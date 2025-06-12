@@ -84,9 +84,35 @@ class AMCPortfolioParser:
             print(f"⚠️ Skipping {sheet_name} (No ISIN header found)")
             return
 
+        df_clean = pd.read_excel(datafile, sheet_name=sheet_name, skiprows=header_row_idx, dtype=str)
+    
+        df_clean.columns = df_clean.iloc[0]
+        df_clean = df_clean[1:].reset_index(drop=True)
+
+        df_clean = df_clean.loc[:, df_clean.columns.notna()]
+
+        print(df_clean.columns)
+
+        if "Coupon" not in df_clean.columns:
+            df_clean.insert(3, 'Coupon','0')
+            df_clean['Coupon'] = 0
+
         
+        col_names=["Name of Instrument","ISIN", "Coupon" ,"Industry", "Quantity", "Market Value", "% to Net Assets", "Yield", "Yield to call"]
+        
+        if len(df_clean.columns) >10:
+            print("⚠️ Skipping {sheet_name} (Too many columns) probably EGS fund)")
+            return
+
+        df_clean.columns =col_names
+        df_clean.dropna(subset=["ISIN", "Name of Instrument", "Market Value"], inplace=True)
 
 
+        #Just a simple logic to determine the type of instrument need to update later TODO
+
+        df_clean[['Yield']] = df_clean[['Yield']].fillna(value=0)
+        df_clean['Type'] = df_clean['Yield'].apply(lambda x: 'Debt or related' if x != 0 else 'Equity or Equity related')
+        
         df_clean = df_clean.round(2)
         df_clean["Scheme Name"] = fund
         df_clean["AMC"] = self.amc_name
