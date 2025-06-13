@@ -2,7 +2,15 @@ import re
 import pandas as pd
 import os
 
+#--additional--
+import requests
+import numpy as np
+from sklearn.metrics.pairwise import cosine_similarity
 OUTPUT_FOLDER = "./output"
+
+#--trivial warning--
+# import warnings
+# warnings.simplefilter(action='ignore', category=FutureWarning)
 
 
 class AMCPortfolioParser:
@@ -15,7 +23,10 @@ class AMCPortfolioParser:
         self.final_columns = config.get("final_columns", []) 
         self.fund_name_extraction_logic = config.get("fund_name_extraction_logic", self._default_fund_name_extraction)
         self.instrument_type_logic = config.get("instrument_type_logic", self._default_instrument_type_logic)
-        self.full_data = pd.DataFrame()
+        # --additional--
+        self.base_headers = ["Name of Instrument","ISIN" , "Industry" , "Yield" , "Quantity" , "Market Value" , "Net Asset Value (NAV)"]
+        self.full_data = pd.DataFrame(columns= self.base_headers + ["Type" , "Scheme" , "AmcName"])
+        self.base_embeddings = np.array([self._generate_embedding(value) for value in self.base_headers])
 
     def _default_fund_name_extraction(self, sheet_df):
         # Default logic for fund name extraction (similar to original script)
@@ -84,51 +95,111 @@ class AMCPortfolioParser:
             print(f"⚠️ Skipping {sheet_name} (No ISIN header found)")
             return
 
-        df_clean = pd.read_excel(datafile, sheet_name=sheet_name, skiprows=header_row_idx, dtype=str)
-    
-        df_clean.columns = df_clean.iloc[0]
-        df_clean = df_clean[1:].reset_index(drop=True)
-
-        df_clean = df_clean.loc[:, df_clean.columns.notna()]
-
-        print(df_clean.columns)
-
-        if "Coupon" not in df_clean.columns:
-            df_clean.insert(3, 'Coupon','0')
-            df_clean['Coupon'] = 0
-
-        
-        col_names=["Name of Instrument","ISIN", "Coupon" ,"Industry", "Quantity", "Market Value", "% to Net Assets", "Yield", "Yield to call"]
-        
-        if len(df_clean.columns) >10:
-            print("⚠️ Skipping {sheet_name} (Too many columns) probably EGS fund)")
+        header_row_idx = next(
+            (index for index, row in sheet_df.iterrows() if any("ISIN" in str(val) for val in row.dropna())),
+            None
+        )
+        if header_row_idx is None:
+            print(f"⚠️ Skipping {sheet_name} (No ISIN header found)")
             return
 
-        df_clean.columns =col_names
-        df_clean.dropna(subset=["ISIN", "Name of Instrument", "Market Value"], inplace=True)
+        df = pd.read_excel(datafile, sheet_name=sheet_name, skiprows=header_row_idx, dtype=str)
+        df = df.dropna(how='all')
 
+        #find and map base_headers with varying headers of the data
+        header_row = self._fetch_header_row(df)
+        print(header_row)
+        header_map = self._header_mapper(header_row)
+        print("header_map....",header_map)
 
-        #Just a simple logic to determine the type of instrument need to update later TODO
-
-        df_clean[['Yield']] = df_clean[['Yield']].fillna(value=0)
-        df_clean['Type'] = df_clean['Yield'].apply(lambda x: 'Debt or related' if x != 0 else 'Equity or Equity related')
         
-        df_clean = df_clean.round(2)
-        df_clean["Scheme Name"] = fund
-        df_clean["AMC"] = self.amc_name
+        threshold = 0.6
+        # Get row indices where the proportion of non-null entries is less than 60%
+        start_indexes = df.index[df.notna().mean(axis=1) < threshold].tolist()
 
-        print(df_clean.head(200))
-        self.full_data=pd.concat([self.full_data,df_clean],ignore_index=True) if not self.full_data.empty else df_clean
+        print("start indexes...",start_indexes)
 
+        #define investment types along with data garbage
+        rows = df.fillna("").astype(str).agg(' '.join, axis=1)
+        investment_types = [rows[investment_type_idx].strip() for investment_type_idx in start_indexes]
 
+        #process data piece by piece
+        for i in range(len(start_indexes)):
+            #[]----modification needed----
+            investment_type = investment_types[i]
 
-        # header_row_idx = next(
-        #     (index for index, row in sheet_df.iterrows() if any("ISIN" in str(val) for val in row.dropna())),
-        #     None
-        # )
-        # if header_row_idx is None:
-        #     print(f"⚠️ Skipping {sheet_name} (No ISIN header found)")
-        #     return
+            start_index = start_indexes[i]
+            if i != len(start_indexes)-1 : end_index = start_indexes[i+1]
+            else : end_index = len(df)
+            print(f"working on index : {start_index} , investment type  {investment_type} ")
+            
+            for (index,row) in df.iloc[start_index:end_index].iterrows():
+                values = header_map.copy()
+                print("here:",row)
+                for (key , idx) in header_map.items():
+                    values[key] = row[idx]
+                isin = values['ISIN']
+                # print("here:",isin)
+                if not str(isin).lower().startswith("in"): # skip if isin is invalid
+                    continue
+                print(f"{index} ",end=" , ") # just to keep track
+
+                #meta data addition
+                values["Type"] =  investment_type
+                values["Scheme"] = sheet_name
+                values["AmcName"] = self.amc_name           
+
+                self.full_data = pd.concat([self.full_data , pd.DataFrame([values])],ignore_index=True).drop_duplicates()
+                print(values)
+        print("sheet over")
+        
+    
+    # ------------ functions added by vaibhav  ---------------
+    def _generate_embedding(self, text:str) -> list[float]:
+        url = "https://lamhieu-lightweight-embeddings.hf.space/v1/embeddings"
+        headers = {
+            "accept": "application/json",
+            "Content-Type": "application/json"
+        }
+        data = {
+            "model": "snowflake-arctic-embed-l-v2.0",
+            "input": text
+        }
+
+        response = requests.post(url, headers=headers, json=data)
+        if response.ok:
+            return response.json()["data"][0]["embedding"]
+        else:
+            raise Exception("No response")
+
+    def _fetch_header_row(self, df :pd.DataFrame) -> list[str]: 
+        rows = df.astype(str).agg(' '.join, axis=1)
+        idx = rows[rows.apply(lambda x: "instrument" in x.lower())].index.tolist()[0]
+        header_row = df.iloc[idx,:].fillna("NULL")
+        header_row = [(header_row.iloc[col]) for col in range(header_row.shape[0])]
+        return header_row
+    
+    def _header_mapper(self, header_row ) -> {str:int}:
+
+        header_map = dict()
+
+        header_row_embeddings = np.array([self._generate_embedding(value) for value in header_row])
+        # Compute cosine similarity (shape: 5 x 10)
+        similarity_matrix = cosine_similarity(self.base_embeddings, header_row_embeddings)
+
+        # For each base vector, find the index of the most similar header
+        most_similar_indices = np.argmax(similarity_matrix, axis=1)
+
+        # Optionally, get the similarity score too
+        most_similar_scores = np.max(similarity_matrix, axis=1)
+
+        # Print results
+        for i, (idx, score) in enumerate(zip(most_similar_indices, most_similar_scores)):
+            print(f"Base vector {i} ie {self.base_headers[i]} is most similar to header {idx} ie {header_row[idx]} with score {score:.4f}")
+            header_map[self.base_headers[i]] = int(idx)
+            
+        return header_map
+        
 
         # # Read the Excel file, skipping rows up to the header, and explicitly setting header=None
         # df_clean = pd.read_excel(datafile, sheet_name=sheet_name, skiprows=header_row_idx, header=None, dtype=str)
@@ -176,13 +247,17 @@ class AMCPortfolioParser:
 
     def parse_all_portfolios(self):
         filenames = self.get_file_names()
+        n_iter = 0
         for datafile in filenames:
             df_raw = self.read_excel_file(datafile)
             if df_raw is None:
                 continue
             for sheet_name, sheet_df in df_raw.items():
                 if sheet_name not in self.sheets_to_avoid:
+                    if n_iter > 10000:
+                        break
                     self.process_sheet(datafile, sheet_name, sheet_df)
+                    n_iter+=1
 
     def save_to_excel(self):
         if not self.full_data.empty:
@@ -196,9 +271,9 @@ class AMCPortfolioParser:
 if __name__ == "__main__":
 
     icici_config = {
-        "data_dir": r"data\\data\\HDFC Mutual Fund\\",
-        "output_file": f"{OUTPUT_FOLDER}/icici_mutual_fund_portfolio_parsed.xlsx",
-        "amc_name": "HDFC Prudential Mutual Fund",
+        "data_dir": r"data\\data\\Bank of India Mutual Fund\\",
+        "output_file": f"{OUTPUT_FOLDER}/Bacnk_of_India_mutual_fund_portfolio_parsed.xlsx",
+        "amc_name": "Bank of India Mutual Fund",
         "sheets_to_avoid": [],
         "column_mapping": {
             # Add any specific renames from the raw Excel headers to the desired final column names
