@@ -36,14 +36,15 @@ if __name__ == "__main__":
             parser = ParagParikhParser(configs[amc_name])
         elif amc_name == "HDFC Mutual Fund":
             parser = HDFCParser(configs[amc_name])
+            parser.parse_all_portfolios()
+            parser.save_to_excel()
         elif amc_name == "ICICI Prudential Mutual Fund":
             parser = ICICIParser(configs[amc_name])
+            parser.parse_all_portfolios()
+            parser.save_to_excel()
         else:
             print(f"❌ No parser implemented for: {amc_name}")
             continue
 
 
 
-if __name__ == "__main__":
-    
-    main()

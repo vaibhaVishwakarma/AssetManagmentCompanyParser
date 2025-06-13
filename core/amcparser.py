@@ -76,7 +76,8 @@ class AMCPortfolioParser:
         else:
             print(f"⚠️ Unsupported file format: {file_path}")
             return None
-
+    
+    @abstractmethod
     def process_sheet(self, datafile, sheet_name, sheet_df):
         print(f"\n🔍 Processing  → Sheet: {sheet_name}")
 

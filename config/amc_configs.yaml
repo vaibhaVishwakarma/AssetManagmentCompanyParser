@@ -266,7 +266,7 @@ hsbc_mutual_fund:
   - AMC
 icici_prudential_mutual_fund:
   data_dir: ./data/icici_prudential_mutual_fund
-  output_file: ./cleaned/icici_prudential_mutual_fund_portfolio.csv
+  output_file: ./cleaned/icici_prudential_mutual_fund_portfolio.xlsx
   amc_name: ICICI Prudential Mutual Fund
   sheets_to_avoid: []
   column_mapping: {}
