@@ -24,7 +24,7 @@ class AMCPortfolioParser:
         self.fund_name_extraction_logic = config.get("fund_name_extraction_logic", self._default_fund_name_extraction)
         self.instrument_type_logic = config.get("instrument_type_logic", self._default_instrument_type_logic)
         # --additional--
-        self.base_headers = ["Name of Instrument","ISIN" , "Industry" , "Yield" , "Quantity" , "Market Value" , "Net Asset Value (NAV)"]
+        self.base_headers = ["Name of Instrument","ISIN" , "Rating/Industry" , "Yield" , "Quantity" , "Market Value" , "Net Asset Value (NAV)"]
         self.full_data = pd.DataFrame(columns= self.base_headers + ["Type" , "Scheme" , "AmcName"])
         self.base_embeddings = np.array([self._generate_embedding(value) for value in self.base_headers])
 
@@ -105,47 +105,53 @@ class AMCPortfolioParser:
 
         df = pd.read_excel(datafile, sheet_name=sheet_name, skiprows=header_row_idx, dtype=str)
         df = df.dropna(how='all')
-
-        #find and map base_headers with varying headers of the data
+        df.reset_index(drop=True , inplace = True)
+        rows = df.fillna(" ").agg("".join , axis = 1)
+        df = df.iloc[rows[rows.apply(lambda x : "listing on stock exchange" not in x.lower())].index.to_list()]
+        df.reset_index(drop=True , inplace = True)
+        
+        #find the row contaning headers
         header_row = self._fetch_header_row(df)
-        print(header_row)
+
+        #clear any columns with null values and merge
+        n_iter = 0
+        while "NULL" in header_row and n_iter<5:
+            start = None
+            end = len(header_row)
+            for i in range(len(header_row)):
+                if start == None and header_row[i] != "NULL":
+                    start = i
+                    break
+            for i in range(start+1 , len(header_row)):
+                if header_row[i] != "NULL":
+                    end = i
+                    break
+            alter1 = df.iloc[:,start:end].fillna("").agg("".join,axis = 1)
+            alter2 = df.drop(df.columns[start:end],axis = 1)
+            df = pd.concat([alter1 , alter2] , axis = 1)
+
+            header_row = self._fetch_header_row(df)
+            n_iter+=1
+
+        #maps the desired columns 
         header_map = self._header_mapper(header_row)
         print("header_map....",header_map)
 
-        
-        threshold = 0.6
-        # Get row indices where the proportion of non-null entries is less than 60%
-        start_indexes = df.index[df.notna().mean(axis=1) < threshold].tolist()
-
-        print("start indexes...",start_indexes)
-
-        #define investment types along with data garbage
-        rows = df.fillna("").astype(str).agg(' '.join, axis=1)
-        investment_types = [rows[investment_type_idx].strip() for investment_type_idx in start_indexes]
+        periods = self._get_valid_periods(df , header_map)
 
         #process data piece by piece
-        for i in range(len(start_indexes)):
-            #[]----modification needed----
-            investment_type = investment_types[i]
+        for (start_idx , end_idx) in periods:
+            scheme_name = re.sub("[^a-zA-Z0-9]" , "" , df[start_idx-1:start_idx].fillna("").agg("".join , axis = 1).iloc[0])
+            print("\n",scheme_name)
 
-            start_index = start_indexes[i]
-            if i != len(start_indexes)-1 : end_index = start_indexes[i+1]
-            else : end_index = len(df)
-            print(f"working on index : {start_index} , investment type  {investment_type} ")
-            
-            for (index,row) in df.iloc[start_index:end_index].iterrows():
+            for (index , row) in df.iloc[start_idx:end_idx+1].iterrows():
                 values = header_map.copy()
-                print("here:",row)
                 for (key , idx) in header_map.items():
-                    values[key] = row[idx]
-                isin = values['ISIN']
-                # print("here:",isin)
-                if not str(isin).lower().startswith("in"): # skip if isin is invalid
-                    continue
+                    values[key] = row.iloc[idx]
                 print(f"{index} ",end=" , ") # just to keep track
 
                 #meta data addition
-                values["Type"] =  investment_type
+                values["Type"] =  scheme_name
                 values["Scheme"] = sheet_name
                 values["AmcName"] = self.amc_name           
 
@@ -155,6 +161,30 @@ class AMCPortfolioParser:
         
     
     # ------------ functions added by vaibhav  ---------------
+    def _check_isin(self, val):
+        s = str(val).lower().strip()
+        s = re.sub("[^a-zA-Z0-9]" , "" , s)
+        return s.startswith("in") and s[-1] in "0123456789"
+    
+    def _get_valid_periods(self, df , header_map):
+        mask = df.iloc[:, header_map["ISIN"]].apply(self._check_isin).values
+        # Find continuous True periods
+        periods = []
+        start = None
+        for i, val in enumerate(mask):
+            if val:
+                if start is None:
+                    start = i
+            else:
+                if start is not None:
+                    periods.append((start, i - 1))
+                    start = None
+        # Edge case: last element was True
+        if start is not None:
+            periods.append((start, len(mask) - 1))
+        print("Passing periods:", periods)
+        return periods
+    
     def _generate_embedding(self, text:str) -> list[float]:
         url = "https://lamhieu-lightweight-embeddings.hf.space/v1/embeddings"
         headers = {
@@ -254,7 +284,7 @@ class AMCPortfolioParser:
                 continue
             for sheet_name, sheet_df in df_raw.items():
                 if sheet_name not in self.sheets_to_avoid:
-                    if n_iter > 10000:
+                    if n_iter > 10000: # ---- to remove ----
                         break
                     self.process_sheet(datafile, sheet_name, sheet_df)
                     n_iter+=1
@@ -271,9 +301,9 @@ class AMCPortfolioParser:
 if __name__ == "__main__":
 
     icici_config = {
-        "data_dir": r"data\\data\\Bank of India Mutual Fund\\",
-        "output_file": f"{OUTPUT_FOLDER}/Bacnk_of_India_mutual_fund_portfolio_parsed.xlsx",
-        "amc_name": "Bank of India Mutual Fund",
+        "data_dir": r"data\\data\\HDFC Mutual Fund\\",
+        "output_file": f"{OUTPUT_FOLDER}/HDFC_mutual_fund_portfolio_parsed.xlsx",
+        "amc_name": "HDFC Mutual Fund",
         "sheets_to_avoid": [],
         "column_mapping": {
             # Add any specific renames from the raw Excel headers to the desired final column names
