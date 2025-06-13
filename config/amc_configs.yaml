@@ -1,0 +1,741 @@
+360_one_asset_management:
+  data_dir: ./data/360_one_asset_management
+  output_file: ./cleaned/360_one_asset_management_portfolio.csv
+  amc_name: 360 One Asset Management
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+aditya_birla_sun_life_mutual_fund:
+  data_dir: ./data/aditya_birla_sun_life_mutual_fund
+  output_file: ./cleaned/aditya_birla_sun_life_mutual_fund_portfolio.csv
+  amc_name: Aditya Birla Sun Life Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+axis_mutual_fund:
+  data_dir: ./data/axis_mutual_fund
+  output_file: ./cleaned/axis_mutual_fund_portfolio.csv
+  amc_name: Axis Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+bandhan_mutual_fund:
+  data_dir: ./data/bandhan_mutual_fund
+  output_file: ./cleaned/bandhan_mutual_fund_portfolio.csv
+  amc_name: Bandhan Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+bank_of_india_mutual_fund:
+  data_dir: ./data/bank_of_india_mutual_fund
+  output_file: ./cleaned/bank_of_india_mutual_fund_portfolio.csv
+  amc_name: Bank of India Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+baroda_bnp_paribas_mutual_fund:
+  data_dir: ./data/baroda_bnp_paribas_mutual_fund
+  output_file: ./cleaned/baroda_bnp_paribas_mutual_fund_portfolio.csv
+  amc_name: Baroda BNP Paribas Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+canara_robeco_mutual_fund:
+  data_dir: ./data/canara_robeco_mutual_fund
+  output_file: ./cleaned/canara_robeco_mutual_fund_portfolio.csv
+  amc_name: Canara Robeco Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+dsp_mutual_fund:
+  data_dir: ./data/dsp_mutual_fund
+  output_file: ./cleaned/dsp_mutual_fund_portfolio.csv
+  amc_name: DSP Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+edelweiss_mutual_fund:
+  data_dir: ./data/edelweiss_mutual_fund
+  output_file: ./cleaned/edelweiss_mutual_fund_portfolio.csv
+  amc_name: Edelweiss Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+franklin_templeton_india:
+  data_dir: ./data/franklin_templeton_india
+  output_file: ./cleaned/franklin_templeton_india_portfolio.csv
+  amc_name: Franklin Templeton India
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+groww_mutual_fund:
+  data_dir: ./data/groww_mutual_fund
+  output_file: ./cleaned/groww_mutual_fund_portfolio.csv
+  amc_name: Groww Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+hdfc_mutual_fund:
+  data_dir: ./data/hdfc_mutual_fund
+  output_file: ./cleaned/hdfc_mutual_fund_portfolio.csv
+  amc_name: HDFC Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+helios_mutual_fund:
+  data_dir: ./data/helios_mutual_fund
+  output_file: ./cleaned/helios_mutual_fund_portfolio.csv
+  amc_name: Helios Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+hsbc_mutual_fund:
+  data_dir: ./data/hsbc_mutual_fund
+  output_file: ./cleaned/hsbc_mutual_fund_portfolio.csv
+  amc_name: HSBC Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+icici_prudential_mutual_fund:
+  data_dir: ./data/icici_prudential_mutual_fund
+  output_file: ./cleaned/icici_prudential_mutual_fund_portfolio.csv
+  amc_name: ICICI Prudential Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+invesco_mutual_fund:
+  data_dir: ./data/invesco_mutual_fund
+  output_file: ./cleaned/invesco_mutual_fund_portfolio.csv
+  amc_name: Invesco Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+iti_mutual_fund:
+  data_dir: ./data/iti_mutual_fund
+  output_file: ./cleaned/iti_mutual_fund_portfolio.csv
+  amc_name: ITI Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+jm_financial_mutual_fund:
+  data_dir: ./data/jm_financial_mutual_fund
+  output_file: ./cleaned/jm_financial_mutual_fund_portfolio.csv
+  amc_name: JM Financial Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+kotak_mutual_fund:
+  data_dir: ./data/kotak_mutual_fund
+  output_file: ./cleaned/kotak_mutual_fund_portfolio.csv
+  amc_name: Kotak Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+lic_mutual_fund:
+  data_dir: ./data/lic_mutual_fund
+  output_file: ./cleaned/lic_mutual_fund_portfolio.csv
+  amc_name: LIC Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+mahindra_manulife_mutual_fund:
+  data_dir: ./data/mahindra_manulife_mutual_fund
+  output_file: ./cleaned/mahindra_manulife_mutual_fund_portfolio.csv
+  amc_name: Mahindra Manulife Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+mirae_asset_mutual_fund:
+  data_dir: ./data/mirae_asset_mutual_fund
+  output_file: ./cleaned/mirae_asset_mutual_fund_portfolio.csv
+  amc_name: Mirae Asset Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+motilal_oswal_mutual_fund:
+  data_dir: ./data/motilal_oswal_mutual_fund
+  output_file: ./cleaned/motilal_oswal_mutual_fund_portfolio.csv
+  amc_name: Motilal Oswal Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+navi_mutual_fund:
+  data_dir: ./data/navi_mutual_fund
+  output_file: ./cleaned/navi_mutual_fund_portfolio.csv
+  amc_name: Navi Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+nippon_india_mutual_fund:
+  data_dir: ./data/nippon_india_mutual_fund
+  output_file: ./cleaned/nippon_india_mutual_fund_portfolio.csv
+  amc_name: Nippon India Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+nj_mutual_fund:
+  data_dir: ./data/nj_mutual_fund
+  output_file: ./cleaned/nj_mutual_fund_portfolio.csv
+  amc_name: NJ Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+pgim_india_mutual_fund:
+  data_dir: ./data/pgim_india_mutual_fund
+  output_file: ./cleaned/pgim_india_mutual_fund_portfolio.csv
+  amc_name: PGIM India Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+ppfas_mutual_fund:
+  data_dir: ./data/ppfas_mutual_fund
+  output_file: ./cleaned/ppfas_mutual_fund_portfolio.csv
+  amc_name: PPFAS Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+quant_mutual_fund:
+  data_dir: ./data/quant_mutual_fund
+  output_file: ./cleaned/quant_mutual_fund_portfolio.csv
+  amc_name: Quant Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+quantum_mutual_fund:
+  data_dir: ./data/quantum_mutual_fund
+  output_file: ./cleaned/quantum_mutual_fund_portfolio.csv
+  amc_name: Quantum Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+sbi_mutual_fund:
+  data_dir: ./data/sbi_mutual_fund
+  output_file: ./cleaned/sbi_mutual_fund_portfolio.csv
+  amc_name: SBI Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+shriram_mutual_fund:
+  data_dir: ./data/shriram_mutual_fund
+  output_file: ./cleaned/shriram_mutual_fund_portfolio.csv
+  amc_name: Shriram Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+sundaram_mutual_fund:
+  data_dir: ./data/sundaram_mutual_fund
+  output_file: ./cleaned/sundaram_mutual_fund_portfolio.csv
+  amc_name: Sundaram Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+tata_mutual_fund:
+  data_dir: ./data/tata_mutual_fund
+  output_file: ./cleaned/tata_mutual_fund_portfolio.csv
+  amc_name: Tata Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+trust_mutual_fund:
+  data_dir: ./data/trust_mutual_fund
+  output_file: ./cleaned/trust_mutual_fund_portfolio.csv
+  amc_name: Trust Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+union_mutual_fund:
+  data_dir: ./data/union_mutual_fund
+  output_file: ./cleaned/union_mutual_fund_portfolio.csv
+  amc_name: Union Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+uti_mutual_fund:
+  data_dir: ./data/uti_mutual_fund
+  output_file: ./cleaned/uti_mutual_fund_portfolio.csv
+  amc_name: UTI Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+whiteoak_mutual_fund:
+  data_dir: ./data/whiteoak_mutual_fund
+  output_file: ./cleaned/whiteoak_mutual_fund_portfolio.csv
+  amc_name: WhiteOak Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
+zerodha_fund_house:
+  data_dir: ./data/zerodha_fund_house
+  output_file: ./cleaned/zerodha_fund_house_portfolio.csv
+  amc_name: Zerodha Fund House
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns:
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry
+  - Quantity
+  - Market Value
+  - '% to Net Assets'
+  - Yield
+  - Yield to call
+  - Type
+  - Scheme Name
+  - AMC
