@@ -28,11 +28,11 @@ class AMCPortfolioParser:
         self.full_data = pd.DataFrame(columns= self.base_headers + ["Type" , "Scheme" , "AmcName"])
         self.base_embeddings = np.array([self._generate_embedding(value) for value in self.base_headers])
 
-    def _default_fund_name_extraction(self, sheet_df):
+    def _default_fund_name_extraction(self, sheet_name, sheet_df):
         # Default logic for fund name extraction (similar to original script)
         amc_norm = self.amc_name.strip().lower()
         top6 = sheet_df.head(6).astype(str)
-        candidates = []
+        candidates = [sheet_name]
         for cell in top6.values.flatten():
             txt = cell.strip()
             low = txt.lower()
@@ -44,6 +44,18 @@ class AMCPortfolioParser:
         name = re.sub(r"\s+", " ", raw).strip()
         name = re.sub(r"[—–\-\:\;,\s]+$", "", name)
         return name
+    
+    def create_ISIN_mapping(self , df):
+        """Create a mapping of fund names to ISINs."""
+        
+        isin_mapping = {}
+        for index, row in df.iterrows():
+            fund_name = row['Cleaned Fund Name'].lower()
+            isin = row['ISIN']
+            if fund_name and isin and row['Growth/Regular Type'] in ["Growth", "Regular"]:
+                isin_mapping[fund_name] = isin
+        return isin_mapping
+
 
     def _default_instrument_type_logic(self, df_clean):
         # Default logic for instrument type determination
@@ -61,26 +73,20 @@ class AMCPortfolioParser:
 
     def read_excel_file(self, file_path):
         file_ext = file_path.split(".")[-1].lower()
-        if file_ext == "xlsb":
-            try:
-                return pd.read_excel(file_path, sheet_name=None, engine="pyxlsb", dtype=str)
-            except Exception as e:
-                print(f"❌ Error reading {file_path} (XLSB format): {e}")
-                return None
-        elif file_ext in ["xls", "xlsx"]:
-            try:
-                return pd.read_excel(file_path, sheet_name=None, dtype=str)
-            except Exception as e:
-                print(f"❌ Error reading {file_path} (XLS/XLSX format): {e}")
-                return None
-        else:
-            print(f"⚠️ Unsupported file format: {file_path}")
-            return None
+        try:  
+            if file_ext == "csv" :
+                return pd.read_csv(file_path, sheet_name=None, dtype=str)
+            elif file_ext in ["xls", "xlsx"]:
+                    return pd.read_excel(file_path, sheet_name=None, dtype=str)
+        except Exception as e:
+            print(f"⚠️ Unsupported file format:{file_ext} \n Path: {file_path}")
 
+        return None
+    
     def process_sheet(self, datafile, sheet_name, sheet_df):
         print(f"\n🔍 Processing  → Sheet: {sheet_name}")
 
-        fund = self.fund_name_extraction_logic(sheet_df)
+        fund = self.fund_name_extraction_logic(sheet_name, sheet_df)
 
         if fund is None:
             print(f"⚠️ Skipping {sheet_name} (Could not extract fund name)")
@@ -103,10 +109,13 @@ class AMCPortfolioParser:
             print(f"⚠️ Skipping {sheet_name} (No ISIN header found)")
             return
 
-        df = pd.read_excel(datafile, sheet_name=sheet_name, skiprows=header_row_idx, dtype=str)
+        if "csv" not in sheet_name:
+            df = pd.read_excel(datafile, sheet_name=sheet_name, skiprows=header_row_idx, dtype=str)
+        else:
+            df = pd.read_csv(datafile, sheet_name=sheet_name, skiprows=header_row_idx, dtype=str)
         df = df.dropna(how='all')
         df.reset_index(drop=True , inplace = True)
-        rows = df.fillna(" ").agg("".join , axis = 1)
+        rows = df.fillna(" ").agg(" ".join , axis = 1)
         df = df.iloc[rows[rows.apply(lambda x : "listing on stock exchange" not in x.lower())].index.to_list()]
         df.reset_index(drop=True , inplace = True)
         
@@ -126,7 +135,7 @@ class AMCPortfolioParser:
                 if header_row[i] != "NULL":
                     end = i
                     break
-            alter1 = df.iloc[:,start:end].fillna("").agg("".join,axis = 1)
+            alter1 = df.iloc[:,start:end].fillna("").agg(" ".join,axis = 1)
             alter2 = df.drop(df.columns[start:end],axis = 1)
             df = pd.concat([alter1 , alter2] , axis = 1)
 
@@ -141,7 +150,7 @@ class AMCPortfolioParser:
 
         #process data piece by piece
         for (start_idx , end_idx) in periods:
-            scheme_name = re.sub("[^a-zA-Z0-9]" , "" , df[start_idx-1:start_idx].fillna("").agg("".join , axis = 1).iloc[0])
+            scheme_name = re.sub("[^a-zA-Z0-9\s]" , "" , df[start_idx-1:start_idx].fillna("").agg(" ".join , axis = 1).iloc[0])
             print("\n",scheme_name)
 
             for (index , row) in df.iloc[start_idx:end_idx+1].iterrows():
@@ -156,7 +165,6 @@ class AMCPortfolioParser:
                 values["AmcName"] = self.amc_name           
 
                 self.full_data = pd.concat([self.full_data , pd.DataFrame([values])],ignore_index=True).drop_duplicates()
-                print(values)
         print("sheet over")
         
     
@@ -229,51 +237,6 @@ class AMCPortfolioParser:
             header_map[self.base_headers[i]] = int(idx)
             
         return header_map
-        
-
-        # # Read the Excel file, skipping rows up to the header, and explicitly setting header=None
-        # df_clean = pd.read_excel(datafile, sheet_name=sheet_name, skiprows=header_row_idx, header=None, dtype=str)
-
-        # # Set the first row of the new DataFrame as the header
-        # df_clean.columns = df_clean.iloc[0]
-
-        # # Remove the header row from the data
-        # df_clean = df_clean[1:].reset_index(drop=True)
-
-        # df_clean = df_clean.loc[:, df_clean.columns.notna()] # Remove unnamed columns
-
-        # print("Columns after initial read and unnamed column removal:", df_clean.columns.tolist()) # Debug print
-
-        # # Apply column mapping
-        # df_clean.rename(columns=self.column_mapping, inplace=True)
-
-        # print("Columns after renaming:", df_clean.columns.tolist()) # Debug print
-
-        # # Ensure 'Coupon' column exists and is numeric
-        # if "Coupon" not in df_clean.columns:
-        #     df_clean["Coupon"] = 0
-        # else:
-        #     df_clean["Coupon"] = pd.to_numeric(df_clean["Coupon"], errors='coerce').fillna(0)
-
-        # # Filter out rows with missing essential data
-        # df_clean.dropna(subset=["ISIN", "Name of Instrument", "Market Value"], inplace=True)
-
-        # # Apply instrument type logic
-        # df_clean = self.instrument_type_logic(df_clean)
-
-        # df_clean = df_clean.round(2)
-        # df_clean["Scheme Name"] = fund
-        # df_clean["AMC"] = self.amc_name
-
-        # # Reorder and select final columns if specified
-        # if self.final_columns:
-        #     # Ensure all final_columns are present, fill missing with NaN
-        #     for col in self.final_columns:
-        #         if col not in df_clean.columns:
-        #             df_clean[col] = None
-        #     df_clean = df_clean[self.final_columns]
-
-        # self.full_data = pd.concat([self.full_data, df_clean], ignore_index=True) if not self.full_data.empty else df_clean
 
     def parse_all_portfolios(self):
         filenames = self.get_file_names()
@@ -283,8 +246,9 @@ class AMCPortfolioParser:
             if df_raw is None:
                 continue
             for sheet_name, sheet_df in df_raw.items():
+                print("-"*30, sheet_name)
                 if sheet_name not in self.sheets_to_avoid:
-                    if n_iter > 10000: # ---- to remove ----
+                    if n_iter > 1: # ---- to remove ----
                         break
                     self.process_sheet(datafile, sheet_name, sheet_df)
                     n_iter+=1
@@ -295,15 +259,21 @@ class AMCPortfolioParser:
             print(f"✅ Successfully saved parsed data to {self.output_file}")
         else:
             print("⚠️ No data to save.")
+    
+    def run(self):
+        self.parse_all_portfolios()
+        self.save_to_excel()
+
+    
 
 
 # Example Usage (for ICICI Prudential Mutual Fund)
 if __name__ == "__main__":
 
     icici_config = {
-        "data_dir": r"data\\data\\HDFC Mutual Fund\\",
-        "output_file": f"{OUTPUT_FOLDER}/HDFC_mutual_fund_portfolio_parsed.xlsx",
-        "amc_name": "HDFC Mutual Fund",
+        "data_dir": r"data\\data\\Groww Mutual Fund",
+        "output_file": f"{OUTPUT_FOLDER}/Groww_mutual_fund_portfolio_parsed.xlsx",
+        "amc_name": "Groww Mutual Fund",
         "sheets_to_avoid": [],
         "column_mapping": {
             # Add any specific renames from the raw Excel headers to the desired final column names
