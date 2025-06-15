@@ -9,7 +9,7 @@ from core.parser import HDFCParser, ICICIMFParser, PPFASParser
 def load_yaml_config(filepath="config/amc_configs.yaml"):
     with open(filepath, "r") as f:
         return yaml.safe_load(f)
-
+    
 if __name__ == "__main__":
         # List of AMC names
 
@@ -29,8 +29,12 @@ if __name__ == "__main__":
         "Zerodha Fund House"
     ]
 
+
     for amc_name in amc_names:
 
+
+
+        print(f"🔍 Processing AMC: {amc_name}")
 
         if amc_name == "PPFAS Mutual Fund":
             #parser = PPFASParser(configs[amc_name])

@@ -11,13 +11,16 @@ class AMCPortfolioParser(ABC):
         self.amc_name = config.get("amc_name")
         self.sheets_to_avoid = config.get("sheets_to_avoid", [])
         self.column_mapping = config.get("column_mapping", {})
-        self.final_columns = config.get("final_columns", []) 
+        self.final_columns = config.get("final_columns", []) #TO DO SOME ISSUE loading final_columns from config
         self.fund_name_extraction_logic = config.get("fund_name_extraction_logic", self._default_fund_name_extraction)
         self.instrument_type_logic = config.get("instrument_type_logic", self._default_instrument_type_logic)
         self.full_data = pd.DataFrame()
         self.isin_lookup =self._create_ISIN_mapping(pd.read_excel(config.get("ISIN_file"))) #TODO: Make this configurable or pass as an argument
 
-
+        if self.final_columns is None or len(self.final_columns) == 0:
+            self.final_columns = [ "Name of Instrument", "ISIN", "Coupon", "Industry", "Quantity", "Market Value", "% to Net Assets",
+    "Yield", "Yield to call", "Type", "Scheme Name", "AMC", "Scheme ISIN"]
+            
 
     def _get_fund_isin(self, fund_name):
 
