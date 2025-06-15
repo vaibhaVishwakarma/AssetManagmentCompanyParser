@@ -36,8 +36,8 @@ if __name__ == "__main__":
             parser = PPFASParser(configs[amc_name])
         elif amc_name == "HDFC Mutual Fund":
             parser = HDFCParser(configs[amc_name])
-            parser.parse_all_portfolios()
-            parser.save_to_excel()
+            #parser.parse_all_portfolios()
+            #parser.save_to_excel()
         elif amc_name == "ICICI Prudential Mutual Fund":
             parser = ICICIMFParser(configs[amc_name])
             parser.parse_all_portfolios()
