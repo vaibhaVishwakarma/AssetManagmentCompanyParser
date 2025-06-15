@@ -8,68 +8,57 @@ class ICICIMFParser(AMCPortfolioParser):
     def process_sheet(self, datafile, sheet_name, sheet_df):
 
         print(f"\n🔍 Processing  → Sheet: {sheet_name}")
+        fund = self.get_fund_name(sheet_df, self.amc_name)
 
-        fund = self.fund_name_extraction_logic(sheet_df)
+        if fund is not None and sheet_name:
+                print(f"\n🔍 Processing  → Fund: {fund}")
 
-        if fund is None:
-            print(f"⚠️ Skipping {sheet_name} (Could not extract fund name)")
-            return
+                header_row_idx = next(
+                        (index for index, row in sheet_df.iterrows() if any("ISIN" in str(val) for val in row.dropna())),
+                        None
+                )
+                if header_row_idx is None:
+                        print(f"⚠️ Skipping {sheet_name} (No ISIN header found)")
+                        return
 
-        print(f"\n🔍 Processing  → Fund: {fund}")
+                df_clean = pd.read_excel(datafile, sheet_name=sheet_name, skiprows=header_row_idx, dtype=str)
+                
+                df_clean.columns = df_clean.iloc[0]
+                df_clean = df_clean[1:].reset_index(drop=True)
 
-        header_row_idx = next(
-            (index for index, row in sheet_df.iterrows() if any("ISIN" in str(val) for val in row.dropna())),
-            None
-        )
-        if header_row_idx is None:
-            print(f"⚠️ Skipping {sheet_name} (No ISIN header found)")
-            return
+                df_clean = df_clean.loc[:, df_clean.columns.notna()]
 
-        # Read the Excel file, skipping rows up to the header, and explicitly setting header=None
-        df_clean = pd.read_excel(datafile, sheet_name=sheet_name, skiprows=header_row_idx, header=None, dtype=str)
+                print(df_clean.columns)
 
-        # Set the first row of the new DataFrame as the header
-        df_clean.columns = df_clean.iloc[0]
+                if "Coupon" not in df_clean.columns:
+                        df_clean.insert(3, 'Coupon','0')
+                        df_clean['Coupon'] = 0
 
-        # Remove the header row from the data
-        df_clean = df_clean[1:].reset_index(drop=True)
+                    
+                col_names=["Name of Instrument","ISIN", "Coupon" ,"Industry", "Quantity", "Market Value", "% to Net Assets", "Yield", "Yield to call"]
+                    
+                if len(df_clean.columns) >10:
+                        print("⚠️ Skipping {sheet_name} (Too many columns) probably EGS fund)")
+                        return
 
-        df_clean = df_clean.loc[:, df_clean.columns.notna()] # Remove unnamed columns
-
-        print("Columns after initial read and unnamed column removal:", df_clean.columns.tolist()) # Debug print
-
-        # Apply column mapping
-        df_clean.rename(columns=self.column_mapping, inplace=True)
-
-        print("Columns after renaming:", df_clean.columns.tolist()) # Debug print
-
-        # Ensure 'Coupon' column exists and is numeric
-        if "Coupon" not in df_clean.columns:
-            df_clean["Coupon"] = 0
-        else:
-            df_clean["Coupon"] = pd.to_numeric(df_clean["Coupon"], errors='coerce').fillna(0)
-
-        # Filter out rows with missing essential data
-        df_clean.dropna(subset=["ISIN", "Name of Instrument", "Market Value"], inplace=True)
-
-        # Apply instrument type logic
-        df_clean = self.instrument_type_logic(df_clean)
-
-        df_clean = df_clean.round(2)
-        df_clean["Scheme Name"] = fund
-        df_clean["AMC"] = self.amc_name
-
-        # Reorder and select final columns if specified
-        if self.final_columns:
-            # Ensure all final_columns are present, fill missing with NaN
-            for col in self.final_columns:
-                if col not in df_clean.columns:
-                    df_clean[col] = None
-            df_clean = df_clean[self.final_columns]
-
-        self.full_data = pd.concat([self.full_data, df_clean], ignore_index=True) if not self.full_data.empty else df_clean
+                df_clean.columns =col_names
+                df_clean.dropna(subset=["ISIN", "Name of Instrument", "Market Value"], inplace=True)
 
 
+                #Just a simple logic to determine the type of instrument need to update later TODO
+
+                df_clean[['Yield']] = df_clean[['Yield']].fillna(value=0)
+                df_clean['Type'] = df_clean['Yield'].apply(lambda x: 'Debt or related' if x != 0 else 'Equity or Equity related')
+                    
+                df_clean = df_clean.round(2)
+                df_clean["Scheme Name"] = fund
+                df_clean["AMC"] = self.amc_name
+
+                print(df_clean.head(200))
+                self.full_data=pd.concat([self.full_data,df_clean],ignore_index=True) if not self.full_data.empty else df_clean
+        
+
+        
 # Templates for all other AMC names
 class One360Parser(AMCPortfolioParser):
     def __init__(self, config):
