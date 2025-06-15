@@ -57,7 +57,12 @@ class ICICIMFParser(AMCPortfolioParser):
                 df_clean = df_clean.round(2)
                 df_clean["Scheme Name"] = fund_name
                 df_clean["AMC"] = self.amc_name
-                df_clean["FUND_ISIN"] = fund_isin if fund_isin is not None else None
+                df_clean["Scheme ISIN"] = fund_isin if fund_isin is not None else None
+                
+
+                # Standardize column names for outputs
+                df_clean = df_clean[[col for col in self.final_columns if col in df_clean.columns]]
+
                 self.full_data=pd.concat([self.full_data,df_clean],ignore_index=True) if not self.full_data.empty else df_clean
                
 # Templates for all other AMC names
@@ -215,14 +220,13 @@ class HDFCParser(AMCPortfolioParser):
                 df_clean = df_clean[1:].reset_index(drop=True)
                 df_clean = df_clean.loc[:, df_clean.columns.notna()]
 
-                print(df_clean.columns)
 
                 col_mapping=self.column_mapping  #obtain col maping from config to standardize column names
 
 
                   # Standardize column names
              
-                df_clean=df_clean.rename(columns=self.column_mapping)
+                df_clean=df_clean.rename(columns=col_mapping)
 
                 #print(df_clean.columns) #to debug the column names
 
@@ -234,7 +238,12 @@ class HDFCParser(AMCPortfolioParser):
                 df_clean = df_clean.round(2)
                 df_clean["Scheme Name"] = fund_name
                 df_clean["AMC"] = AMC_NAME
-                df_clean["FUND_ISIN"] = fund_isin if fund_isin is not None else None
+                df_clean["Scheme ISIN"] = fund_isin if fund_isin is not None else None
+
+
+                # Standardize column names for outputs
+                df_clean = df_clean[[col for col in self.final_columns if col in df_clean.columns]]
+
                 self.full_data = pd.concat([self.full_data, df_clean], ignore_index=True) if not self.full_data.empty else df_clean
 
         
