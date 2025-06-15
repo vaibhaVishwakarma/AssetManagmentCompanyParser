@@ -8,13 +8,11 @@
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/360_one_asset_management_portfolio.xlsx
   sheets_to_avoid: []
 aditya_birla_sun_life_mutual_fund:
@@ -27,13 +25,11 @@ aditya_birla_sun_life_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/aditya_birla_sun_life_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 axis_mutual_fund:
@@ -46,13 +42,11 @@ axis_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/axis_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 bandhan_mutual_fund:
@@ -65,13 +59,11 @@ bandhan_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/bandhan_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 bank_of_india_mutual_fund:
@@ -84,13 +76,11 @@ bank_of_india_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/bank_of_india_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 baroda_bnp_paribas_mutual_fund:
@@ -103,13 +93,11 @@ baroda_bnp_paribas_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/baroda_bnp_paribas_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 canara_robeco_mutual_fund:
@@ -122,13 +110,11 @@ canara_robeco_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/canara_robeco_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 dsp_mutual_fund:
@@ -141,13 +127,11 @@ dsp_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/dsp_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 edelweiss_mutual_fund:
@@ -160,13 +144,11 @@ edelweiss_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/edelweiss_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 franklin_templeton_india:
@@ -179,13 +161,11 @@ franklin_templeton_india:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/franklin_templeton_india_portfolio.xlsx
   sheets_to_avoid: []
 groww_mutual_fund:
@@ -198,13 +178,11 @@ groww_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/groww_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 hdfc_mutual_fund:
@@ -217,13 +195,11 @@ hdfc_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/hdfc_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 helios_mutual_fund:
@@ -236,13 +212,11 @@ helios_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/helios_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 hsbc_mutual_fund:
@@ -255,13 +229,11 @@ hsbc_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/hsbc_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 icici_prudential_mutual_fund:
@@ -274,13 +246,11 @@ icici_prudential_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/icici_prudential_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 invesco_mutual_fund:
@@ -293,13 +263,11 @@ invesco_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/invesco_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 iti_mutual_fund:
@@ -312,13 +280,11 @@ iti_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/iti_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 jm_financial_mutual_fund:
@@ -331,13 +297,11 @@ jm_financial_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/jm_financial_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 kotak_mutual_fund:
@@ -350,13 +314,11 @@ kotak_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/kotak_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 lic_mutual_fund:
@@ -369,13 +331,11 @@ lic_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/lic_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 mahindra_manulife_mutual_fund:
@@ -388,13 +348,11 @@ mahindra_manulife_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/mahindra_manulife_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 mirae_asset_mutual_fund:
@@ -407,13 +365,11 @@ mirae_asset_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/mirae_asset_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 motilal_oswal_mutual_fund:
@@ -426,13 +382,11 @@ motilal_oswal_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/motilal_oswal_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 navi_mutual_fund:
@@ -445,13 +399,11 @@ navi_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/navi_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 nippon_india_mutual_fund:
@@ -464,13 +416,11 @@ nippon_india_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/nippon_india_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 nj_mutual_fund:
@@ -483,13 +433,11 @@ nj_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/nj_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 pgim_india_mutual_fund:
@@ -502,13 +450,11 @@ pgim_india_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/pgim_india_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 ppfas_mutual_fund:
@@ -521,13 +467,11 @@ ppfas_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/ppfas_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 quant_mutual_fund:
@@ -540,13 +484,11 @@ quant_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/quant_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 quantum_mutual_fund:
@@ -559,13 +501,11 @@ quantum_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/quantum_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 sbi_mutual_fund:
@@ -578,13 +518,11 @@ sbi_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/sbi_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 shriram_mutual_fund:
@@ -597,13 +535,11 @@ shriram_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/shriram_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 sundaram_mutual_fund:
@@ -616,13 +552,11 @@ sundaram_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/sundaram_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 tata_mutual_fund:
@@ -635,13 +569,11 @@ tata_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/tata_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 trust_mutual_fund:
@@ -654,13 +586,11 @@ trust_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/trust_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 union_mutual_fund:
@@ -673,13 +603,11 @@ union_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/union_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 uti_mutual_fund:
@@ -692,13 +620,11 @@ uti_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/uti_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 whiteoak_mutual_fund:
@@ -711,13 +637,11 @@ whiteoak_mutual_fund:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/whiteoak_mutual_fund_portfolio.xlsx
   sheets_to_avoid: []
 zerodha_fund_house:
@@ -730,12 +654,10 @@ zerodha_fund_house:
   - Coupon
   - Industry
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT)
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+  - Yield to call (YTC)
+  - Yield to Maturity (YTM)
   output_file: ./cleaned/zerodha_fund_house_portfolio.xlsx
   sheets_to_avoid: []

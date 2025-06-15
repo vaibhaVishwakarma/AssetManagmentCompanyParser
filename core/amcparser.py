@@ -14,18 +14,19 @@ OUTPUT_FOLDER = "./output"
 
 
 class AMCPortfolioParser:
-    def __init__(self, config):
-        self.data_dir = config.get("data_dir")
+    def __init__(self, config={}):
+        self.data_dir = config.get("data_dir",None)
         self.output_file = config.get("output_file", "parsed_portfolio.xlsx")
-        self.amc_name = config.get("amc_name")
+        self.amc_name = config.get("amc_name",None)
         self.sheets_to_avoid = config.get("sheets_to_avoid", [])
         self.column_mapping = config.get("column_mapping", {})
         self.final_columns = config.get("final_columns", []) 
         self.fund_name_extraction_logic = config.get("fund_name_extraction_logic", self._default_fund_name_extraction)
         self.instrument_type_logic = config.get("instrument_type_logic", self._default_instrument_type_logic)
         # --additional--
-        self.base_headers = ["Name of Instrument","ISIN" , "Rating/Industry" , "Yield" , "Quantity" , "Market Value" , "Net Asset Value (NAV)"]
-        self.full_data = pd.DataFrame(columns= self.base_headers + ["Type" , "Scheme" , "AmcName"])
+        self.base_headers = config.get("final_columns" , ["Name of Instrument","ISIN" , "Rating/Industry" , "Yield" , "Quantity" , "Market Value" , "Net Asset Value (NAV)"])
+        self.base_headers = [self._pre_process_header(header)for header in self.base_headers]
+        self.full_data = pd.DataFrame(columns= self.base_headers)
         self.base_embeddings = np.array([self._generate_embedding(value) for value in self.base_headers])
 
     def _default_fund_name_extraction(self, sheet_name, sheet_df):
@@ -44,18 +45,6 @@ class AMCPortfolioParser:
         name = re.sub(r"\s+", " ", raw).strip()
         name = re.sub(r"[—–\-\:\;,\s]+$", "", name)
         return name
-    
-    def create_ISIN_mapping(self , df):
-        """Create a mapping of fund names to ISINs."""
-        
-        isin_mapping = {}
-        for index, row in df.iterrows():
-            fund_name = row['Cleaned Fund Name'].lower()
-            isin = row['ISIN']
-            if fund_name and isin and row['Growth/Regular Type'] in ["Growth", "Regular"]:
-                isin_mapping[fund_name] = isin
-        return isin_mapping
-
 
     def _default_instrument_type_logic(self, df_clean):
         # Default logic for instrument type determination
@@ -116,7 +105,7 @@ class AMCPortfolioParser:
         df = df.dropna(how='all')
         df.reset_index(drop=True , inplace = True)
         rows = df.fillna(" ").agg(" ".join , axis = 1)
-        df = df.iloc[rows[rows.apply(lambda x : "listing on stock exchange" not in x.lower())].index.to_list()]
+        df = df.iloc[rows[rows.apply(lambda x : "stock exchang" not in x.lower())].index.to_list()]
         df.reset_index(drop=True , inplace = True)
         
         #find the row contaning headers
@@ -144,20 +133,42 @@ class AMCPortfolioParser:
 
         #maps the desired columns 
         header_map = self._header_mapper(header_row)
-        print("header_map....",header_map)
+        # print("header_map....",header_map)
+        
+
+        # transform numerical columns to standard scale
+        for header in self.base_headers[6:]:
+            if header not in header_map.keys() : continue
+            col = header_map[header]
+            col_name = header_row[col]
+            factor = None
+            if "%" in header and "%" not in col_name:
+                factor = 100
+            if "%" not in header and "%" in col_name:
+                factor = 0.01
+            if factor:
+                try:
+                    df.iloc[:,col] = df.iloc[:,col].astype(str).apply(self._trf).astype(np.float32) * factor
+                    print(f"{col_name} Column Transformed to standard Units")
+                except Exception as e:
+                    print("failed" , col_name)
+
+
 
         periods = self._get_valid_periods(df , header_map)
 
         #process data piece by piece
         for (start_idx , end_idx) in periods:
-            scheme_name = re.sub("[^a-zA-Z0-9\s]" , "" , df[start_idx-1:start_idx].fillna("").agg(" ".join , axis = 1).iloc[0])
-            print("\n",scheme_name)
+            scheme_name = re.sub(r"\([^)]*\)", "", df[start_idx-1:start_idx].astype(str).fillna("").agg(" ".join , axis = 1).iloc[0])
+            scheme_name = re.sub(r"[^a-zA-Z0-9\s\&]" , "" , scheme_name)
+            # print("\n",scheme_name)
 
             for (index , row) in df.iloc[start_idx:end_idx+1].iterrows():
                 values = header_map.copy()
                 for (key , idx) in header_map.items():
-                    values[key] = row.iloc[idx]
-                print(f"{index} ",end=" , ") # just to keep track
+                    temp = row.iloc[idx]
+                    values[key] = temp if type(temp) not in ["str","object"] else  re.sub(r"[^a-zA-z0-9.\s]","",temp)
+                # print(f"{index} ",end=" , ") # just to keep track
 
                 #meta data addition
                 values["Type"] =  scheme_name
@@ -169,13 +180,20 @@ class AMCPortfolioParser:
         
     
     # ------------ functions added by vaibhav  ---------------
+    def _trf(self, x):
+        x = re.search(r'\d+(?:\.\d+)?', x)
+        if x : x = x.group().strip()
+        return "0" if x == None or x == "" else x
+
+    def _filter_isin(self, string):
+        s = str(string).lower().strip()
+        return re.sub("[^a-zA-Z0-9]" , "" , s).upper()
     def _check_isin(self, val):
-        s = str(val).lower().strip()
-        s = re.sub("[^a-zA-Z0-9]" , "" , s)
-        return s.startswith("in") and s[-1] in "0123456789"
+        return val.startswith("IN") and val[-1] in "0123456789"
     
     def _get_valid_periods(self, df , header_map):
-        mask = df.iloc[:, header_map["ISIN"]].apply(self._check_isin).values
+        df.iloc[:, header_map["isin"]] = df.iloc[:, header_map["isin"]].apply(self._filter_isin)
+        mask = df.iloc[:, header_map["isin"]].apply(self._check_isin).values
         # Find continuous True periods
         periods = []
         start = None
@@ -190,7 +208,7 @@ class AMCPortfolioParser:
         # Edge case: last element was True
         if start is not None:
             periods.append((start, len(mask) - 1))
-        print("Passing periods:", periods)
+        # print("Passing periods:", periods)
         return periods
     
     def _generate_embedding(self, text:str) -> list[float]:
@@ -217,9 +235,15 @@ class AMCPortfolioParser:
         header_row = [(header_row.iloc[col]) for col in range(header_row.shape[0])]
         return header_row
     
+    def _pre_process_header (self, x) :
+        return re.sub(r"[^a-z\s%\(\)\\]","",x.lower())
+    
     def _header_mapper(self, header_row ) -> {str:int}:
 
         header_map = dict()
+
+        self.base_headers = [self._pre_process_header(header) for header in self.base_headers]
+        header_row = [self._pre_process_header(header) for header in header_row]
 
         header_row_embeddings = np.array([self._generate_embedding(value) for value in header_row])
         # Compute cosine similarity (shape: 5 x 10)
@@ -233,8 +257,28 @@ class AMCPortfolioParser:
 
         # Print results
         for i, (idx, score) in enumerate(zip(most_similar_indices, most_similar_scores)):
+            bh = self.base_headers[i] 
+            hr = header_row[idx]
+
+            if "nav" in bh and "aum" in hr:
+                score = 0
+            if "yield" in bh and "yield" not in hr:
+                score = 0
+            if ("ytc" in bh or "call" in bh):
+                if("ytc" in hr or "call" in hr) and "put" not in hr: 
+                    score = 1
+                else: 
+                    score = 0 
+            if ("ytm" in bh or "maturity" in bh): 
+                if ("ytm" in hr or "maturity" in hr): 
+                    score = 1
+                else: 
+                    score =0
+
             print(f"Base vector {i} ie {self.base_headers[i]} is most similar to header {idx} ie {header_row[idx]} with score {score:.4f}")
-            header_map[self.base_headers[i]] = int(idx)
+            if score > 0.51 :
+                header_map[self.base_headers[i]] = int(idx)
+        
             
         return header_map
 
@@ -263,17 +307,30 @@ class AMCPortfolioParser:
     def run(self):
         self.parse_all_portfolios()
         self.save_to_excel()
-
     
+    def append(self, main_output_file, fund_name , fund_isin):
+        if len(self.full_data) < 1 : return
 
+        self.full_data["fund_name"] = fund_name
+        self.full_data["fund_isin"] = fund_isin
+
+        self.full_data = self.full_data[["fund_name","fund_isin"] + [col for col in self.full_data.columns if col not in ["fund_name","fund_isin"]]]
+
+        if os.path.exists(main_output_file):
+            data = pd.read_excel(main_output_file)
+            data = pd.concat([data, self.full_data], axis = 0)
+        else :        
+            data = self.full_data
+        
+        data.to_excel(main_output_file, index=False)
 
 # Example Usage (for ICICI Prudential Mutual Fund)
 if __name__ == "__main__":
 
     icici_config = {
-        "data_dir": r"data\\data\\Groww Mutual Fund",
-        "output_file": f"{OUTPUT_FOLDER}/Groww_mutual_fund_portfolio_parsed.xlsx",
-        "amc_name": "Groww Mutual Fund",
+        "data_dir": r"data\\data\\360 One Asset Management",
+        "output_file": f"{OUTPUT_FOLDER}/one_asset_360_mutual_fund_portfolio_parsed.xlsx",
+        "amc_name": "360 One Asset Management",
         "sheets_to_avoid": [],
         "column_mapping": {
             # Add any specific renames from the raw Excel headers to the desired final column names
@@ -283,7 +340,7 @@ if __name__ == "__main__":
         "final_columns": [
             "Name of Instrument", "ISIN", "Coupon", "Industry", "Quantity", 
             "Market Value", "% to Net Assets", "Yield", "Yield to call", 
-            "Type", "Scheme Name", "AMC"
+            "YTM"
         ]
     }
 
