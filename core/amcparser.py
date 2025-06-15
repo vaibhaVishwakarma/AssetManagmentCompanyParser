@@ -17,8 +17,8 @@ class AMCPortfolioParser(ABC):
         self.full_data = pd.DataFrame()
         self.isin_lookup =self._create_ISIN_mapping(pd.read_excel(config.get("ISIN_file"))) #TODO: Make this configurable or pass as an argument
 
-
-    def _create_ISIN_mapping(df):
+    
+    def _create_ISIN_mapping(self,df):
         
         """Create a mapping of fund names to ISINs."""
         isin_mapping = {}

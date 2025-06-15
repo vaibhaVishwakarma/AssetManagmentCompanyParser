@@ -43,6 +43,7 @@ if __name__ == "__main__":
             print("to do")
         elif amc_name == "ICICI Prudential Mutual Fund":
             config=configs[amc_name]
+            print(config.get("ISIN_file"))
             parser = ICICIMFParser(config)
             parser.parse_all_portfolios()
             parser.save_to_excel()

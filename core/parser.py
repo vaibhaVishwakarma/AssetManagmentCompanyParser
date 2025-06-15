@@ -5,10 +5,13 @@ class ICICIMFParser(AMCPortfolioParser):
     def __init__(self, config):
         super().__init__(config=config)
 
+
+    
+
     def process_sheet(self, datafile, sheet_name, sheet_df):
 
         print(f"\n🔍 Processing  → Sheet: {sheet_name}")
-        fund = self.get_fund_name(sheet_df, self.amc_name)
+        fund = self._default_fund_name_extraction(sheet_df)
 
         if fund is not None and sheet_name:
                 print(f"\n🔍 Processing  → Fund: {fund}")

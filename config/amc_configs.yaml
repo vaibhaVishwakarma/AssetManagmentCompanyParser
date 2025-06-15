@@ -1,7 +1,7 @@
 Axis Mutual Fund:
   data_dir: /Users/njp60/Documents/code/mutualfundbackend/funddata/data/Axis Mutual Fund
   output_file: /Users/njp60/Documents/code/AssetManagmentCompanyParser/output/axis_mutual_fund_portfolio.xlsx
-  ISIN_file: /Users/njp60/Documents/code/AssetManagmentCompanyParser/ISIN/fundISIN.xlsx
+  ISIN_file: /Users/njp60/Documents/code/AssetManagmentCompanyParser/ISIN/fundisin.xlsx
   amc_name: Axis Mutual Fund
   sheets_to_avoid: []
   column_mapping: {}
@@ -21,6 +21,7 @@ Axis Mutual Fund:
 HDFC Mutual Fund:
   data_dir: /Users/njp60/Documents/code/mutualfundbackend/funddata/data/HDFC Mutual Fund
   output_file: /Users/njp60/Documents/code/AssetManagmentCompanyParser/output/hdfc_mutual_fund_portfolio.xlsx
+  ISIN_file: /Users/njp60/Documents/code/AssetManagmentCompanyParser/ISIN/fundisin.xlsx
   amc_name: HDFC Mutual Fund
   sheets_to_avoid: []
   column_mapping: {}
@@ -40,6 +41,7 @@ HDFC Mutual Fund:
 ICICI Prudential Mutual Fund:
   data_dir: /Users/njp60/Documents/code/mutualfundbackend/funddata/data/ICICI Prudential Mutual Fund
   output_file: /Users/njp60/Documents/code/AssetManagmentCompanyParser/output/icici_prudential_mutual_fund_portfolio.xlsx
+  ISIN_file: /Users/njp60/Documents/code/AssetManagmentCompanyParser/ISIN/fundisin.xlsx
   amc_name: ICICI Prudential Mutual Fund
   sheets_to_avoid: []
   column_mapping: {}
