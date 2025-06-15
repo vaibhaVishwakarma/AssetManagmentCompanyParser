@@ -24,20 +24,31 @@ HDFC Mutual Fund:
   ISIN_file: /Users/njp60/Documents/code/AssetManagmentCompanyParser/ISIN/fundisin.xlsx
   amc_name: HDFC Mutual Fund
   sheets_to_avoid: []
-  column_mapping: {}
+  column_mapping:
+    ISIN: ISIN
+    Coupon (%): Coupon
+    Name Of the Instrument: Name of Instrument
+    Industry+ /Rating: Industry
+    Quantity: Quantity
+    Market/ Fair Value (Rs. in Lacs.): Market Value
+    '% to NAV': '% to Net Assets'
+    Yield: Yield
+    ~YTC (AT1/Tier 2 bonds): Yield to call
+    Derivative % to NAV: Derivative % to NAV
+    Unhedged % to NAV: Unhedged % to NAV
   final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value
-  - '% to Net Assets'
-  - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
+    - Name of Instrument
+    - ISIN
+    - Coupon
+    - Industry
+    - Quantity
+    - Market Value
+    - '% to Net Assets'
+    - Yield
+    - Yield to call
+    - Type
+    - Scheme Name
+    - AMC
 ICICI Prudential Mutual Fund:
   data_dir: /Users/njp60/Documents/code/mutualfundbackend/funddata/data/ICICI Prudential Mutual Fund
   output_file: /Users/njp60/Documents/code/AssetManagmentCompanyParser/output/icici_prudential_mutual_fund_portfolio.xlsx

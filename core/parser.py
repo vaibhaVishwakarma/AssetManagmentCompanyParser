@@ -180,10 +180,12 @@ class HDFCParser(AMCPortfolioParser):
         This method can be overridden in subclasses for specific fund name extraction logic.
         """
         # Default implementation: use the first non-empty cell in the first row
-        amc_norm = self.amc_name.strip().lower()
-        top6 = sheet_df.head(1).astype(str)
-        for t in top6:
-            print(self._clean_fund_name(t))
+        name=sheet_df.head(0).columns[0]
+        name= self._clean_fund_name(name)
+        if name:
+            return name
+        else:
+            print("⚠️ No fund name found in the sheet.")
 
 
     def process_sheet(self, datafile, sheet_name, sheet_df):
@@ -213,8 +215,29 @@ class HDFCParser(AMCPortfolioParser):
                 df_clean = df_clean[1:].reset_index(drop=True)
                 df_clean = df_clean.loc[:, df_clean.columns.notna()]
 
+                print(df_clean.columns)
 
-                df_clean.columns = ["Name of Instrument", "ISIN", "Industry", "Quantity", "Market Value", "% to Net Assets"]
+                col_mapping=self.column_mapping  #obtain col maping from config to standardize column names
+
+
+                  # Standardize column names
+             
+                col_mappinp ={'ISIN' : 'ISIN',
+                              'Coupon (%)': 'Coupon',
+                              'Name Of the Instrument': 'Name of Instrument',
+                              'Industry+ /Rating': 'Industry',
+                              'Quantity': 'Quantity',
+                              'Market/ Fair Value (Rs. in Lacs.)': 'Market Value',
+                              '% to NAV': "% to Net Assets",
+                              'Yield': 'Yield',
+                              '~YTC (AT1/Tier 2 bonds)': 'Yield to call',
+                              'Derivative % to NAV':   'Derivative % to NAV',
+                              'Unhedged % to NAV': 'Unhedged % to NAV',
+                }
+
+                df_clean.rename(columns=col_mapping)
+
+
                 df_clean.dropna(subset=["ISIN", "Name of Instrument", "Market Value"], inplace=True)
                 
                 df_clean['Type'] = df_clean['Industry'].apply(lambda x: 'Debt or related' if 'DEBT' in str(x).upper() else 'Equity or Equity related')
@@ -222,6 +245,7 @@ class HDFCParser(AMCPortfolioParser):
                 df_clean = df_clean.round(2)
                 df_clean["Scheme Name"] = fund_name
                 df_clean["AMC"] = AMC_NAME
+                df_clean["FUND_ISIN"] = fund_isin if fund_isin is not None else None
                 self.full_data = pd.concat([self.full_data, df_clean], ignore_index=True) if not self.full_data.empty else df_clean
 
         
