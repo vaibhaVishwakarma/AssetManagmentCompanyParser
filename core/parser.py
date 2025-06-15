@@ -5,16 +5,16 @@ class ICICIMFParser(AMCPortfolioParser):
     def __init__(self, config):
         super().__init__(config=config)
 
-
-    
-
     def process_sheet(self, datafile, sheet_name, sheet_df):
 
         print(f"\n🔍 Processing  → Sheet: {sheet_name}")
-        fund = self._default_fund_name_extraction(sheet_df)
+        fund_name = self._default_fund_name_extraction(sheet_df)
+        
 
-        if fund is not None and sheet_name:
-                print(f"\n🔍 Processing  → Fund: {fund}")
+        if fund_name is not None and sheet_name:
+                print(f"\n🔍 Processing  → Fund: {fund_name}")
+
+                fund_isin=self._get_fund_isin(fund_name)
 
                 header_row_idx = next(
                         (index for index, row in sheet_df.iterrows() if any("ISIN" in str(val) for val in row.dropna())),
@@ -54,14 +54,11 @@ class ICICIMFParser(AMCPortfolioParser):
                 df_clean['Type'] = df_clean['Yield'].apply(lambda x: 'Debt or related' if x != 0 else 'Equity or Equity related')
                     
                 df_clean = df_clean.round(2)
-                df_clean["Scheme Name"] = fund
+                df_clean["Scheme Name"] = fund_name
                 df_clean["AMC"] = self.amc_name
-
-                print(df_clean.head(200))
+                df_clean["FUND_ISIN"] = fund_isin if fund_isin is not None else None
                 self.full_data=pd.concat([self.full_data,df_clean],ignore_index=True) if not self.full_data.empty else df_clean
-        
-
-        
+               
 # Templates for all other AMC names
 class One360Parser(AMCPortfolioParser):
     def __init__(self, config):
@@ -167,8 +164,40 @@ class HDFCParser(AMCPortfolioParser):
         super().__init__(config=config)
 
     def process_sheet(self, datafile, sheet_name, sheet_df):
-        # TODO: Implement the specific cleaning logic for HDFC Mutual Fund
-        pass
+        print(f"\n🔍 Processing  → Sheet: {sheet_name}")
+        
+        fund_name = self._default_fund_name_extraction(sheet_df)
+        AMC_NAME = self.amc_name
+        
+        if fund_name is not None and sheet_name:
+                print(f"\n🔍 Processing  → Sheet: {fund_name}")
+                
+                fund_isin = self._get_fund_isin(fund_name)
+
+                header_row_idx = next(
+                    (index for index, row in sheet_df.iterrows() if any("ISIN" in str(val) for val in row.dropna())),
+                    None
+                )
+                if header_row_idx is None:
+                    print(f"⚠️ Skipping {sheet_name} (No ISIN header found)")
+                    return
+
+                df_clean = pd.read_excel(datafile, sheet_name=sheet_name, skiprows=header_row_idx, dtype=str)
+                df_clean.columns = df_clean.iloc[0]
+                df_clean = df_clean[1:].reset_index(drop=True)
+                df_clean = df_clean.loc[:, df_clean.columns.notna()]
+
+                df_clean.columns = ["Name of Instrument", "ISIN", "Industry", "Quantity", "Market Value", "% to Net Assets"]
+                df_clean.dropna(subset=["ISIN", "Name of Instrument", "Market Value"], inplace=True)
+                
+                df_clean['Type'] = df_clean['Industry'].apply(lambda x: 'Debt or related' if 'DEBT' in str(x).upper() else 'Equity or Equity related')
+                
+                df_clean = df_clean.round(2)
+                df_clean["Scheme Name"] = fund_name
+                df_clean["AMC"] = AMC_NAME
+                self.full_data = pd.concat([self.full_data, df_clean], ignore_index=True) if not self.full_data.empty else df_clean
+
+        
 
 
 class HeliosParser(AMCPortfolioParser):

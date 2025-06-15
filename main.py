@@ -37,16 +37,14 @@ if __name__ == "__main__":
             print("to do")
 
         elif amc_name == "HDFC Mutual Fund":
-            #parser = HDFCParser(configs[amc_name])
-            #parser.parse_all_portfolios()
-            #parser.save_to_excel()
-            print("to do")
-        elif amc_name == "ICICI Prudential Mutual Fund":
-            config=configs[amc_name]
-            print(config.get("ISIN_file"))
-            parser = ICICIMFParser(config)
+            parser = HDFCParser(configs[amc_name])
             parser.parse_all_portfolios()
             parser.save_to_excel()
+        elif amc_name == "ICICI Prudential Mutual Fund":
+            print("Completed")
+            #parser = ICICIMFParser(configs[amc_name])
+            #parser.parse_all_portfolios()
+            #parser.save_to_excel()
         else:
             print(f"❌ No parser implemented for: {amc_name}")
             continue

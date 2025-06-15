@@ -17,6 +17,17 @@ class AMCPortfolioParser(ABC):
         self.full_data = pd.DataFrame()
         self.isin_lookup =self._create_ISIN_mapping(pd.read_excel(config.get("ISIN_file"))) #TODO: Make this configurable or pass as an argument
 
+
+    def _get_fund_isin(self, fund_name):
+
+        if fund_name.lower() in self.isin_lookup:
+                print(f"ISIN for {fund_name.lower()}: {self.isin_lookup[fund_name.lower()]}")
+                return self.isin_lookup[fund_name.lower()]
+        else:
+             print(f"No ISIN found for {fund_name}")
+        return None
+
+        
     
     def _create_ISIN_mapping(self,df):
         
