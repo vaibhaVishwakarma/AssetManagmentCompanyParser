@@ -1,5 +1,6 @@
 from core.amcparser import AMCPortfolioParser
 import pandas as pd
+import re
 
 class ICICIMFParser(AMCPortfolioParser):
     def __init__(self, config):
@@ -163,14 +164,39 @@ class HDFCParser(AMCPortfolioParser):
     def __init__(self, config):
         super().__init__(config=config)
 
+    def _clean_fund_name(self, fund_name):
+        """
+        Cleans the fund name by removing unwanted characters and normalizing it.
+        This method can be overridden in subclasses for specific fund name cleaning logic.
+        """
+        # Default implementation: strip whitespace and convert to lowercase
+        cleaned_name = re.sub(r'\s+fund.*', ' fund', fund_name, flags=re.IGNORECASE)
+        return cleaned_name.strip()
+    
+
+    def _get_fund_name(self, sheet_df):
+        """
+        Extracts the fund name from the sheet DataFrame.
+        This method can be overridden in subclasses for specific fund name extraction logic.
+        """
+        # Default implementation: use the first non-empty cell in the first row
+        amc_norm = self.amc_name.strip().lower()
+        top6 = sheet_df.head(1).astype(str)
+        for t in top6:
+            print(self._clean_fund_name(t))
+
+
     def process_sheet(self, datafile, sheet_name, sheet_df):
         print(f"\n🔍 Processing  → Sheet: {sheet_name}")
         
-        fund_name = self._default_fund_name_extraction(sheet_df)
+        fund_name = self._get_fund_name(sheet_df)
+        print("Fund Name:", fund_name)
         AMC_NAME = self.amc_name
         
         if fund_name is not None and sheet_name:
-                print(f"\n🔍 Processing  → Sheet: {fund_name}")
+                
+                fund_isin = self._get_fund_isin(fund_name)
+                print(f"\n🔍 Processing  → Sheet: {fund_name}, {fund_isin}")
                 
                 fund_isin = self._get_fund_isin(fund_name)
 
@@ -186,6 +212,7 @@ class HDFCParser(AMCPortfolioParser):
                 df_clean.columns = df_clean.iloc[0]
                 df_clean = df_clean[1:].reset_index(drop=True)
                 df_clean = df_clean.loc[:, df_clean.columns.notna()]
+
 
                 df_clean.columns = ["Name of Instrument", "ISIN", "Industry", "Quantity", "Market Value", "% to Net Assets"]
                 df_clean.dropna(subset=["ISIN", "Name of Instrument", "Market Value"], inplace=True)

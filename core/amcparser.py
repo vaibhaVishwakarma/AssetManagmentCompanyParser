@@ -18,6 +18,7 @@ class AMCPortfolioParser(ABC):
         self.isin_lookup =self._create_ISIN_mapping(pd.read_excel(config.get("ISIN_file"))) #TODO: Make this configurable or pass as an argument
 
 
+
     def _get_fund_isin(self, fund_name):
 
         if fund_name.lower() in self.isin_lookup:
@@ -27,7 +28,15 @@ class AMCPortfolioParser(ABC):
              print(f"No ISIN found for {fund_name}")
         return None
 
-        
+    @abstractmethod
+    def _fund_name_extraction(self, sheet_df):
+        "To bo overridden in subclasses to extract fund names from the sheet."
+        pass
+
+    @abstractmethod
+    def _clean_fund_name(self, fund_name):
+        """To be overridden in subclasses to clean fund names."""
+        pass
     
     def _create_ISIN_mapping(self,df):
         
