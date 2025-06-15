@@ -40,15 +40,20 @@ if __name__ == "__main__":
             #parser = PPFASParser(configs[amc_name])
             print("to do")
 
-        elif amc_name == "HDFC Mutual Fund":
-            parser = HDFCParser(configs[amc_name])
-            parser.parse_all_portfolios()
-            parser.save_to_excel()
         elif amc_name == "ICICI Prudential Mutual Fund":
-            print("Completed")
-            #parser = ICICIMFParser(configs[amc_name])
+
+            parser = ICICIMFParser(configs[amc_name])
+            parser.parse_all_portfolios()
+            parser.save_to_excel()    
+
+
+
+        elif amc_name == "HDFC Mutual Fund":
+            print("Processing HDFC Mutual Fund")
+            parser = HDFCParser(configs[amc_name])
             #parser.parse_all_portfolios()
             #parser.save_to_excel()
+
         else:
             print(f"❌ No parser implemented for: {amc_name}")
             continue

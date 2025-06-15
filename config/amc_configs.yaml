@@ -45,7 +45,16 @@ ICICI Prudential Mutual Fund:
   ISIN_file: /Users/njp60/Documents/code/AssetManagmentCompanyParser/ISIN/fundisin.xlsx
   amc_name: ICICI Prudential Mutual Fund
   sheets_to_avoid: []
-  column_mapping: {}
+  column_mapping:
+    Company/Issuer/Instrument Name: Name of Instrument
+    ISIN: ISIN
+    Coupon: Coupon
+    Industry/Rating: Industry
+    Quantity: Quantity
+    Exposure/Market Value(Rs.Lakh): Market Value
+    '% to Nav': '% to Net Assets'
+    Yield of the instrument: Yield
+    Yield to Call @: Yield to call
   final_columns: *default_columns
 kotak_mutual_fund:
   data_dir: /Users/njp60/Documents/code/mutualfundbackend/funddata/data/Kotak Mutual Fund

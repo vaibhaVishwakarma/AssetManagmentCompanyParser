@@ -6,11 +6,33 @@ class ICICIMFParser(AMCPortfolioParser):
     def __init__(self, config):
         super().__init__(config=config)
 
+
+    def _clean_fund_name(self, fund_name):
+        """
+        Cleans the fund name by removing unwanted characters and normalizing it.
+        This method can be overridden in subclasses for specific fund name cleaning logic.
+        This is probably not needed for this AMC: ICICI Mutual Fund, but included for consistency.
+        """
+        # Default implementation: strip whitespace and convert to lowercase
+        cleaned_name = re.sub(r'\s+fund.*', ' fund', fund_name, flags=re.IGNORECASE)
+        return cleaned_name.strip()    
+    
+    def _get_fund_name(self, sheet_df):
+        """
+        Extracts the fund name from the sheet DataFrame.
+        This method can be overridden in subclasses for specific fund name extraction logic.
+        This is probably not needed for this AMC: ICICI Mutual Fund, but included for consistency.
+        """
+        # Default implementation: use the first non-empty cell in the first row
+        
+        return None
+
+
     def process_sheet(self, datafile, sheet_name, sheet_df):
 
         print(f"\n🔍 Processing  → Sheet: {sheet_name}")
         fund_name = self._default_fund_name_extraction(sheet_df)
-        
+        fund_name = self._clean_fund_name(fund_name) if fund_name else None
 
         if fund_name is not None and sheet_name:
                 print(f"\n🔍 Processing  → Fund: {fund_name}")
@@ -32,20 +54,29 @@ class ICICIMFParser(AMCPortfolioParser):
 
                 df_clean = df_clean.loc[:, df_clean.columns.notna()]
 
-                print(df_clean.columns)
+                print(df_clean.columns) 
 
+                # Check if 'Coupon' column exists, if not, add it with default value 0 this is due to structure of ICICI AMC files
                 if "Coupon" not in df_clean.columns:
                         df_clean.insert(3, 'Coupon','0')
                         df_clean['Coupon'] = 0
+                
+                # THis is due to error in on xls possibly due to hard coded column names or during manual entry
+                df_clean.columns = [col.replace('\tISIN', 'ISIN') for col in df_clean.columns]
+
+             
+                col_mapping = self.column_mapping  #obtain col maping from config to standardize column names
+                df_clean=df_clean.rename(columns=col_mapping)
 
                     
-                col_names=["Name of Instrument","ISIN", "Coupon" ,"Industry", "Quantity", "Market Value", "% to Net Assets", "Yield", "Yield to call"]
+                #col_names=["Name of Instrument","ISIN", "Coupon" ,"Industry", "Quantity", "Market Value", "% to Net Assets", "Yield", "Yield to call"]
                     
                 if len(df_clean.columns) >10:
-                        print("⚠️ Skipping {sheet_name} (Too many columns) probably EGS fund)")
+                        print("⚠️ Skipping {sheet_name} (Too many columns) probably EGS fund)") #TO DO ESG funds later
                         return
 
-                df_clean.columns =col_names
+                #df_clean.columns =col_names
+                print("Columns after renaming:", df_clean.columns)
                 df_clean.dropna(subset=["ISIN", "Name of Instrument", "Market Value"], inplace=True)
 
 
