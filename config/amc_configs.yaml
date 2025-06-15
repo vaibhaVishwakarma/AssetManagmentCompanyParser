@@ -1,6 +1,7 @@
-axis_mutual_fund:
+Axis Mutual Fund:
   data_dir: /Users/njp60/Documents/code/mutualfundbackend/funddata/data/Axis Mutual Fund
   output_file: /Users/njp60/Documents/code/AssetManagmentCompanyParser/output/axis_mutual_fund_portfolio.xlsx
+  ISIN_file: /Users/njp60/Documents/code/AssetManagmentCompanyParser/ISIN/fundISIN.xlsx
   amc_name: Axis Mutual Fund
   sheets_to_avoid: []
   column_mapping: {}
@@ -17,7 +18,7 @@ axis_mutual_fund:
   - Type
   - Scheme Name
   - AMC
-hdfc_mutual_fund:
+HDFC Mutual Fund:
   data_dir: /Users/njp60/Documents/code/mutualfundbackend/funddata/data/HDFC Mutual Fund
   output_file: /Users/njp60/Documents/code/AssetManagmentCompanyParser/output/hdfc_mutual_fund_portfolio.xlsx
   amc_name: HDFC Mutual Fund
@@ -36,7 +37,7 @@ hdfc_mutual_fund:
   - Type
   - Scheme Name
   - AMC
-icici_prudential_mutual_fund:
+ICICI Prudential Mutual Fund:
   data_dir: /Users/njp60/Documents/code/mutualfundbackend/funddata/data/ICICI Prudential Mutual Fund
   output_file: /Users/njp60/Documents/code/AssetManagmentCompanyParser/output/icici_prudential_mutual_fund_portfolio.xlsx
   amc_name: ICICI Prudential Mutual Fund
@@ -56,8 +57,8 @@ icici_prudential_mutual_fund:
   - Scheme Name
   - AMC
 kotak_mutual_fund:
-  data_dir: /Users/njp60/Documents/code/mutualfundbackend/funddata/data/ICICI Prudential Mutual Fund
-  output_file: /Users/njp60/Documents/code/AssetManagmentCompanyParser/output/icici_prudential_mutual_fund_portfolio.xlsx
+  data_dir: /Users/njp60/Documents/code/mutualfundbackend/funddata/data/Kotak Mutual Fund
+  output_file: /Users/njp60/Documents/code/AssetManagmentCompanyParser/output/kotak_mutual_fund_portfolio.xlsx
   amc_name: Kotak Mutual Fund
   sheets_to_avoid: []
   column_mapping: {}

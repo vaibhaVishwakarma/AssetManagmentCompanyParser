@@ -6,7 +6,7 @@ import pandas as pd
 from core.parser import HDFCParser, ICICIMFParser, PPFASParser
 
 # Load all configurations
-def load_yaml_config(filepath="amc_configs.yaml"):
+def load_yaml_config(filepath="config/amc_configs.yaml"):
     with open(filepath, "r") as f:
         return yaml.safe_load(f)
 
@@ -33,13 +33,17 @@ if __name__ == "__main__":
 
 
         if amc_name == "PPFAS Mutual Fund":
-            parser = PPFASParser(configs[amc_name])
+            #parser = PPFASParser(configs[amc_name])
+            print("to do")
+
         elif amc_name == "HDFC Mutual Fund":
-            parser = HDFCParser(configs[amc_name])
+            #parser = HDFCParser(configs[amc_name])
             #parser.parse_all_portfolios()
             #parser.save_to_excel()
+            print("to do")
         elif amc_name == "ICICI Prudential Mutual Fund":
-            parser = ICICIMFParser(configs[amc_name])
+            config=configs[amc_name]
+            parser = ICICIMFParser(config)
             parser.parse_all_portfolios()
             parser.save_to_excel()
         else:

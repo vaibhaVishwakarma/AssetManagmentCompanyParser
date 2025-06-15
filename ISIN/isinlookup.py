@@ -13,7 +13,7 @@ def create_ISIN_mapping(df):
                 isin_mapping[fund_name] = isin
         return isin_mapping
 
-df =pd.read_excel("ISIN/fund_isin.xlsx")
+df =pd.read_excel("ISIN/fundisin.xlsx")
 lookup= create_ISIN_mapping(df)
 fund_name="hdfc balanced advantage fund"
 print(fund_name.lower())
