@@ -29,7 +29,7 @@ class AMCPortfolioParser(ABC):
         return None
 
     @abstractmethod
-    def _fund_name_extraction(self, sheet_df):
+    def _get_fund_name(self, sheet_df):
         "To bo overridden in subclasses to extract fund names from the sheet."
         pass
 
