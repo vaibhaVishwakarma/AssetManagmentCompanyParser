@@ -222,7 +222,7 @@ class HDFCParser(AMCPortfolioParser):
 
                   # Standardize column names
              
-                col_mappinp ={'ISIN' : 'ISIN',
+                col_mapping ={'ISIN' : 'ISIN',
                               'Coupon (%)': 'Coupon',
                               'Name Of the Instrument': 'Name of Instrument',
                               'Industry+ /Rating': 'Industry',
