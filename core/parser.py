@@ -222,20 +222,9 @@ class HDFCParser(AMCPortfolioParser):
 
                   # Standardize column names
              
-                col_mapping ={'ISIN' : 'ISIN',
-                              'Coupon (%)': 'Coupon',
-                              'Name Of the Instrument': 'Name of Instrument',
-                              'Industry+ /Rating': 'Industry',
-                              'Quantity': 'Quantity',
-                              'Market/ Fair Value (Rs. in Lacs.)': 'Market Value',
-                              '% to NAV': "% to Net Assets",
-                              'Yield': 'Yield',
-                              '~YTC (AT1/Tier 2 bonds)': 'Yield to call',
-                              'Derivative % to NAV':   'Derivative % to NAV',
-                              'Unhedged % to NAV': 'Unhedged % to NAV',
-                }
+                df_clean=df_clean.rename(columns=self.column_mapping)
 
-                df_clean.rename(columns=col_mapping)
+                #print(df_clean.columns) #to debug the column names
 
 
                 df_clean.dropna(subset=["ISIN", "Name of Instrument", "Market Value"], inplace=True)
