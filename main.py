@@ -51,8 +51,8 @@ if __name__ == "__main__":
         elif amc_name == "HDFC Mutual Fund":
             print("Processing HDFC Mutual Fund")
             parser = HDFCParser(configs[amc_name])
-            #parser.parse_all_portfolios()
-            #parser.save_to_excel()
+            parser.parse_all_portfolios()
+            parser.save_to_excel()
 
         else:
             print(f"❌ No parser implemented for: {amc_name}")
