@@ -1,6 +1,8 @@
 import re
 import pandas as pd
 import os
+from abc import ABC, abstractmethod
+
 
 #--additional--
 import requests
@@ -179,6 +181,8 @@ class AMCPortfolioParser:
         header_row = df.iloc[idx,:].fillna("NULL")
         header_row = [(header_row.iloc[col]) for col in range(header_row.shape[0])]
         return header_row
+    
+
     
     def _header_mapper(self, header_row ) -> {str:int}:
 
