@@ -329,6 +329,7 @@ class SBIParser(AMCPortfolioParser):
         super().__init__(config=config)
 
     def _get_fund_name(self,df):
+        if len(df.columns) < 4 : return None
         return df.iloc[1,3]
         
 

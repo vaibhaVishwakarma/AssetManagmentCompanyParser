@@ -159,7 +159,11 @@ class AMCPortfolioParser(ABC):
             rows = df.fillna(" ").agg(" ".join , axis = 1).apply(str.lower)
             df = df.iloc[rows[rows.apply(lambda x : "stock exchang" not in x and not ("index" in x and "stock" in x))].index.to_list()]
             df.reset_index(drop=True , inplace = True)
-            table_end_idx = min(rows[rows.apply(lambda x : "grand total" in x)].index.to_list()[0]-1, len(df))
+            grand_total_idx = rows[rows.apply(lambda x : "grand total" in x)].index.to_list()
+            table_end_idx=len(df)
+            if len(grand_total_idx) > 0 : 
+                table_end_idx = min( table_end_idx , grand_total_idx[-1])
+            
             
             #find the row contaning headers
             header_row = self._fetch_header_row(df)
@@ -187,27 +191,6 @@ class AMCPortfolioParser(ABC):
             #maps the desired columns 
             header_map = self._header_mapper(header_row)
             # print("header_map....",header_map)
-            
-
-            # transform numerical columns to standard scale
-            for header in self.base_headers[6:]:
-                if header not in header_map.keys() : continue
-                col = header_map[header]
-                col_name = header_row[col]
-                factor = None
-                if "%" in header and "%" not in col_name:
-                    factor = 100
-                if "%" not in header and "%" in col_name:
-                    factor = 0.01
-                # if converstion needed.
-                # if factor:
-                #     try:
-                #         df.iloc[:,col] = df.iloc[:,col].astype(str).apply(self._trf).astype(np.float32) * factor
-                #         print(f"{col_name} Column Transformed to standard Units")
-                #     except Exception as e:
-                #         print("failed" , col_name)
-
-
 
             periods = self._get_valid_periods(df , header_map)
 
@@ -219,20 +202,18 @@ class AMCPortfolioParser(ABC):
                     print("No valid Type Name Found. Moving on.")
                     continue
                 
-                type_name =  df[type_name_idx:type_name_idx+1].fillna("").agg("".join , axis = 1).iloc[0]
+                type_name =  df[type_name_idx:type_name_idx+1].fillna(" ").agg(" ".join , axis = 1).iloc[0]
                 if("(" not in type_name): type_name = re.sub(r"[^\)]\)","",type_name)
                 type_name = re.sub(r"\([^)]*\)", "", type_name)
-                type_name = re.sub(r"[^a-zA-Z\s\&]" , "" , type_name)
+                type_name = re.sub(r"[^a-zA-Z\s\&\-/\\]" , "" , type_name)
                 type_name = re.sub(r"(?<!\w)(nan)+(?!\w)", "", type_name ,flags=re.IGNORECASE)
-                # print("\n",type_name)
+                type_name = re.sub(r"\s+"," ",type_name)
 
                 for (index , row) in df.iloc[start_idx:min(end_idx+1,table_end_idx)].iterrows():
                     values = header_map.copy()
                     for (key , idx) in header_map.items():
                         temp = row.iloc[idx]
                         values[key] = temp
-                        # values[key] = temp if type(temp) not in ["str","object"] else  re.sub(r"[^a-zA-Z0-9.\s/\\]","",temp)
-                    # print(f"{index} ",end=" , ") # just to keep track
 
                     #meta data addition
                     values["Type"] =  type_name
@@ -275,10 +256,12 @@ class AMCPortfolioParser(ABC):
         return re.sub("[^a-zA-Z0-9]" , "" , s).upper()
     
     def _check_isin(self, val):
-        return  (" " not in val and 
+        return  (   len(val) in range(5,20) and
+                    " " not in val and 
                     (val[0].isupper() and 
                     val[1].isupper() and 
-                    (val[-1].isdigit() or val[-1].upper() == "X")))
+                    (val[-1].isdigit() or val[-1].upper() == "X"))
+                )
                 
     
     def _get_valid_periods(self, df , header_map):
@@ -369,15 +352,14 @@ class AMCPortfolioParser(ABC):
             if score > 0.51 :
                 header_map[self.base_headers[i]] = int(idx)
         
-            
         return header_map
     # --------OLD Functiones over--------
 
 
     def parse_all_portfolios(self):
         filenames = self.get_file_names()
-        n_files = 10
-        for datafile in filenames:
+        n_files = 10000
+        for datafile in filenames[::3]:
             df_raw = self.read_excel_file(datafile)
             if df_raw is None:
                 continue
