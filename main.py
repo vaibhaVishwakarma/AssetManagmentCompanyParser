@@ -3,10 +3,9 @@ import yaml
 import pandas as pd
 
 # Import your actual parser classes
-from core.parser import HDFCParser, ICICIMFParser, PPFASParser
-
+from core.parser import *
 # Load all configurations
-def load_yaml_config(filepath="config/amc_configs.yaml"):
+def load_yaml_config(filepath="config/amc_configs2.yaml"):
     with open(filepath, "r") as f:
         return yaml.safe_load(f)
     
@@ -26,37 +25,62 @@ if __name__ == "__main__":
         "PGIM India Mutual Fund", "PPFAS Mutual Fund", "Quant Mutual Fund", "Quantum Mutual Fund", 
         "SBI Mutual Fund", "Shriram Mutual Fund", "Sundaram Mutual Fund", "Tata Mutual Fund", 
         "Trust Mutual Fund", "Union Mutual Fund", "UTI Mutual Fund", "WhiteOak Mutual Fund", 
-        "Zerodha Fund House"
+        "Zerodha Fund House",
     ]
-
 
     for amc_name in amc_names:
 
-
-
         print(f"🔍 Processing AMC: {amc_name}")
 
+        if amc_name == "Kotak Mutual Fund":
+            parser = KotakParser(configs[amc_name])
+            parser.parse_all_portfolios()
+            parser.save_to_excel() 
+        
+        # if amc_name == "Helios Mutual Fund":
+        #     parser = HeliosParser(configs[amc_name])
+        #     parser.parse_all_portfolios()
+        #     parser.save_to_excel() 
+        if amc_name == "Groww Mutual Fund":
+            parser = GrowwParser(configs[amc_name])
+            parser.parse_all_portfolios()
+            parser.save_to_excel() 
         if amc_name == "PPFAS Mutual Fund":
-            #parser = PPFASParser(configs[amc_name])
-            print("to do")
+            parser = PPFASParser(configs[amc_name])
+            parser.parse_all_portfolios()
+            parser.save_to_excel() 
+        # if amc_name == "Mirae Asset Mutual Fund":
+        #     parser = MiraeAssetParser(configs[amc_name])
+        #     parser.parse_all_portfolios()
+        #     parser.save_to_excel() 
+        # if amc_name == "Quant Mutual Fund":
+        #     parser = QuantParser(configs[amc_name])
+        #     parser.parse_all_portfolios()
+        #     parser.save_to_excel() 
+        if amc_name == "SBI Mutual Fund":
+            parser = SBIParser(configs[amc_name])
+            parser.parse_all_portfolios()
+            parser.save_to_excel() 
 
-        elif amc_name == "ICICI Prudential Mutual Fund":
+        # if amc_name == "PPFAS Mutual Fund":
+        #     #parser = PPFASParser(configs[amc_name])
+        #     print("to do")
+
+        if amc_name == "ICICI Prudential Mutual Fund":
 
             parser = ICICIMFParser(configs[amc_name])
             parser.parse_all_portfolios()
             parser.save_to_excel()    
 
-
-
-        elif amc_name == "HDFC Mutual Fund":
+        if amc_name == "HDFC Mutual Fund":
             print("Processing HDFC Mutual Fund")
             parser = HDFCParser(configs[amc_name])
             parser.parse_all_portfolios()
             parser.save_to_excel()
 
-        else:
-            print(f"❌ No parser implemented for: {amc_name}")
-            continue
+        # # else:
+        #     print(f"❌ No parser implemented for: {amc_name}")
+        #     continue
 
 
 

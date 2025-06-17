@@ -21,9 +21,9 @@ Axis Mutual Fund:
   column_mapping: {}
   final_columns: *default_columns
 HDFC Mutual Fund:
-  data_dir: /Users/njp60/Documents/code/mutualfundbackend/funddata/data/HDFC Mutual Fund
-  output_file: /Users/njp60/Documents/code/AssetManagmentCompanyParser/output/hdfc_mutual_fund_portfolio.xlsx
-  ISIN_file: /Users/njp60/Documents/code/AssetManagmentCompanyParser/ISIN/fundisin.xlsx
+  data_dir: "data/data/HDFC Mutual Fund"
+  output_file: HDFC_mutual_fund_portfolio.xlsx
+  ISIN_file: ISIN/fundisin.xlsx
   amc_name: HDFC Mutual Fund
   sheets_to_avoid: []
   column_mapping:
@@ -57,9 +57,18 @@ ICICI Prudential Mutual Fund:
     Yield to Call @: Yield to call
   final_columns: *default_columns
 kotak_mutual_fund:
-  data_dir: /Users/njp60/Documents/code/mutualfundbackend/funddata/data/Kotak Mutual Fund
-  output_file: /Users/njp60/Documents/code/AssetManagmentCompanyParser/output/kotak_mutual_fund_portfolio.xlsx
+  data_dir: "data/data/Kotak Mutual Fund"
+  output_file: kotak_mutual_fund_portfolio.xlsx
+  ISIN_file: ISIN/fundisin.xlsx
   amc_name: Kotak Mutual Fund
   sheets_to_avoid: []
   column_mapping: {}
-  final_columns: *default_columns
+  final_columns: []
+Groww_mutual_fund:
+  data_dir: "data/data/Groww Mutual Fund"
+  output_file: Groww_mutual_fund_portfolio.xlsx
+  ISIN_file: ISIN/fundisin.xlsx
+  amc_name: Groww Mutual Fund
+  sheets_to_avoid: []
+  column_mapping: {}
+  final_columns: []
