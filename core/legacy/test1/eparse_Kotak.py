@@ -3,7 +3,7 @@ import re
 import pandas as pd
 import os
 
-datadir='/Users/njp60/Documents/code/mutualfundbackend/funddata/data/Kotak Mutual Fund/'
+datadir='data/data/Kotak Mutual Fund/'
 filename='ConsolidatedSebiPortfolioJanuary2025.xls'
 output_file = 'kotak_mutual_fund_porfolio.xlsx'
 AMC_NAME="Kotak Mutual Fund"

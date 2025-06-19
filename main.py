@@ -13,7 +13,7 @@ import traceback
 class DualLogger:
     def __init__(self, filename):
         self.terminal = sys.stdout
-        self.logfile = open(filename, 'w', encoding="UTF-8" , buffering=1)  # line-buffered
+        self.logfile = open(filename, 'a+', encoding="UTF-8" , buffering=1)  # line-buffered
         atexit.register(self.cleanup)  # ensure file is closed at exit
 
     def write(self, message):
@@ -59,44 +59,94 @@ if __name__ == "__main__":
         "PGIM India Mutual Fund", "PPFAS Mutual Fund", "Quant Mutual Fund", "Quantum Mutual Fund", 
         "SBI Mutual Fund", "Shriram Mutual Fund", "Sundaram Mutual Fund", "Tata Mutual Fund", 
         "Trust Mutual Fund", "Union Mutual Fund", "UTI Mutual Fund", "WhiteOak Mutual Fund", 
-        "Zerodha Fund House",
+        "Zerodha Fund House" , "Old Bridge Capital",
     ]
+    default_config = configs["Defaults"]
+
 
     for amc_name in amc_names:
 
         print(f"🔍 Processing AMC: {amc_name}")
 
-        if amc_name == "Kotak Mutual Fund":
-            parser = KotakParser(configs[amc_name])
+        if amc_name == "Old Bridge Capital":
+            parser = OldBridgeCapital(configs[amc_name] , default_config=default_config)
             parser.parse_all_portfolios()
             parser.save_to_excel() 
-        # if amc_name == "Groww Mutual Fund":
-        #     parser = GrowwParser(configs[amc_name])
-        #     parser.parse_all_portfolios()
-        #     parser.save_to_excel() 
+        if amc_name == "Motilal Oswal Mutual Fund":
+            parser = MotilalOswalParser(configs[amc_name], default_config=default_config )
+            parser.parse_all_portfolios()
+            parser.save_to_excel() 
+        if amc_name == "Nippon India Mutual Fund":
+            parser = NipponIndiaParser(configs[amc_name] , default_config=default_config)
+            parser.parse_all_portfolios()
+            parser.save_to_excel() 
+        if amc_name == "Aditya Birla Sun Life Mutual Fund":
+            parser = AdityaBirlaParser(configs[amc_name] , default_config=default_config)
+            parser.parse_all_portfolios()
+            parser.save_to_excel() 
+        if amc_name == "DSP Mutual Fund":
+            parser = DSPParser(configs[amc_name] , default_config=default_config)
+            parser.parse_all_portfolios()
+            parser.save_to_excel() 
+        if amc_name == "Canara Robero Mutual Fund":
+            parser = CanaraRobecoParser(configs[amc_name] , default_config=default_config)
+            parser.parse_all_portfolios()
+            parser.save_to_excel() 
+        if amc_name == "Bank of India Mutual Fund":
+            parser = BankOfIndiaParser(configs[amc_name] , default_config=default_config)
+            parser.parse_all_portfolios()
+            parser.save_to_excel() 
+        if amc_name == "Bandhan Mutual Fund":
+            parser = BandhanParser(configs[amc_name] , default_config=default_config)
+            parser.parse_all_portfolios()
+            parser.save_to_excel() 
+        if amc_name == "LIC Mutual Fund":
+            parser = LICParser(configs[amc_name] , default_config=default_config)
+            parser.parse_all_portfolios()
+            parser.save_to_excel() 
+        if amc_name == "Invesco Mutual Fund":
+            parser = InvescoParser(configs[amc_name] , default_config=default_config)
+            parser.parse_all_portfolios()
+            parser.save_to_excel() 
+        if amc_name == "360 One Asset Management":
+            parser = One360Parser(configs[amc_name] , default_config=default_config)
+            parser.parse_all_portfolios()
+            parser.save_to_excel() 
+        if amc_name == "Axis Mutual Fund":
+            parser = AxisParser(configs[amc_name] , default_config=default_config)
+            parser.parse_all_portfolios()
+            parser.save_to_excel() 
+        if amc_name == "Kotak Mutual Fund":
+            parser = KotakParser(configs[amc_name] , default_config=default_config)
+            parser.parse_all_portfolios()
+            parser.save_to_excel() 
+        if amc_name == "Groww Mutual Fund":
+            parser = GrowwParser(configs[amc_name] , default_config=default_config)
+            parser.parse_all_portfolios()
+            parser.save_to_excel() 
         if amc_name == "PPFAS Mutual Fund":
-            parser = PPFASParser(configs[amc_name])
+            parser = PPFASParser(configs[amc_name] , default_config=default_config)
             parser.parse_all_portfolios()
             parser.save_to_excel() 
         if amc_name == "Mirae Asset Mutual Fund":
-            parser = MiraeAssetParser(configs[amc_name])
+            parser = MiraeAssetParser(configs[amc_name] , default_config=default_config)
             parser.parse_all_portfolios()
             parser.save_to_excel() 
         if amc_name == "Quant Mutual Fund":
-            parser = QuantParser(configs[amc_name])
+            parser = QuantParser(configs[amc_name] , default_config=default_config)
             parser.parse_all_portfolios()
             parser.save_to_excel() 
         if amc_name == "SBI Mutual Fund":
-            parser = SBIParser(configs[amc_name])
+            parser = SBIParser(configs[amc_name] , default_config=default_config)
             parser.parse_all_portfolios()
             parser.save_to_excel() 
         if amc_name == "ICICI Prudential Mutual Fund":
-            parser = ICICIMFParser(configs[amc_name])
+            parser = ICICIMFParser(configs[amc_name] , default_config=default_config)
             parser.parse_all_portfolios()
             parser.save_to_excel()    
         if amc_name == "HDFC Mutual Fund":
             print("Processing HDFC Mutual Fund")
-            parser = HDFCParser(configs[amc_name])
+            parser = HDFCParser(configs[amc_name] , default_config=default_config)
             parser.parse_all_portfolios()
             parser.save_to_excel()
 

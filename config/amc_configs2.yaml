@@ -1,664 +1,306 @@
+ Defaults: &default
+  OutputDirectory: &OutputDirecotry ./cleaned
+  ISIN_File_Path: &default_isin_file_path ./ISIN/fundisin.xlsx
+  final Columns: &default_columns
+  - Name of Instrument
+  - ISIN
+  - Coupon
+  - Industry / Rating
+  - Quantity
+  - Market Value (MKT) ( rs lakh )
+  - '% to Net Assets (NAV)'
+  - Yield
+  - Yield to call (YTC)
+ 
  360 One Asset Management:
-  amc_name: 360 One Asset Management
-  column_mapping: {}
-  data_dir: ./data/data/360 One Asset Management
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  
-  output_file: ./cleaned/360_one_asset_management_portfolio.xlsx
+  AMCName: 360 One Asset Management
+  DataDirectory: ./data/data/360 One Asset Management
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  Aditya Birla Sun Life Mutual Fund:
-  amc_name: Aditya Birla Sun Life Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Aditya Birla Sun Life Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/aditya_birla_sun_life_mutual_fund_portfolio.xlsx
+  AMCName: Aditya Birla Sun Life Mutual Fund
+  DataDirectory: ./data/data/Aditya Birla Sun Life Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  Axis Mutual Fund:
-  amc_name: Axis Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Axis Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/axis_mutual_fund_portfolio.xlsx
+  AMCName: Axis Mutual Fund
+  DataDirectory: ./data/data/Axis Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  Bandhan Mutual Fund:
-  amc_name: Bandhan Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Bandhan Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/bandhan_mutual_fund_portfolio.xlsx
+  AMCName: Bandhan Mutual Fund
+  DataDirectory: ./data/data/Bandhan Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  Bank of India Mutual Fund:
-  amc_name: Bank of India Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Bank Of India Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/bank_of_india_mutual_fund_portfolio.xlsx
+  AMCName: Bank of India Mutual Fund
+  DataDirectory: ./data/data/Bank Of India Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  Baroda BNP Paribas Mutual Fund:
-  amc_name: Baroda BNP Paribas Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Baroda Bnp Paribas Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/baroda_bnp_paribas_mutual_fund_portfolio.xlsx
+  AMCName: Baroda BNP Paribas Mutual Fund
+  DataDirectory: ./data/data/Baroda Bnp Paribas Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  Canara Robeco Mutual Fund:
-  amc_name: Canara Robeco Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Canara Robeco Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/canara_robeco_mutual_fund_portfolio.xlsx
+  AMCName: Canara Robeco Mutual Fund
+  DataDirectory: ./data/data/Canara Robeco Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  DSP Mutual Fund:
-  amc_name: DSP Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Dsp Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/dsp_mutual_fund_portfolio.xlsx
+  AMCName: DSP Mutual Fund
+  DataDirectory: ./data/data/Dsp Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  Edelweiss Mutual Fund:
-  amc_name: Edelweiss Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Edelweiss Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/edelweiss_mutual_fund_portfolio.xlsx
+  AMCName: Edelweiss Mutual Fund
+  DataDirectory: ./data/data/Edelweiss Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  Franklin Templeton India:
-  amc_name: Franklin Templeton India
-  column_mapping: {}
-  data_dir: ./data/data/Franklin Templeton India
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/franklin_templeton_india_portfolio.xlsx
+  AMCName: Franklin Templeton India
+  DataDirectory: ./data/data/Franklin Templeton India
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  Groww Mutual Fund:
-  amc_name: Groww Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Groww Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/groww_mutual_fund_portfolio.xlsx
+  AMCName: Groww Mutual Fund
+  DataDirectory: ./data/data/Groww Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+    - Yield
  HDFC Mutual Fund:
-  amc_name: HDFC Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Hdfc Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/hdfc_mutual_fund_portfolio.xlsx
+  AMCName: HDFC Mutual Fund
+  DataDirectory: ./data/data/Hdfc Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+    - '% to Net Assets (NAV)'
+    - Yield
+    - Yield to Call (YTC)
  Helios Mutual Fund:
-  amc_name: Helios Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Helios Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/helios_mutual_fund_portfolio.xlsx
+  AMCName: Helios Mutual Fund
+  DataDirectory: ./data/data/Helios Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  HSBC Mutual Fund:
-  amc_name: HSBC Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Hsbc Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/hsbc_mutual_fund_portfolio.xlsx
+  AMCName: HSBC Mutual Fund
+  DataDirectory: ./data/data/Hsbc Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  ICICI Prudential Mutual Fund:
-  amc_name: ICICI Prudential Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Icici Prudential Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/icici_prudential_mutual_fund_portfolio.xlsx
+  AMCName: ICICI Prudential Mutual Fund
+  DataDirectory: ./data/data/Icici Prudential Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+    - Yield to Call (YTC)
  Invesco Mutual Fund:
-  amc_name: Invesco Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Invesco Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/invesco_mutual_fund_portfolio.xlsx
+  AMCName: Invesco Mutual Fund
+  DataDirectory: ./data/data/Invesco Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+    - '% to Net Assets (NAV)'
  ITI Mutual Fund:
-  amc_name: ITI Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Iti Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/iti_mutual_fund_portfolio.xlsx
+  AMCName: ITI Mutual Fund
+  DataDirectory: ./data/data/Iti Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  JM Financial Mutual Fund:
-  amc_name: JM Financial Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Jm Financial Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/jm_financial_mutual_fund_portfolio.xlsx
+  AMCName: JM Financial Mutual Fund
+  DataDirectory: ./data/data/Jm Financial Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  Kotak Mutual Fund:
-  amc_name: Kotak Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Kotak Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/kotak_mutual_fund_portfolio.xlsx
+  AMCName: Kotak Mutual Fund
+  DataDirectory: ./data/data/Kotak Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+    - '% to Net Assets (NAV)'
+    - Yield
  LIC Mutual Fund:
-  amc_name: LIC Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Lic Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/lic_mutual_fund_portfolio.xlsx
+  AMCName: LIC Mutual Fund
+  DataDirectory: ./data/data/Lic Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  Mahindra Manulife Mutual Fund:
-  amc_name: Mahindra Manulife Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Mahindra Manulife Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/mahindra_manulife_mutual_fund_portfolio.xlsx
+  AMCName: Mahindra Manulife Mutual Fund
+  DataDirectory: ./data/data/Mahindra Manulife Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
+ Old Bridge Capital:
+  AMCName: Old Bridge Capital
+  DataDirectory: ./data/data/Old Bridge Capital
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+    - '% to Net Assets (NAV)'
  Mirae Asset Mutual Fund:
-  amc_name: Mirae Asset Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Mirae Asset Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/mirae_asset_mutual_fund_portfolio.xlsx
+  AMCName: Mirae Asset Mutual Fund
+  DataDirectory: ./data/data/Mirae Asset Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  Motilal Oswal Mutual Fund:
-  amc_name: Motilal Oswal Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Motilal Oswal Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/motilal_oswal_mutual_fund_portfolio.xlsx
+  AMCName: Motilal Oswal Mutual Fund
+  DataDirectory: ./data/data/Motilal Oswal Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  Navi Mutual Fund:
-  amc_name: Navi Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Navi Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/navi_mutual_fund_portfolio.xlsx
+  AMCName: Navi Mutual Fund
+  DataDirectory: ./data/data/Navi Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  Nippon India Mutual Fund:
-  amc_name: Nippon India Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Nippon India Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/nippon_india_mutual_fund_portfolio.xlsx
+  AMCName: Nippon India Mutual Fund
+  DataDirectory: ./data/data/Nippon India Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  NJ Mutual Fund:
-  amc_name: NJ Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Nj Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/nj_mutual_fund_portfolio.xlsx
+  AMCName: NJ Mutual Fund
+  DataDirectory: ./data/data/Nj Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  PGIM India Mutual Fund:
-  amc_name: PGIM India Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Pgim India Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/pgim_india_mutual_fund_portfolio.xlsx
+  AMCName: PGIM India Mutual Fund
+  DataDirectory: ./data/data/Pgim India Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  PPFAS Mutual Fund:
-  amc_name: PPFAS Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Ppfas Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/ppfas_mutual_fund_portfolio.xlsx
+  AMCName: PPFAS Mutual Fund
+  DataDirectory: ./data/data/Ppfas Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  Quant Mutual Fund:
-  amc_name: Quant Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Quant Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/quant_mutual_fund_portfolio.xlsx
+  AMCName: Quant Mutual Fund
+  DataDirectory: ./data/data/Quant Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+    - '% to Net Assets (NAV)'
  Quantum Mutual Fund:
-  amc_name: Quantum Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Quantum Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/quantum_mutual_fund_portfolio.xlsx
+  AMCName: Quantum Mutual Fund
+  DataDirectory: ./data/data/Quantum Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  SBI Mutual Fund:
-  amc_name: SBI Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Sbi Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/sbi_mutual_fund_portfolio.xlsx
+  AMCName: SBI Mutual Fund
+  DataDirectory: ./data/data/Sbi Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+    - '% to Net Assets (NAV)'
+    - Yield to call (YTC)
  Shriram Mutual Fund:
-  amc_name: Shriram Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Shriram Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/shriram_mutual_fund_portfolio.xlsx
+  AMCName: Shriram Mutual Fund
+  DataDirectory: ./data/data/Shriram Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  Sundaram Mutual Fund:
-  amc_name: Sundaram Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Sundaram Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/sundaram_mutual_fund_portfolio.xlsx
+  AMCName: Sundaram Mutual Fund
+  DataDirectory: ./data/data/Sundaram Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  Tata Mutual Fund:
-  amc_name: Tata Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Tata Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/tata_mutual_fund_portfolio.xlsx
+  AMCName: Tata Mutual Fund
+  DataDirectory: ./data/data/Tata Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  Trust Mutual Fund:
-  amc_name: Trust Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Trust Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/trust_mutual_fund_portfolio.xlsx
+  AMCName: Trust Mutual Fund
+  DataDirectory: ./data/data/Trust Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  Union Mutual Fund:
-  amc_name: Union Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Union Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/union_mutual_fund_portfolio.xlsx
+  AMCName: Union Mutual Fund
+  DataDirectory: ./data/data/Union Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  UTI Mutual Fund:
-  amc_name: UTI Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Uti Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/uti_mutual_fund_portfolio.xlsx
+  AMCName: UTI Mutual Fund
+  DataDirectory: ./data/data/Uti Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  WhiteOak Mutual Fund:
-  amc_name: WhiteOak Mutual Fund
-  column_mapping: {}
-  data_dir: ./data/data/Whiteoak Mutual Fund
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/whiteoak_mutual_fund_portfolio.xlsx
+  AMCName: WhiteOak Mutual Fund
+  DataDirectory: ./data/data/Whiteoak Mutual Fund
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
  Zerodha Fund House:
-  amc_name: Zerodha Fund House
-  column_mapping: {}
-  data_dir: ./data/data/Zerodha Fund House
-  ISIN_file: ISIN/fundisin.xlsx
-  final_columns:
-  - Name of Instrument
-  - ISIN
-  - Coupon
-  - Industry
-  - Quantity
-  - Market Value (MKT) (lakh)
-  - '% to Net Assets (NAV)'
-  - Yield
-  - Yield to call (YTC)
-  output_file: ./cleaned/zerodha_fund_house_portfolio.xlsx
+  AMCName: Zerodha Fund House
+  DataDirectory: ./data/data/Zerodha Fund House
   sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
