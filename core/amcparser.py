@@ -1,3 +1,4 @@
+#%%
 import re
 import pandas as pd
 import os
@@ -8,6 +9,7 @@ from abc import ABC, abstractmethod
 import requests
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
+from langchain_huggingface import HuggingFaceEmbeddings
 import nltk
 nltk.download("stopwords")
 from nltk.corpus import stopwords
@@ -33,6 +35,7 @@ class AMCPortfolioParser(ABC):
             
         self.base_headers = [self._pre_process_header(header) for header in self.final_columns]
         self.full_data = pd.DataFrame(columns= self.base_headers + ["Type", "Scheme Name", "AMC", "Scheme ISIN"])
+        self.embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
         self.base_embeddings = np.array([self._generate_embedding(value) for value in self.base_headers])
 
         self.stopwords = set(stopwords.words("english"))
@@ -92,10 +95,7 @@ class AMCPortfolioParser(ABC):
                 return pd.read_excel(file_path, sheet_name=sheet_name, skiprows=header_row_idx, dtype=str)
             
         except Exception as e:
-            pass
-
-        finally:
-            print(f"⚠️ Error Reading file: {file_path}\n Supported File types xlsb/xls/xlsx")
+            print(f"⚠️ Error Reading file: {file_path}\n Supported File types xlsb/xls/xlsx &\n error: \n{e} ")
 
         return None
 
@@ -170,6 +170,7 @@ class AMCPortfolioParser(ABC):
                 type_name = re.sub(r"[^a-zA-Z\s\&\-/\\]" , "" , type_name)
                 type_name = self.filterNANIsolated(type_name)
                 type_name = self.filterReccuringSpaces(type_name)
+                type_name = type_name if "total" not in type_name.lower() else "uncategorised"
 
                 for (index , row) in df.iloc[start_idx:min(end_idx+1,table_end_idx)].iterrows():
                     values = header_map.copy()
@@ -217,8 +218,8 @@ class AMCPortfolioParser(ABC):
         return re.sub("[^a-zA-Z0-9]" , "" , s).upper()
     
     def _check_isin(self, val):
-        return  (   len(val) in range(5,20) and
-                    " " not in val and 
+        return  (   len(val) in range(5,30) and
+                    " " not in val.strip() and 
                     (val[0].isupper() and 
                     val[1].isupper() and 
                     (val[-1].isdigit() or val[-1].upper() == "X"))
@@ -246,28 +247,29 @@ class AMCPortfolioParser(ABC):
         return periods
     
     def _generate_embedding(self, text:str) -> list[float]:
-        url = "https://lamhieu-lightweight-embeddings.hf.space/v1/embeddings"
-        headers = {
-            "accept": "application/json",
-            "Content-Type": "application/json"
-        }
-        data = {
-            "model": "snowflake-arctic-embed-l-v2.0",
-            "input": text
-        }
-
-        response = requests.post(url, headers=headers, json=data)
-        if response.ok:
-            return response.json()["data"][0]["embedding"]
-        else:
-            raise Exception("No response")
+        return self.embeddings.embed_query(text)
+        # url = "https://lamhieu-lightweight-embeddings.hf.space/v1/embeddings"
+        # headers = {
+        #     "accept": "application/json",
+        #     "Content-Type": "application/json"
+        # }
+        # data = {
+        #     "model": "snowflake-arctic-embed-l-v2.0",
+        #     "input": text
+        # }   
+        # response = requests.post(url, headers=headers, json=data)
+        # if response.ok:
+        #     return response.json()["data"][0]["embedding"]
+        # else:
+        #     raise Exception("No response")
         
     def _fetch_header_row(self, df :pd.DataFrame) -> list[str]: 
         rows = df.astype(str).agg(' '.join, axis=1)
-        idx = rows[rows.apply(lambda x: "isin" in x.lower())].index.tolist()[0]
+        idx = rows[rows.apply(lambda x: "isin " in x.lower())].index.tolist()[0]
         header_row = df.iloc[idx,:].fillna("NULL")
         header_row = [(header_row.iloc[col]) for col in range(header_row.shape[0])]
         return header_row
+    
     def _pre_process_header (self, x) :
         return re.sub(r"[^a-z\s%\(\)\\/]","",x.lower())
     
@@ -308,6 +310,8 @@ class AMCPortfolioParser(ABC):
                     score = 1
                 else: 
                     score =0
+            if "coupon" in bh and "coupon" not in hr:
+                score = 0
 
             print(f"Base vector {i} ie {self.base_headers[i]} is most similar to header {idx} ie {header_row[idx]} with score {score:.4f}")
             if score > 0.47 :
@@ -343,4 +347,10 @@ class AMCPortfolioParser(ABC):
                 continue
 
 
+#%%
+if __name__ == "__main__":
+    obj = AMCPortfolioParser({},{})
+    print(obj._generate_embedding("hello"))
 
+
+# %%
