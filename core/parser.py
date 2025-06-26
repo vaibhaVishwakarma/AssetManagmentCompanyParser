@@ -65,9 +65,9 @@ class BarodaBNPParser(AMCPortfolioParser):
     def __init__(self, amc_config, default_config):
         super().__init__(amc_config=amc_config, default_config=default_config)
 
-    def process_sheet(self, datafile, sheet_name, sheet_df):
-        # TODO: Implement the specific cleaning logic for Baroda BNP Paribas Mutual Fund
-        pass
+    def _get_fund_name(self,df):
+        if len(df.columns) < 2 : return None
+        return df.columns[1]
 
 
 class CanaraRobecoParser(AMCPortfolioParser):
@@ -109,9 +109,9 @@ class FranklinTempletonParser(AMCPortfolioParser):
     def __init__(self, amc_config, default_config):
         super().__init__(amc_config=amc_config, default_config=default_config)
 
-    def process_sheet(self, datafile, sheet_name, sheet_df):
-        # TODO: Implement the specific cleaning logic for Franklin Templeton India
-        pass
+    def _get_fund_name(self,df):
+        if len(df.columns) < 2 : return None
+        return df.columns[0]
 
 
 class GrowwParser(AMCPortfolioParser):
@@ -148,11 +148,9 @@ class HeliosParser(AMCPortfolioParser):
     def __init__(self, amc_config, default_config):
         super().__init__(amc_config=amc_config, default_config=default_config)
 
-    @override
-    def _get_fund_name(self, df):
-        # Default implementation: use the first non-empty cell in the first row
-        pass       
-
+    def _get_fund_name(self,df):
+        if len(df.columns) < 2 or len(df) <4 : return None
+        return df.iloc[1,3]
     
 
 
@@ -160,9 +158,9 @@ class HSBCParser(AMCPortfolioParser):
     def __init__(self, amc_config, default_config):
         super().__init__(amc_config=amc_config, default_config=default_config)
 
-    def process_sheet(self, datafile, sheet_name, sheet_df):
-        # TODO: Implement the specific cleaning logic for HSBC Mutual Fund
-        pass
+    def _get_fund_name(self,df):
+        if len(df.columns) < 2 or len(df) <1 : return None
+        return df.iloc[1,0]
 
 
 class InvescoParser(AMCPortfolioParser):
@@ -186,18 +184,18 @@ class ITIParser(AMCPortfolioParser):
     def __init__(self, amc_config, default_config):
         super().__init__(amc_config=amc_config, default_config=default_config)
 
-    def process_sheet(self, datafile, sheet_name, sheet_df):
-        # TODO: Implement the specific cleaning logic for ITI Mutual Fund
-        pass
+    def _get_fund_name(self,df):
+        if len(df.columns) < 2 or len(df) <2 : return None
+        return df.iloc[1,1]
 
 
 class JMFinancialParser(AMCPortfolioParser):
     def __init__(self, amc_config, default_config):
         super().__init__(amc_config=amc_config, default_config=default_config)
 
-    def process_sheet(self, datafile, sheet_name, sheet_df):
-        # TODO: Implement the specific cleaning logic for JM Financial Mutual Fund
-        pass
+    def _get_fund_name(self,df):
+        if len(df.columns) < 1 or len(df) <2 : return None
+        return df.iloc[0,1]
 
 
 class KotakParser(AMCPortfolioParser):
@@ -232,9 +230,9 @@ class MahindraManulifeParser(AMCPortfolioParser):
     def __init__(self, amc_config, default_config):
         super().__init__(amc_config=amc_config, default_config=default_config)
 
-    def process_sheet(self, datafile, sheet_name, sheet_df):
-        # TODO: Implement the specific cleaning logic for Mahindra Manulife Mutual Fund
-        pass
+    def _get_fund_name(self,df):
+        if len(df.columns) < 2 or len(df) <2 : return None
+        return df.iloc[1,1]
 
 
 class MiraeAssetParser(AMCPortfolioParser):
@@ -263,9 +261,9 @@ class NaviParser(AMCPortfolioParser):
     def __init__(self, amc_config, default_config):
         super().__init__(amc_config=amc_config, default_config=default_config)
 
-    def process_sheet(self, datafile, sheet_name, sheet_df):
-        # TODO: Implement the specific cleaning logic for Navi Mutual Fund
-        pass
+    def _get_fund_name(self,df):
+        if len(df)<4 and len(df.columns) < 1  : return None
+        return df.iloc[3,0]
 
 
 class NipponIndiaParser(AMCPortfolioParser):
@@ -281,18 +279,18 @@ class NJParser(AMCPortfolioParser):
     def __init__(self, amc_config, default_config):
         super().__init__(amc_config=amc_config, default_config=default_config)
 
-    def process_sheet(self, datafile, sheet_name, sheet_df):
-        # TODO: Implement the specific cleaning logic for NJ Mutual Fund
-        pass
+    def _get_fund_name(self,df):
+        if len(df)<1 and len(df.columns) < 2  : return None
+        return df.iloc[0,1]
 
 
 class PGIMIndiaParser(AMCPortfolioParser):
     def __init__(self, amc_config, default_config):
         super().__init__(amc_config=amc_config, default_config=default_config)
 
-    def process_sheet(self, datafile, sheet_name, sheet_df):
-        # TODO: Implement the specific cleaning logic for PGIM India Mutual Fund
-        pass
+    def _get_fund_name(self,df):
+        if len(df.columns) < 2 : return None
+        return df.columns[1]
 
 
 class PPFASParser(AMCPortfolioParser):
@@ -321,10 +319,9 @@ class QuantumParser(AMCPortfolioParser):
     def __init__(self, amc_config, default_config):
         super().__init__(amc_config=amc_config, default_config=default_config)
 
-    def process_sheet(self, datafile, sheet_name, sheet_df):
-        # TODO: Implement the specific cleaning logic for Quantum Mutual Fund
-        pass
-
+    def _get_fund_name(self,df):
+        if len(df)<6 and len(df.columns) < 1  : return None
+        return df.iloc[5,0]
 
 class SBIParser(AMCPortfolioParser):
     def __init__(self, amc_config, default_config):
@@ -340,45 +337,45 @@ class ShriramParser(AMCPortfolioParser):
     def __init__(self, amc_config, default_config):
         super().__init__(amc_config=amc_config, default_config=default_config)
 
-    def process_sheet(self, datafile, sheet_name, sheet_df):
-        # TODO: Implement the specific cleaning logic for Shriram Mutual Fund
-        pass
+    def _get_fund_name(self,df):
+        if len(df.columns) < 2 : return None
+        return df.columns[1]
 
 
 class SundaramParser(AMCPortfolioParser):
     def __init__(self, amc_config, default_config):
         super().__init__(amc_config=amc_config, default_config=default_config)
 
-    def process_sheet(self, datafile, sheet_name, sheet_df):
-        # TODO: Implement the specific cleaning logic for Sundaram Mutual Fund
-        pass
+    def _get_fund_name(self,df):
+        if len(df)<1 and len(df.columns) < 1  : return None
+        return df.iloc[0,0]
 
 
 class TataParser(AMCPortfolioParser):
     def __init__(self, amc_config, default_config):
         super().__init__(amc_config=amc_config, default_config=default_config)
 
-    def process_sheet(self, datafile, sheet_name, sheet_df):
-        # TODO: Implement the specific cleaning logic for Tata Mutual Fund
-        pass
+    def _get_fund_name(self,df):
+        if len(df.columns) < 2 : return None
+        return df.columns[1]
 
 
 class TrustParser(AMCPortfolioParser):
     def __init__(self, amc_config, default_config):
         super().__init__(amc_config=amc_config, default_config=default_config)
 
-    def process_sheet(self, datafile, sheet_name, sheet_df):
-        # TODO: Implement the specific cleaning logic for Trust Mutual Fund
-        pass
+    def _get_fund_name(self,df):
+        if len(df)<3 and len(df.columns) < 1  : return None
+        return df.iloc[2,0].split("\n")[0]
 
 
 class UnionParser(AMCPortfolioParser):
     def __init__(self, amc_config, default_config):
         super().__init__(amc_config=amc_config, default_config=default_config)
 
-    def process_sheet(self, datafile, sheet_name, sheet_df):
-        # TODO: Implement the specific cleaning logic for Union Mutual Fund
-        pass
+    def _get_fund_name(self,df):
+        if len(df)<6 and len(df.columns) < 3  : return None
+        return df.iloc[5,2].lower().split("of")[1].split("fund")[0]
 
 
 class UTIParser(AMCPortfolioParser):
@@ -394,9 +391,9 @@ class WhiteOakParser(AMCPortfolioParser):
     def __init__(self, amc_config, default_config):
         super().__init__(amc_config=amc_config, default_config=default_config)
 
-    def process_sheet(self, datafile, sheet_name, sheet_df):
-        # TODO: Implement the specific cleaning logic for WhiteOak Mutual Fund
-        pass
+    def _get_fund_name(self,df):
+        if len(df.columns) < 2 : return None
+        return df.columns[1]
 
 
 class ZerodhaParser(AMCPortfolioParser):

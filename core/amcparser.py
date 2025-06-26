@@ -13,6 +13,9 @@ from langchain_huggingface import HuggingFaceEmbeddings
 import nltk
 nltk.download("stopwords")
 from nltk.corpus import stopwords
+# %%
+
+#%%
 
 class AMCPortfolioParser(ABC):
 
@@ -43,10 +46,16 @@ class AMCPortfolioParser(ABC):
         #functions
         self.filterNonAlphaNumeric = lambda x : re.sub(r"[^a-zA-z0-9]","",x)
         self.filterStopWords = lambda x : " ".join([word for word in str(x).lower().split(" ") if word not in self.stopwords])    
-        self.filterBullets = lambda x :  x if "(" in x else re.sub(r"[^\)]\)", "", x)
         self.filterBracketContent = lambda x: re.sub(r"\([^\)]\)", "", x)
         self.filterNANIsolated = lambda x : re.sub(r"(?<!\w)(nan)+(?!\w)", "", x ,flags=re.IGNORECASE)
         self.filterReccuringSpaces = lambda x : re.sub(r"\s+"," ",x)
+
+    def filterBullets(self, string):
+        tmp = string + "()"
+        if tmp.index("(") > tmp.index(")"):
+            string = re.sub(r"[^\)]\)", "", string)
+        return string
+
 
     def _get_fund_isin(self, fund_name):
 
@@ -79,7 +88,7 @@ class AMCPortfolioParser(ABC):
         file_names = []
         for root, dirs, files in os.walk(self.data_dir):
             for file in files:
-                if file.endswith((".xlsb", ".xls", ".xlsx")):
+                if file.endswith((".xlsb", ".xls", ".xlsx" , ".xlsm")):
                     file_names.append(os.path.join(root, file))
         return file_names
 
@@ -89,10 +98,10 @@ class AMCPortfolioParser(ABC):
         try:
             if file_ext == "xlsb":
                 return pd.read_excel(file_path, sheet_name=None, engine="pyxlsb", dtype=str)
-            elif file_ext in ["xls", "xlsx"]:
+            elif file_ext in ["xls", "xlsx" , "xlsm"]:
                 return pd.read_excel(file_path, sheet_name=None, dtype=str)
             elif file_ext == "csv":
-                return pd.read_excel(file_path, sheet_name=sheet_name, skiprows=header_row_idx, dtype=str)
+                return pd.read_csv(file_path, sheet_name=sheet_name, skiprows=header_row_idx, dtype=str)
             
         except Exception as e:
             print(f"⚠️ Error Reading file: {file_path}\n Supported File types xlsb/xls/xlsx &\n error: \n{e} ")
@@ -248,20 +257,6 @@ class AMCPortfolioParser(ABC):
     
     def _generate_embedding(self, text:str) -> list[float]:
         return self.embeddings.embed_query(text)
-        # url = "https://lamhieu-lightweight-embeddings.hf.space/v1/embeddings"
-        # headers = {
-        #     "accept": "application/json",
-        #     "Content-Type": "application/json"
-        # }
-        # data = {
-        #     "model": "snowflake-arctic-embed-l-v2.0",
-        #     "input": text
-        # }   
-        # response = requests.post(url, headers=headers, json=data)
-        # if response.ok:
-        #     return response.json()["data"][0]["embedding"]
-        # else:
-        #     raise Exception("No response")
         
     def _fetch_header_row(self, df :pd.DataFrame) -> list[str]: 
         rows = df.astype(str).agg(' '.join, axis=1)
@@ -317,7 +312,7 @@ class AMCPortfolioParser(ABC):
             if score > 0.47 :
                 header_map[self.base_headers[i]] = int(idx)
         
-        return header_map
+        return header_map   
     # --------OLD Functiones over--------
 
 
@@ -346,11 +341,3 @@ class AMCPortfolioParser(ABC):
                 print("error Saving [File is Open] ", e)
                 continue
 
-
-#%%
-if __name__ == "__main__":
-    obj = AMCPortfolioParser({},{})
-    print(obj._generate_embedding("hello"))
-
-
-# %%
