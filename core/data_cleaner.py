@@ -5,7 +5,7 @@ import re
 import os
 
 
-f = open("./config/amc_configs2.yaml", "r")
+f = open("./config/amc_configs.yaml", "r")
 configs = yaml.safe_load(f)
 f.close()
 
@@ -30,11 +30,9 @@ def cleanString(s):
     return 0
 
 def dropCriteria(row):
-    coupon = row.iloc[2]
     quantity, mkt , nav = row.iloc[4:7]
-    null_values = np.isnan(np.array([coupon,quantity,mkt,nav])).sum()
 
-    to_return = False if (nav>100.0) or (null_values >2) else True
+    to_return = False if (nav>100.0) or ( quantity == 0 and mkt == 0) else True
     if not to_return: 
         print(row.to_frame().T.to_string(index=False))
         print("-" * 50)
@@ -60,6 +58,8 @@ for filename in file_paths:
         if col in scalebyhundred:
             df[col] = df[col].apply(lambda x : np.multiply(x, 100))
         df[col] = df[col].fillna(0)
+
+    df["isin"] = df["isin"].apply(lambda x: x[:12])
 
     df["% to net assets (nav)"] = 100 * df["% to net assets (nav)"]
     df["yield"] = 100 * df["yield"]
