@@ -60,7 +60,10 @@
   sheets_to_avoid: []
   final_columns: *default_columns
   Scale100: ""
-  Scale100th: ""
+  Scale100th: 
+  - '% to Net Assets (NAV)'
+  - Yield
+  - Yield to call (YTC)
  DSP Mutual Fund:
   AMCName: DSP Mutual Fund
   DataDirectory: ./data/data/Dsp Mutual Fund
@@ -81,7 +84,8 @@
   sheets_to_avoid: []
   final_columns: *default_columns
   Scale100: ""
-  Scale100th: ""
+  Scale100th: 
+  - '% to Net Assets (NAV)'
  Groww Mutual Fund:
   AMCName: Groww Mutual Fund
   DataDirectory: ./data/data/Groww Mutual Fund
@@ -106,14 +110,17 @@
   sheets_to_avoid: []
   final_columns: *default_columns
   Scale100: ""
-  Scale100th: ""
+  Scale100th: 
+  - '% to Net Assets (NAV)'
  HSBC Mutual Fund:
   AMCName: HSBC Mutual Fund
   DataDirectory: ./data/data/Hsbc Mutual Fund
   sheets_to_avoid: []
   final_columns: *default_columns
   Scale100: ""
-  Scale100th: ""
+  Scale100th: 
+  - Yield
+  
  ICICI Prudential Mutual Fund:
   AMCName: ICICI Prudential Mutual Fund
   DataDirectory: ./data/data/Icici Prudential Mutual Fund
@@ -143,7 +150,8 @@
   sheets_to_avoid: []
   final_columns: *default_columns
   Scale100: ""
-  Scale100th: ""
+  Scale100th: 
+  - Yield
  Kotak Mutual Fund:
   AMCName: Kotak Mutual Fund
   DataDirectory: ./data/data/Kotak Mutual Fund
@@ -166,7 +174,8 @@
   sheets_to_avoid: []
   final_columns: *default_columns
   Scale100: ""
-  Scale100th: ""
+  Scale100th: 
+  - '% to Net Assets (NAV)'
  Old Bridge Capital:
   AMCName: Old Bridge Capital
   DataDirectory: ./data/data/Old Bridge Capital
@@ -195,7 +204,9 @@
   sheets_to_avoid: []
   final_columns: *default_columns
   Scale100: ""
-  Scale100th: ""
+  Scale100th: 
+  - '% to Net Assets (NAV)' 
+  - Yield
  Nippon India Mutual Fund:
   AMCName: Nippon India Mutual Fund
   DataDirectory: ./data/data/Nippon India Mutual Fund
@@ -216,7 +227,9 @@
   sheets_to_avoid: []
   final_columns: *default_columns
   Scale100: ""
-  Scale100th: ""
+  Scale100th: 
+  - '% to Net Assets (NAV)'
+  - Yield
  PPFAS Mutual Fund:
   AMCName: PPFAS Mutual Fund
   DataDirectory: ./data/data/Ppfas Mutual Fund
@@ -247,6 +260,7 @@
   Scale100: ""
   Scale100th: 
     - '% to Net Assets (NAV)'
+    - Yield
     - Yield to call (YTC)
  Shriram Mutual Fund:
   AMCName: Shriram Mutual Fund
@@ -254,7 +268,9 @@
   sheets_to_avoid: []
   final_columns: *default_columns
   Scale100: ""
-  Scale100th: ""
+  Scale100th: 
+  - '% to Net Assets (NAV)'
+  - Yield
  Sundaram Mutual Fund:
   AMCName: Sundaram Mutual Fund
   DataDirectory: ./data/data/Sundaram Mutual Fund
@@ -268,7 +284,9 @@
   sheets_to_avoid: []
   final_columns: *default_columns
   Scale100: ""
-  Scale100th: ""
+  Scale100th: 
+  - '% to Net Assets (NAV)'
+  - Yield
  Trust Mutual Fund:
   AMCName: Trust Mutual Fund
   DataDirectory: ./data/data/Trust Mutual Fund
@@ -282,7 +300,8 @@
   sheets_to_avoid: []
   final_columns: *default_columns
   Scale100: ""
-  Scale100th: ""
+  Scale100th: 
+  - '% to Net Assets (NAV)'
  UTI Mutual Fund:
   AMCName: UTI Mutual Fund
   DataDirectory: ./data/data/Uti Mutual Fund

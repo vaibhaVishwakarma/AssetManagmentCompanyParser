@@ -11,10 +11,16 @@ f.close()
 
 output_folder = configs.get("Defaults",{}).get("OutputDirectory","./cleaned")
 file_paths = list(os.walk(output_folder))[0][2]
-file_paths = list(filter(lambda x : "transformed" not in x , file_paths))
+file_paths = list(filter(lambda x : "transformed" not in x and "~" not in x , file_paths))
 
+floatFilter = lambda x : re.findall(r"-?\d+\.{1}\d+",x)
+integerFilter = lambda x : re.findall(r"-?\d+",x)
 def cleanString(s):
-    s = str(s)
+    s = re.sub("%","",str(s))
+    try: 
+        return float(s)
+    except Exception as e:
+        pass
     s1 = floatFilter(s)
     if s1 :
         return s1[0]
@@ -23,16 +29,22 @@ def cleanString(s):
         return s2[0]
     return 0
 
-# def dropCriteria(row):
-#     return sum([1 if item else 0 for item in row.to_list()[:3]]) < 2
+def dropCriteria(row):
+    coupon = row.iloc[2]
+    quantity, mkt , nav = row.iloc[4:7]
+    null_values = np.isnan(np.array([coupon,quantity,mkt,nav])).sum()
 
+    to_return = False if (nav>100.0) or (null_values >2) else True
+    if not to_return: 
+        print(row.to_frame().T.to_string(index=False))
+        print("-" * 50)
+    return to_return #true to keep the row else drop
 
 for filename in file_paths:
     df = pd.read_excel(f"{output_folder}/{filename}")
-    floatFilter = lambda x : re.findall(r"-?\d+\.{1}\d+",x)
-    integerFilter = lambda x : re.findall(r"-?\d+",x)
     amc_name = df["AMC"].unique()[0]
     config = configs.get(amc_name,{})
+    print(amc_name)
     scalebyhundred = config.get("Scale100",[])
     scalebyhundred = list(map(str.lower , scalebyhundred))
     factorbyhundred = config.get("Scale100th",[])   
@@ -49,10 +61,15 @@ for filename in file_paths:
             df[col] = df[col].apply(lambda x : np.multiply(x, 100))
         df[col] = df[col].fillna(0)
 
-    # df = df[df.apply(dropCriteria , axis = 1)]
+    df["% to net assets (nav)"] = 100 * df["% to net assets (nav)"]
+    df["yield"] = 100 * df["yield"]
+    df["yield to call (ytc)"] = 100 * df["yield to call (ytc)"]
+
+    df = df[df.apply(dropCriteria , axis = 1)]
 
     df.to_excel(f"final_cleaned/{filename}" , index = False)
 
 
 
 
+#%%

@@ -74,13 +74,12 @@ class AMCPortfolioParser(ABC):
         return self.isin_lookup.get(candidate_fund_names[0])
 
     def _create_ISIN_mapping(self,df):
-        
         """Create a mapping of fund names to ISINs."""
         isin_mapping = {}
         for index, row in df.iterrows():
             fund_name = row['Cleaned Fund Name'].lower()
             isin = row['ISIN']
-            if fund_name and isin and row['Growth/Regular Type'] in ["Growth", "Regular"]:
+            if fund_name and isin and row["Growth/Regular Type"] in ["Direct", "direct"]:  # filter based on ["Direct"] or ["Regular", "Growth"]
                 isin_mapping[fund_name] = isin
         return isin_mapping    
 
@@ -227,6 +226,7 @@ class AMCPortfolioParser(ABC):
         return re.sub("[^a-zA-Z0-9]" , "" , s).upper()
     
     def _check_isin(self, val):
+        val = val[:12]
         return  (   len(val) in range(5,30) and
                     " " not in val.strip() and 
                     (val[0].isupper() and 
