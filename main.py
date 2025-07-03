@@ -39,7 +39,7 @@ sys.excepthook = handle_exception
 
 
 # Load all configurations
-def load_yaml_config(filepath="config/amc_configs2.yaml"):
+def load_yaml_config(filepath="config/amc_configs.yaml"):
     with open(filepath, "r") as f:
         return yaml.safe_load(f)
     

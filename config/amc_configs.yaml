@@ -1,74 +1,325 @@
-final_columns: &default_columns
+ Defaults: &default
+  OutputDirectory: &OutputDirecotry ./cleaned
+  ISIN_File_Path: &default_isin_file_path ./ISIN/fundisin.xlsx
+  final Columns: &default_columns
   - Name of Instrument
   - ISIN
   - Coupon
-  - Industry
+  - Industry / Rating
   - Quantity
-  - Market Value
-  - '% to Net Assets'
+  - Market Value (MKT) ( rs lakh )
+  - '% to Net Assets (NAV)'
   - Yield
-  - Yield to call
-  - Type
-  - Scheme Name
-  - AMC
-  - Scheme ISIN
-Axis Mutual Fund:
-  data_dir: /Users/njp60/Documents/code/mutualfundbackend/funddata/data/Axis Mutual Fund
-  output_file: /Users/njp60/Documents/code/AssetManagmentCompanyParser/output/axis_mutual_fund_portfolio.xlsx
-  ISIN_file: /Users/njp60/Documents/code/AssetManagmentCompanyParser/ISIN/fundisin.xlsx
-  amc_name: Axis Mutual Fund
+  - Yield to call (YTC)
+ 
+ 360 One Asset Management:
+  AMCName: 360 One Asset Management
+  DataDirectory: ./data/360 One Asset Management
   sheets_to_avoid: []
-  column_mapping: {}
   final_columns: *default_columns
-HDFC Mutual Fund:
-  data_dir: "data/data/HDFC Mutual Fund"
-  output_file: HDFC_mutual_fund_portfolio.xlsx
-  ISIN_file: ISIN/fundisin.xlsx
-  amc_name: HDFC Mutual Fund
+  Scale100: ""
+  Scale100th: ""
+ Aditya Birla Sun Life Mutual Fund:
+  AMCName: Aditya Birla Sun Life Mutual Fund
+  DataDirectory: ./data/Aditya Birla Sun Life Mutual Fund
   sheets_to_avoid: []
-  column_mapping:
-    ISIN: ISIN
-    Coupon (%): Coupon
-    Name Of the Instrument: Name of Instrument
-    Industry+ /Rating: Industry
-    Quantity: Quantity
-    Market/ Fair Value (Rs. in Lacs.): Market Value
-    '% to NAV': '% to Net Assets'
-    Yield: Yield
-    ~YTC (AT1/Tier 2 bonds): Yield to call
-    Derivative % to NAV: Derivative % to NAV
-    Unhedged % to NAV: Unhedged % to NAV
-    final_columns: *default_columns
-ICICI Prudential Mutual Fund:
-  data_dir: /Users/njp60/Documents/code/mutualfundbackend/funddata/data/ICICI Prudential Mutual Fund
-  output_file: /Users/njp60/Documents/code/AssetManagmentCompanyParser/output/icici_prudential_mutual_fund_portfolio.xlsx
-  ISIN_file: /Users/njp60/Documents/code/AssetManagmentCompanyParser/ISIN/fundisin.xlsx
-  amc_name: ICICI Prudential Mutual Fund
-  sheets_to_avoid: []
-  column_mapping:
-    Company/Issuer/Instrument Name: Name of Instrument
-    ISIN: ISIN
-    Coupon: Coupon
-    Industry/Rating: Industry
-    Quantity: Quantity
-    Exposure/Market Value(Rs.Lakh): Market Value
-    '% to Nav': '% to Net Assets'
-    Yield of the instrument: Yield
-    Yield to Call @: Yield to call
   final_columns: *default_columns
-kotak_mutual_fund:
-  data_dir: "data/data/Kotak Mutual Fund"
-  output_file: kotak_mutual_fund_portfolio.xlsx
-  ISIN_file: ISIN/fundisin.xlsx
-  amc_name: Kotak Mutual Fund
+  Scale100: ""
+  Scale100th: ""
+ Axis Mutual Fund:
+  AMCName: Axis Mutual Fund
+  DataDirectory: ./data/Axis Mutual Fund
   sheets_to_avoid: []
-  column_mapping: {}
-  final_columns: []
-Groww_mutual_fund:
-  data_dir: "data/data/Groww Mutual Fund"
-  output_file: Groww_mutual_fund_portfolio.xlsx
-  ISIN_file: ISIN/fundisin.xlsx
-  amc_name: Groww Mutual Fund
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
+ Bandhan Mutual Fund:
+  AMCName: Bandhan Mutual Fund
+  DataDirectory: ./data/Bandhan Mutual Fund
   sheets_to_avoid: []
-  column_mapping: {}
-  final_columns: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
+ Bank of India Mutual Fund:
+  AMCName: Bank of India Mutual Fund
+  DataDirectory: ./data/Bank Of India Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
+ Baroda BNP Paribas Mutual Fund:
+  AMCName: Baroda BNP Paribas Mutual Fund
+  DataDirectory: ./data/Baroda Bnp Paribas Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
+ Canara Robeco Mutual Fund:
+  AMCName: Canara Robeco Mutual Fund
+  DataDirectory: ./data/Canara Robeco Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+  - '% to Net Assets (NAV)'
+  - Yield
+  - Yield to call (YTC)
+ DSP Mutual Fund:
+  AMCName: DSP Mutual Fund
+  DataDirectory: ./data/Dsp Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
+ Edelweiss Mutual Fund:
+  AMCName: Edelweiss Mutual Fund
+  DataDirectory: ./data/Edelweiss Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
+ Franklin Templeton India:
+  AMCName: Franklin Templeton India
+  DataDirectory: ./data/Franklin Templeton India
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+  - '% to Net Assets (NAV)'
+ Groww Mutual Fund:
+  AMCName: Groww Mutual Fund
+  DataDirectory: ./data/Groww Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+    - Yield
+ HDFC Mutual Fund:
+  AMCName: HDFC Mutual Fund
+  DataDirectory: ./data/Hdfc Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+    - '% to Net Assets (NAV)'
+    - Yield
+    - Yield to Call (YTC)
+ Helios Mutual Fund:
+  AMCName: Helios Mutual Fund
+  DataDirectory: ./data/Helios Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+  - '% to Net Assets (NAV)'
+ HSBC Mutual Fund:
+  AMCName: HSBC Mutual Fund
+  DataDirectory: ./data/Hsbc Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+  - Yield
+  
+ ICICI Prudential Mutual Fund:
+  AMCName: ICICI Prudential Mutual Fund
+  DataDirectory: ./data/Icici Prudential Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+    - Yield to Call (YTC)
+ Invesco Mutual Fund:
+  AMCName: Invesco Mutual Fund
+  DataDirectory: ./data/Invesco Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+    - '% to Net Assets (NAV)'
+ ITI Mutual Fund:
+  AMCName: ITI Mutual Fund
+  DataDirectory: ./data/Iti Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
+ JM Financial Mutual Fund:
+  AMCName: JM Financial Mutual Fund
+  DataDirectory: ./data/Jm Financial Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+  - Yield
+ Kotak Mutual Fund:
+  AMCName: Kotak Mutual Fund
+  DataDirectory: ./data/Kotak Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+    - '% to Net Assets (NAV)'
+    - Yield
+ LIC Mutual Fund:
+  AMCName: LIC Mutual Fund
+  DataDirectory: ./data/Lic Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
+ Mahindra Manulife Mutual Fund:
+  AMCName: Mahindra Manulife Mutual Fund
+  DataDirectory: ./data/Mahindra Manulife Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+  - '% to Net Assets (NAV)'
+ Old Bridge Capital:
+  AMCName: Old Bridge Capital
+  DataDirectory: ./data/Old Bridge Capital
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+    - '% to Net Assets (NAV)'
+ Mirae Asset Mutual Fund:
+  AMCName: Mirae Asset Mutual Fund
+  DataDirectory: ./data/Mirae Asset Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
+ Motilal Oswal Mutual Fund:
+  AMCName: Motilal Oswal Mutual Fund
+  DataDirectory: ./data/Motilal Oswal Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
+ Navi Mutual Fund:
+  AMCName: Navi Mutual Fund
+  DataDirectory: ./data/Navi Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+  - '% to Net Assets (NAV)' 
+  - Yield
+ Nippon India Mutual Fund:
+  AMCName: Nippon India Mutual Fund
+  DataDirectory: ./data/Nippon India Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
+ NJ Mutual Fund:
+  AMCName: NJ Mutual Fund
+  DataDirectory: ./data/Nj Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
+ PGIM India Mutual Fund:
+  AMCName: PGIM India Mutual Fund
+  DataDirectory: ./data/Pgim India Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+  - '% to Net Assets (NAV)'
+  - Yield
+ PPFAS Mutual Fund:
+  AMCName: PPFAS Mutual Fund
+  DataDirectory: ./data/Ppfas Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
+ Quant Mutual Fund:
+  AMCName: Quant Mutual Fund
+  DataDirectory: ./data/Quant Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+    - '% to Net Assets (NAV)'
+ Quantum Mutual Fund:
+  AMCName: Quantum Mutual Fund
+  DataDirectory: ./data/Quantum Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
+ SBI Mutual Fund:
+  AMCName: SBI Mutual Fund
+  DataDirectory: ./data/Sbi Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+    - '% to Net Assets (NAV)'
+    - Yield
+    - Yield to call (YTC)
+ Shriram Mutual Fund:
+  AMCName: Shriram Mutual Fund
+  DataDirectory: ./data/Shriram Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+  - '% to Net Assets (NAV)'
+  - Yield
+ Sundaram Mutual Fund:
+  AMCName: Sundaram Mutual Fund
+  DataDirectory: ./data/Sundaram Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
+ Tata Mutual Fund:
+  AMCName: Tata Mutual Fund
+  DataDirectory: ./data/Tata Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+  - '% to Net Assets (NAV)'
+  - Yield
+ Trust Mutual Fund:
+  AMCName: Trust Mutual Fund
+  DataDirectory: ./data/Trust Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
+ Union Mutual Fund:
+  AMCName: Union Mutual Fund
+  DataDirectory: ./data/Union Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: 
+  - '% to Net Assets (NAV)'
+ UTI Mutual Fund:
+  AMCName: UTI Mutual Fund
+  DataDirectory: ./data/Uti Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
+ WhiteOak Mutual Fund:
+  AMCName: WhiteOak Mutual Fund
+  DataDirectory: ./data/Whiteoak Mutual Fund
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
+ Zerodha Fund House:
+  AMCName: Zerodha Fund House
+  DataDirectory: ./data/Zerodha Fund House
+  sheets_to_avoid: []
+  final_columns: *default_columns
+  Scale100: ""
+  Scale100th: ""
