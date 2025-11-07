@@ -60,6 +60,7 @@ for filename in file_paths:
         df[col] = df[col].fillna(0)
 
     df["isin"] = df["isin"].apply(lambda x: x[:12])
+    df["industry / rating"].fillna("others")
 
     df["% to net assets (nav)"] = 100 * df["% to net assets (nav)"]
     df["yield"] = 100 * df["yield"]
