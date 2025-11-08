@@ -1,36 +1,66 @@
-#%%
+# core/amcparser.py
 import re
 import pandas as pd
 import os
-import sys
 import time
 from abc import ABC, abstractmethod
 
-import requests
+import requests  # kept as in original
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from langchain_huggingface import HuggingFaceEmbeddings
 import nltk
 nltk.download("stopwords")
 from nltk.corpus import stopwords
-# %%
 
-#%%
+import logging
+
+# ---------- logger ----------
+logger = logging.getLogger(__name__)
+if not logger.handlers:
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s | %(levelname)s | %(message)s"
+    )
 
 class AMCPortfolioParser(ABC):
 
     def __init__(self, amc_config , default_config ):
 
+        # empty intermediate folders each run
+        for folder in [".cleaned", ".final_cleaned"]:
+            os.makedirs(folder, exist_ok=True)
+            for name in os.listdir(folder):
+                path = os.path.join(folder, name)
+                try:
+                    if os.path.isfile(path) or os.path.islink(path):
+                        os.remove(path)
+                    elif os.path.isdir(path):
+                        # empty nested
+                        for root, dirs, files in os.walk(path, topdown=False):
+                            for f in files:
+                                try:
+                                    os.remove(os.path.join(root, f))
+                                except Exception as e:
+                                    logger.warning(f"Could not remove {f} in {root}: {e}")
+                            for d in dirs:
+                                try:
+                                    os.rmdir(os.path.join(root, d))
+                                except Exception as e:
+                                    logger.warning(f"Could not remove {d} in {root}: {e}")
+                except Exception as e:
+                    logger.warning(f"Cleanup failed for {path}: {e}")
 
-        #independent variables
+        # independent variables
         self.amc_name = amc_config.get("AMCName",None)
         self.data_dir = amc_config.get("DataDirectory",f"./data/data/{self.amc_name}")
         self.output_directory = default_config.get("OutputDirectory","./")
+        os.makedirs(self.output_directory ,exist_ok=True)
         self.sheets_to_avoid = amc_config.get("sheets_to_avoid", [])
         self.isin_lookup = self._create_ISIN_mapping(pd.read_excel(default_config.get("ISINFilePath","./ISIN/fundisin.xlsx")))
         self.final_columns = amc_config.get("final_columns", None)
 
-        #handle dervived variables
+        # handle derived variables
         self.output_file = f"{self.output_directory}/{self.amc_name}.xlsx"
         if self.final_columns is None or len(self.final_columns) == 0:
             self.final_columns = [  "Name of Instrument", "ISIN", "Coupon", "Industry", "Quantity", "Market Value", "% to Net Assets (nav)",
@@ -43,7 +73,7 @@ class AMCPortfolioParser(ABC):
 
         self.stopwords = set(stopwords.words("english"))
 
-        #functions
+        # functions
         self.filterNonAlphaNumeric = lambda x : re.sub(r"[^a-zA-z0-9]","",x)
         self.filterStopWords = lambda x : " ".join([word for word in str(x).lower().split(" ") if word not in self.stopwords])    
         self.filterBracketContent = lambda x: re.sub(r"\([^\)]\)", "", x)
@@ -59,7 +89,7 @@ class AMCPortfolioParser(ABC):
     def _get_fund_isin(self, fund_name):
 
         fund_name = self.filterStopWords(fund_name)
-        #as per pattern after the word "fund" dates or irrelevent spefications are present
+        # as per pattern after the word "fund" dates or irrelevent spefications are present
         fund_name = self.filterNonAlphaNumeric(fund_name).split("fund")[0].lower()
 
         fund_names = pd.Series(self.isin_lookup.keys()).astype(str).apply(str.lower)
@@ -105,25 +135,44 @@ class AMCPortfolioParser(ABC):
                 return pd.read_csv(file_path, sheet_name=sheet_name, skiprows=header_row_idx, dtype=str)
             
         except Exception as e:
-            print(f"⚠️ Error Reading file: {file_path}\n Supported File types xlsb/xls/xlsx &\n error: \n{e} ")
+            logger.error(f"Error Reading file: {file_path} | Supported File types xlsb/xls/xlsx | error: {e}")
 
         return None
+    
+        def _get_fund_isin(self, fund_name):
 
-    def process_sheet(self, file_path, sheet_name, df): #parsing logic    
-        print(f"\n🔍 Processing  → Sheet: {sheet_name}")
+        fund_name = self.filterStopWords(fund_name)
+        # as per pattern after the word "fund" dates or irrelevent spefications are present
+        fund_name = self.filterNonAlphaNumeric(fund_name).split("fund")[0].lower()
+
+        fund_names = pd.Series(self.isin_lookup.keys()).astype(str).apply(str.lower)
+
+        mask = fund_names.apply(lambda x : fund_name in self.filterNonAlphaNumeric(self.filterStopWords(x)))
+        candidate_fund_names = fund_names[mask].to_list()
+
+        if not candidate_fund_names:
+            return None
+        
+        isin = self.isin_lookup.get(candidate_fund_names[0])
+        if self._check_isin(isin):
+            return isin
+        return None
+
+    def process_sheet(self, file_path, sheet_name, df):  # parsing logic    
+        logger.info(f"Processing → Sheet: {sheet_name}")
         fund_name = self._get_fund_name(df)
         
-        if not fund_name : print(f"No fund name for sheet {sheet_name}")
+        if not fund_name : logger.warning(f"No fund name for sheet {sheet_name}")
         if fund_name is not None and sheet_name:
             fund_isin = self._get_fund_isin(fund_name)
-            print(f"\n🔍 Processing  → dataframe: {fund_name}, {fund_isin}")
+            logger.info(f"Processing → dataframe: {fund_name}, {fund_isin}")
 
             header_row_idx = next(
                 (index for index, row in df.iterrows() if any("ISIN" in str(val) for val in row.dropna())),
                 None
             )
             if header_row_idx is None:
-                print(f"⚠️ Skipping {sheet_name} (No ISIN header found)")
+                logger.warning(f"Skipping {sheet_name} (No ISIN header found)")
                 return
 
             df = df.dropna(how='all')
@@ -137,10 +186,10 @@ class AMCPortfolioParser(ABC):
                 table_end_idx = min( table_end_idx , grand_total_idx[-1])
             
             
-            #find the row contaning headers
+            # find the row contaning headers
             header_row = self._fetch_header_row(df)
 
-            #clear any columns with null values and merge
+            # clear any columns with null values and merge
             n_iter = 0
             while "NULL" in header_row and n_iter<5:
                 start = None
@@ -160,18 +209,17 @@ class AMCPortfolioParser(ABC):
                 header_row = self._fetch_header_row(df)
                 n_iter+=1
 
-            #maps the desired columns 
+            # maps the desired columns 
             header_map = self._header_mapper(header_row)
-            # print("header_map....",header_map)
 
             periods = self._get_valid_periods(df , header_map)
 
-            #process data piece by piece
+            # process data piece by piece
             for (start_idx , end_idx) in periods:
 
                 type_name_idx = self._get_investment_type(df , start_idx , header_map["isin"])
                 if(type_name_idx == start_idx):
-                    print("No valid Type Name Found. Moving on.")
+                    logger.info("No valid Type Name Found. Moving on.")
                     continue
                 
                 type_name = df[type_name_idx:type_name_idx+1].fillna(" ").agg(" ".join , axis = 1).iloc[0]
@@ -188,25 +236,25 @@ class AMCPortfolioParser(ABC):
                         temp = row.iloc[idx]
                         values[key] = temp
                  
-
-                    #meta data addition
+                    # meta data addition
                     values["Type"] =  type_name
                     values["Scheme Name"] = fund_name
                     values["AMC"] = self.amc_name  
                     values["Scheme ISIN"] = fund_isin if fund_isin is not None else None         
 
                     self.full_data = pd.concat([self.full_data , pd.DataFrame([values])],ignore_index=True).drop_duplicates()
-            print("sheet over")
 
+            # the only print we keep, per requirement (c)
+            print("Processed this Excel")
+            logger.info("sheet over")
 
-
-    # --------OLD Functiones--------
+    # -------- OLD Functions (unchanged logic) --------
 
     def _get_investment_type(self, df , start_index, isin_col_num):
-        n_iter = 1 # to avoid endless loop
+        n_iter = 1  # to avoid endless loop
         while(n_iter<=10):
             candidate_isin = df.iloc[start_index-n_iter , isin_col_num]
-            print(candidate_isin)
+            logger.debug(candidate_isin)
             if not self._check_isin(str(candidate_isin)):
                 return start_index-n_iter
             n_iter+=1
@@ -254,7 +302,6 @@ class AMCPortfolioParser(ABC):
         # Edge case: last element was True
         if start is not None:
             periods.append((start, len(mask) - 1))
-        # print("Passing periods:", periods)
         return periods
     
     def _generate_embedding(self, text:str) -> list[float]:
@@ -278,16 +325,11 @@ class AMCPortfolioParser(ABC):
         header_row = [self._pre_process_header(header) for header in header_row]
 
         header_row_embeddings = np.array([self._generate_embedding(value) for value in header_row])
-        # Compute cosine similarity (shape: 5 x 10)
         similarity_matrix = cosine_similarity(self.base_embeddings, header_row_embeddings)
 
-        # For each base vector, find the index of the most similar header
         most_similar_indices = np.argmax(similarity_matrix, axis=1)
-
-        # Optionally, get the similarity score too
         most_similar_scores = np.max(similarity_matrix, axis=1)
 
-        # Print results
         for i, (idx, score) in enumerate(zip(most_similar_indices, most_similar_scores)):
             bh = self.base_headers[i] 
             hr = header_row[idx]
@@ -310,13 +352,13 @@ class AMCPortfolioParser(ABC):
             if "coupon" in bh and "coupon" not in hr:
                 score = 0
 
-            print(f"Base vector {i} ie {self.base_headers[i]} is most similar to header {idx} ie {header_row[idx]} with score {score:.4f}")
+            logger.info(f"Base vector {i} ie {self.base_headers[i]} ~ header {idx} ie {header_row[idx]} | score {score:.4f}")
             if score > 0.47 :
                 header_map[self.base_headers[i]] = int(idx)
         
         return header_map   
-    # --------OLD Functiones over--------
 
+    # -------- OLD Functions over --------
 
     def parse_all_portfolios(self):
         file_paths = self._get_file_names()
@@ -335,11 +377,10 @@ class AMCPortfolioParser(ABC):
             try:
                 if not self.full_data.empty:
                     self.full_data.to_excel(self.output_file, index=False)
-                    print(f"✅ Successfully saved parsed data to {self.output_file}")
+                    logger.info(f"Successfully saved parsed data to {self.output_file}")
                 else:
-                    print("⚠️ No data to save.")
+                    logger.warning("No data to save.")
                 error_saving = False
             except Exception as e:
-                print("error Saving [File is Open] ", e)
+                logger.error(f"Error Saving [File is Open] {e}")
                 continue
-
