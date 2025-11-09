@@ -1,6 +1,5 @@
  Defaults: &default
-  OutputDirectory: &OutputDirecotry ./.cleaned
-  ISIN_File_Path: &default_isin_file_path ./ISIN/fundisin.xlsx
+  path_BSE_SchemeData: ./reference/SchemeData0111251523SS.csv
   final Columns: &default_columns
   - Name of Instrument
   - ISIN

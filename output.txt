@@ -58653,3 +58653,601 @@ sheet over
 ⚠️ No data to save.
 🔍 Processing AMC: Old Bridge Capital
 ⚠️ No data to save.
+🔍 Processing AMC: 360 One Asset Management
+
+🔍 Processing  → Sheet: Dynamic Bond
+
+🔍 Processing  → dataframe: 360 ONE Dynamic Bond Fund  - An Open Ended Dynamic Debt Scheme investing across duration. A relatively high interest rate risk and relatively high credit risk, INF579M01217
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie industry / rating with score 1.0000
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+NAN
+NAN
+sheet over
+
+🔍 Processing  → Sheet: Liquid Fund
+
+🔍 Processing  → dataframe: 360 ONE Liquid Fund (An open ended Liquid Scheme) - An Open Ended Liquid Debt Scheme. A relatively low interest rate risk and moderate credit risk, INF579M01514
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie rating with score 0.7140
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+NAN
+NAN
+NAN
+NAN
+sheet over
+
+🔍 Processing  → Sheet: Focused Equity
+
+🔍 Processing  → dataframe: 360 ONE Focused Equity Fund  - An Open Ended Equity Scheme investing in maximum 30 multicap stocks, INF579M01878
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie industry with score 0.6707
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+sheet over
+
+🔍 Processing  → Sheet: Quant Fund
+
+🔍 Processing  → dataframe: 360 ONE QUANT FUND - An Open Ended Equity Scheme investing based on quant theme, INF579M01AG6
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie industry with score 0.6707
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+sheet over
+
+🔍 Processing  → Sheet: ELSS Tax Saver Nifty 50 Index
+
+🔍 Processing  → dataframe: 360 ONE ELSS Tax Saver Nifty 50 Index Fund - An Open Ended Passive Equity Linked Saving Scheme with a statutory lock-in period of 3 years, INF579M01AM4
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie industry with score 0.6707
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+sheet over
+
+🔍 Processing  → Sheet: Flexicap Fund
+
+🔍 Processing  → dataframe: 360 ONE FLEXICAP FUND - An Open Ended Dynamic Equity Scheme investing across large cap, mid cap and small cap stocks, INF579M01AQ5
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie industry with score 0.6707
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+sheet over
+
+🔍 Processing  → Sheet: Hybrid Fund
+
+🔍 Processing  → dataframe: 360 ONE Balanced Hybrid Fund -  An open ended balanced scheme investing in equity and debt instruments, INF579M01AV5
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie industry / rating with score 1.0000
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+NAN
+sheet over
+
+🔍 Processing  → Sheet: GOLDETF
+
+🔍 Processing  → dataframe: 360 ONE GOLD ETF (An open-ended exchange traded fund replicating/tracking domestic prices of Gold), None
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie industry / rating with score 1.0000
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+sheet over
+
+🔍 Processing  → Sheet: SILVERETF
+
+🔍 Processing  → dataframe: 360 ONE Silver ETF (An open-ended exchange traded fund replicating/tracking domestic prices of Silver), None
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie industry / rating with score 1.0000
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+sheet over
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+
+Unhandled exception occurred:
+Traceback (most recent call last):
+  File "C:\Users\vaibh\miniconda3\envs\amcparser\lib\runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "C:\Users\vaibh\miniconda3\envs\amcparser\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "C:\Users\vaibh\OneDrive\Documents\Functional\DevMani @ Work\AMCParser\AssetManagmentCompanyParser\core\main.py", line 103, in <module>
+    parser.save_to_excel()
+  File "C:\Users\vaibh\OneDrive\Documents\Functional\DevMani @ Work\AMCParser\AssetManagmentCompanyParser\core\amcparser.py", line 330, in save_to_excel
+    time.sleep(1)
+KeyboardInterrupt
+🔍 Processing AMC: 360 One Asset Management
+
+🔍 Processing  → Sheet: Dynamic Bond
+
+🔍 Processing  → dataframe: 360 ONE Dynamic Bond Fund  - An Open Ended Dynamic Debt Scheme investing across duration. A relatively high interest rate risk and relatively high credit risk, INF579M01217
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie industry / rating with score 1.0000
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+NAN
+NAN
+sheet over
+
+🔍 Processing  → Sheet: Liquid Fund
+
+🔍 Processing  → dataframe: 360 ONE Liquid Fund (An open ended Liquid Scheme) - An Open Ended Liquid Debt Scheme. A relatively low interest rate risk and moderate credit risk, INF579M01514
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie rating with score 0.7140
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+NAN
+NAN
+NAN
+NAN
+sheet over
+
+🔍 Processing  → Sheet: Focused Equity
+
+🔍 Processing  → dataframe: 360 ONE Focused Equity Fund  - An Open Ended Equity Scheme investing in maximum 30 multicap stocks, INF579M01878
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie industry with score 0.6707
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+sheet over
+
+🔍 Processing  → Sheet: Quant Fund
+
+🔍 Processing  → dataframe: 360 ONE QUANT FUND - An Open Ended Equity Scheme investing based on quant theme, INF579M01AG6
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie industry with score 0.6707
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+sheet over
+
+🔍 Processing  → Sheet: ELSS Tax Saver Nifty 50 Index
+
+🔍 Processing  → dataframe: 360 ONE ELSS Tax Saver Nifty 50 Index Fund - An Open Ended Passive Equity Linked Saving Scheme with a statutory lock-in period of 3 years, INF579M01AM4
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie industry with score 0.6707
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+sheet over
+
+🔍 Processing  → Sheet: Flexicap Fund
+
+🔍 Processing  → dataframe: 360 ONE FLEXICAP FUND - An Open Ended Dynamic Equity Scheme investing across large cap, mid cap and small cap stocks, INF579M01AQ5
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie industry with score 0.6707
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+sheet over
+
+🔍 Processing  → Sheet: Hybrid Fund
+
+🔍 Processing  → dataframe: 360 ONE Balanced Hybrid Fund -  An open ended balanced scheme investing in equity and debt instruments, INF579M01AV5
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie industry / rating with score 1.0000
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+NAN
+sheet over
+
+🔍 Processing  → Sheet: GOLDETF
+
+🔍 Processing  → dataframe: 360 ONE GOLD ETF (An open-ended exchange traded fund replicating/tracking domestic prices of Gold), None
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie industry / rating with score 1.0000
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+sheet over
+
+🔍 Processing  → Sheet: SILVERETF
+
+🔍 Processing  → dataframe: 360 ONE Silver ETF (An open-ended exchange traded fund replicating/tracking domestic prices of Silver), None
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie industry / rating with score 1.0000
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+sheet over
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+error Saving [File is Open]  Cannot save file into a non-existent directory: '.cleaned'
+
+Unhandled exception occurred:
+Traceback (most recent call last):
+  File "C:\Users\vaibh\miniconda3\envs\amcparser\lib\runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "C:\Users\vaibh\miniconda3\envs\amcparser\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "C:\Users\vaibh\OneDrive\Documents\Functional\DevMani @ Work\AMCParser\AssetManagmentCompanyParser\core\main.py", line 103, in <module>
+    parser.save_to_excel()
+  File "C:\Users\vaibh\OneDrive\Documents\Functional\DevMani @ Work\AMCParser\AssetManagmentCompanyParser\core\amcparser.py", line 333, in save_to_excel
+    self.full_data.to_excel(self.output_file, index=False)
+  File "C:\Users\vaibh\miniconda3\envs\amcparser\lib\site-packages\pandas\util\_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\vaibh\miniconda3\envs\amcparser\lib\site-packages\pandas\core\generic.py", line 2439, in to_excel
+    formatter.write(
+  File "C:\Users\vaibh\miniconda3\envs\amcparser\lib\site-packages\pandas\io\formats\excel.py", line 943, in write
+    writer = ExcelWriter(
+  File "C:\Users\vaibh\miniconda3\envs\amcparser\lib\site-packages\pandas\io\excel\_openpyxl.py", line 61, in __init__
+    super().__init__(
+  File "C:\Users\vaibh\miniconda3\envs\amcparser\lib\site-packages\pandas\io\excel\_base.py", line 1221, in __init__
+    self.check_extension(ext)
+  File "C:\Users\vaibh\miniconda3\envs\amcparser\lib\site-packages\pandas\io\excel\_base.py", line 1337, in check_extension
+    if ext.startswith("."):
+KeyboardInterrupt
+🔍 Processing AMC: 360 One Asset Management
+
+🔍 Processing  → Sheet: Dynamic Bond
+
+🔍 Processing  → dataframe: 360 ONE Dynamic Bond Fund  - An Open Ended Dynamic Debt Scheme investing across duration. A relatively high interest rate risk and relatively high credit risk, INF579M01217
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie industry / rating with score 1.0000
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+NAN
+NAN
+sheet over
+
+🔍 Processing  → Sheet: Liquid Fund
+
+🔍 Processing  → dataframe: 360 ONE Liquid Fund (An open ended Liquid Scheme) - An Open Ended Liquid Debt Scheme. A relatively low interest rate risk and moderate credit risk, INF579M01514
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie rating with score 0.7140
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+NAN
+NAN
+NAN
+NAN
+sheet over
+
+🔍 Processing  → Sheet: Focused Equity
+
+🔍 Processing  → dataframe: 360 ONE Focused Equity Fund  - An Open Ended Equity Scheme investing in maximum 30 multicap stocks, INF579M01878
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie industry with score 0.6707
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+sheet over
+
+🔍 Processing  → Sheet: Quant Fund
+
+🔍 Processing  → dataframe: 360 ONE QUANT FUND - An Open Ended Equity Scheme investing based on quant theme, INF579M01AG6
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie industry with score 0.6707
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+sheet over
+
+🔍 Processing  → Sheet: ELSS Tax Saver Nifty 50 Index
+
+🔍 Processing  → dataframe: 360 ONE ELSS Tax Saver Nifty 50 Index Fund - An Open Ended Passive Equity Linked Saving Scheme with a statutory lock-in period of 3 years, INF579M01AM4
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie industry with score 0.6707
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+sheet over
+
+🔍 Processing  → Sheet: Flexicap Fund
+
+🔍 Processing  → dataframe: 360 ONE FLEXICAP FUND - An Open Ended Dynamic Equity Scheme investing across large cap, mid cap and small cap stocks, INF579M01AQ5
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie industry with score 0.6707
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+sheet over
+
+🔍 Processing  → Sheet: Hybrid Fund
+
+🔍 Processing  → dataframe: 360 ONE Balanced Hybrid Fund -  An open ended balanced scheme investing in equity and debt instruments, INF579M01AV5
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie industry / rating with score 1.0000
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+NAN
+sheet over
+
+🔍 Processing  → Sheet: GOLDETF
+
+🔍 Processing  → dataframe: 360 ONE GOLD ETF (An open-ended exchange traded fund replicating/tracking domestic prices of Gold), None
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie industry / rating with score 1.0000
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+sheet over
+
+🔍 Processing  → Sheet: SILVERETF
+
+🔍 Processing  → dataframe: 360 ONE Silver ETF (An open-ended exchange traded fund replicating/tracking domestic prices of Silver), None
+Base vector 0 ie name of instrument is most similar to header 0 ie name of the instrument  with score 0.9901
+Base vector 1 ie isin is most similar to header 1 ie isin with score 1.0000
+Base vector 2 ie coupon is most similar to header 1 ie isin with score 0.0000
+Base vector 3 ie industry / rating is most similar to header 2 ie industry / rating with score 1.0000
+Base vector 4 ie quantity is most similar to header 3 ie quantity with score 1.0000
+Base vector 5 ie market value (mkt) ( rs lakh ) is most similar to header 4 ie market/fair value(rs in lacs) with score 0.6582
+Base vector 6 ie % to net assets (nav) is most similar to header 5 ie rounded % to net assets with score 0.6783
+Base vector 7 ie yield is most similar to header 3 ie quantity with score 0.0000
+Base vector 8 ie yield to call (ytc) is most similar to header 6 ie ytm with score 0.0000
+NAN
+sheet over
+✅ Successfully saved parsed data to ./.cleaned/360 One Asset Management.xlsx
+🔍 Processing AMC: Aditya Birla Sun Life Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: Axis Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: Bandhan Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: Bank of India Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: Baroda BNP Paribas Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: Canara Robeco Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: DSP Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: Edelweiss Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: Franklin Templeton India
+⚠️ No data to save.
+🔍 Processing AMC: Groww Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: HDFC Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: Helios Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: HSBC Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: ICICI Prudential Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: Invesco Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: ITI Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: JM Financial Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: Kotak Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: LIC Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: Mahindra Manulife Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: Mirae Asset Mutual Fund
+{'AMCName': 'Mirae Asset Mutual Fund', 'DataDirectory': './data/Mirae Asset Mutual Fund', 'sheets_to_avoid': [], 'final_columns': ['Name of Instrument', 'ISIN', 'Coupon', 'Industry / Rating', 'Quantity', 'Market Value (MKT) ( rs lakh )', '% to Net Assets (NAV)', 'Yield', 'Yield to call (YTC)'], 'Scale100': '', 'Scale100th': ''} {'OutputDirectory': './.cleaned', 'ISIN_File_Path': './ISIN/fundisin.xlsx', 'final Columns': ['Name of Instrument', 'ISIN', 'Coupon', 'Industry / Rating', 'Quantity', 'Market Value (MKT) ( rs lakh )', '% to Net Assets (NAV)', 'Yield', 'Yield to call (YTC)']}
+⚠️ No data to save.
+🔍 Processing AMC: Motilal Oswal Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: Navi Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: Nippon India Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: NJ Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: PGIM India Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: PPFAS Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: Quant Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: Quantum Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: SBI Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: Shriram Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: Sundaram Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: Tata Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: Trust Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: Union Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: UTI Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: WhiteOak Mutual Fund
+⚠️ No data to save.
+🔍 Processing AMC: Zerodha Fund House
+⚠️ No data to save.
+🔍 Processing AMC: Old Bridge Capital
+⚠️ No data to save.

@@ -1,11 +1,11 @@
-from typing import override
+from typing_extensions import override
 from core.amcparser import AMCPortfolioParser
 import pandas as pd
 import re
 
 class ICICIMFParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     @override
     def _get_fund_name(self, df):
@@ -17,8 +17,8 @@ class ICICIMFParser(AMCPortfolioParser):
                
 # Templates for all other AMC names
 class One360Parser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df.columns) < 2 : return None
@@ -26,8 +26,8 @@ class One360Parser(AMCPortfolioParser):
 
 
 class AdityaBirlaParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df.columns) < 2 : return None
@@ -35,8 +35,8 @@ class AdityaBirlaParser(AMCPortfolioParser):
 
 
 class AxisParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df.columns) < 2 : return None
@@ -44,8 +44,8 @@ class AxisParser(AMCPortfolioParser):
 
 
 class BandhanParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df)<2 and len(df.columns) < 2 : return None
@@ -53,8 +53,8 @@ class BandhanParser(AMCPortfolioParser):
 
 
 class BankOfIndiaParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df.columns) < 2 : return None
@@ -62,8 +62,8 @@ class BankOfIndiaParser(AMCPortfolioParser):
 
 
 class BarodaBNPParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df.columns) < 2 : return None
@@ -71,8 +71,8 @@ class BarodaBNPParser(AMCPortfolioParser):
 
 
 class CanaraRobecoParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df.columns) < 2 : return None
@@ -80,8 +80,8 @@ class CanaraRobecoParser(AMCPortfolioParser):
 
 
 class DSPParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df.columns) < 2 : return None
@@ -89,8 +89,8 @@ class DSPParser(AMCPortfolioParser):
 
 
 class EdelweissParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self, df):
         """
@@ -106,8 +106,8 @@ class EdelweissParser(AMCPortfolioParser):
 
 
 class FranklinTempletonParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df.columns) < 2 : return None
@@ -115,8 +115,8 @@ class FranklinTempletonParser(AMCPortfolioParser):
 
 
 class GrowwParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     @override
     def _get_fund_name(self, sheet_df):
@@ -130,8 +130,8 @@ class GrowwParser(AMCPortfolioParser):
 
 
 class HDFCParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     @override
     def _get_fund_name(self, sheet_df):
@@ -145,8 +145,8 @@ class HDFCParser(AMCPortfolioParser):
 
 
 class HeliosParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df.columns) < 2 or len(df) <4 : return None
@@ -155,8 +155,8 @@ class HeliosParser(AMCPortfolioParser):
 
 
 class HSBCParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df.columns) < 2 or len(df) <1 : return None
@@ -164,16 +164,16 @@ class HSBCParser(AMCPortfolioParser):
 
 
 class InvescoParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df.columns) < 2 or len(df) <2 : return None
         return df.iloc[1,1]
     
 class OldBridgeCapital(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df.columns) < 2 or len(df) <2 : return None
@@ -181,8 +181,8 @@ class OldBridgeCapital(AMCPortfolioParser):
 
 
 class ITIParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df.columns) < 2 or len(df) <2 : return None
@@ -190,8 +190,8 @@ class ITIParser(AMCPortfolioParser):
 
 
 class JMFinancialParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df.columns) < 1 or len(df) <2 : return None
@@ -199,8 +199,8 @@ class JMFinancialParser(AMCPortfolioParser):
 
 
 class KotakParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)    
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)    
 
     @override
     def _get_fund_name(self, sheet_df):
@@ -218,8 +218,8 @@ class KotakParser(AMCPortfolioParser):
             print("⚠️ No fund name found in the sheet.")
 
 class LICParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df.columns) < 2 : return None
@@ -227,8 +227,8 @@ class LICParser(AMCPortfolioParser):
 
 
 class MahindraManulifeParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df.columns) < 2 or len(df) <2 : return None
@@ -236,9 +236,9 @@ class MahindraManulifeParser(AMCPortfolioParser):
 
 
 class MiraeAssetParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
+    def __init__(self, amc_config, default_config, embedding_model):
         print(amc_config , default_config)
-        super().__init__(amc_config=amc_config, default_config=default_config)
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self, df):
         try: 
@@ -249,8 +249,8 @@ class MiraeAssetParser(AMCPortfolioParser):
 
 
 class MotilalOswalParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df.columns) < 2 : return None
@@ -258,8 +258,8 @@ class MotilalOswalParser(AMCPortfolioParser):
 
 
 class NaviParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df)<4 and len(df.columns) < 1  : return None
@@ -267,8 +267,8 @@ class NaviParser(AMCPortfolioParser):
 
 
 class NipponIndiaParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df.columns) < 2 : return None
@@ -276,8 +276,8 @@ class NipponIndiaParser(AMCPortfolioParser):
 
 
 class NJParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df)<1 and len(df.columns) < 2  : return None
@@ -285,8 +285,8 @@ class NJParser(AMCPortfolioParser):
 
 
 class PGIMIndiaParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df.columns) < 2 : return None
@@ -294,8 +294,8 @@ class PGIMIndiaParser(AMCPortfolioParser):
 
 
 class PPFASParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     @override
     def _get_fund_name(self, df):
@@ -308,24 +308,24 @@ class PPFASParser(AMCPortfolioParser):
 
 
 class QuantParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         return df.iloc[0,2].strip()
 
 
 class QuantumParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df)<6 and len(df.columns) < 1  : return None
         return df.iloc[5,0]
 
 class SBIParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df.columns) < 4 : return None
@@ -334,8 +334,8 @@ class SBIParser(AMCPortfolioParser):
 
 
 class ShriramParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df.columns) < 2 : return None
@@ -343,8 +343,8 @@ class ShriramParser(AMCPortfolioParser):
 
 
 class SundaramParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df)<1 and len(df.columns) < 1  : return None
@@ -352,8 +352,8 @@ class SundaramParser(AMCPortfolioParser):
 
 
 class TataParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df.columns) < 2 : return None
@@ -361,8 +361,8 @@ class TataParser(AMCPortfolioParser):
 
 
 class TrustParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df)<3 and len(df.columns) < 1  : return None
@@ -370,8 +370,8 @@ class TrustParser(AMCPortfolioParser):
 
 
 class UnionParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df)<6 and len(df.columns) < 3  : return None
@@ -379,8 +379,8 @@ class UnionParser(AMCPortfolioParser):
 
 
 class UTIParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def process_sheet(self, datafile, sheet_name, sheet_df):
         # TODO: Implement the specific cleaning logic for UTI Mutual Fund
@@ -388,8 +388,8 @@ class UTIParser(AMCPortfolioParser):
 
 
 class WhiteOakParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def _get_fund_name(self,df):
         if len(df.columns) < 2 : return None
@@ -397,8 +397,8 @@ class WhiteOakParser(AMCPortfolioParser):
 
 
 class ZerodhaParser(AMCPortfolioParser):
-    def __init__(self, amc_config, default_config):
-        super().__init__(amc_config=amc_config, default_config=default_config)
+    def __init__(self, amc_config, default_config, embedding_model):
+        super().__init__(amc_config=amc_config, default_config=default_config, embedding_model = embedding_model)
 
     def process_sheet(self, datafile, sheet_name, sheet_df):
         # TODO: Implement the specific cleaning logic for Zerodha Fund House

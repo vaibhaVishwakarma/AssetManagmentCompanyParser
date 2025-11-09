@@ -1,21 +1,41 @@
 # core/amcparser.py
+"""
+AMC Portfolio Base Parser
+
+This module defines the abstract base class `AMCPortfolioParser`, which provides
+the full parsing workflow for AMC (Asset Management Company) portfolio Excel files.
+
+Responsibilities:
+- Prepare environment and clean intermediate folders.
+- Load Excel files and extract fund-level information.
+- Identify, map, and standardize headers using semantic similarity.
+- Generate consolidated data ready for downstream processing.
+
+All AMC-specific logic (fund name detection etc.) is meant to be implemented
+in subclasses inheriting from this base parser.
+
+Logging:
+    Uses `logging` for all operational messages except for a single print
+    statement (as required by design) to indicate when a sheet is processed.
+"""
+
 import re
 import pandas as pd
 import os
 import time
 from abc import ABC, abstractmethod
-
-import requests  # kept as in original
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from langchain_huggingface import HuggingFaceEmbeddings
 import nltk
 nltk.download("stopwords")
 from nltk.corpus import stopwords
-
 import logging
+import requests  # retained for compatibility with existing architecture
 
-# ---------- logger ----------
+# -------------------------------------------------------------------
+# Logger Configuration
+# -------------------------------------------------------------------
 logger = logging.getLogger(__name__)
 if not logger.handlers:
     logging.basicConfig(
@@ -23,267 +43,232 @@ if not logger.handlers:
         format="%(asctime)s | %(levelname)s | %(message)s"
     )
 
+# -------------------------------------------------------------------
+# Abstract Base Class Definition
+# -------------------------------------------------------------------
 class AMCPortfolioParser(ABC):
+    """
+    Abstract base class for all AMC portfolio parsers.
 
-    def __init__(self, amc_config , default_config ):
+    Each subclass represents a specific AMC and implements the `_get_fund_name`
+    method to identify the relevant fund name in an input sheet.
 
-        # empty intermediate folders each run
-        for folder in [".cleaned", ".final_cleaned"]:
-            os.makedirs(folder, exist_ok=True)
-            for name in os.listdir(folder):
-                path = os.path.join(folder, name)
-                try:
-                    if os.path.isfile(path) or os.path.islink(path):
-                        os.remove(path)
-                    elif os.path.isdir(path):
-                        # empty nested
-                        for root, dirs, files in os.walk(path, topdown=False):
-                            for f in files:
-                                try:
-                                    os.remove(os.path.join(root, f))
-                                except Exception as e:
-                                    logger.warning(f"Could not remove {f} in {root}: {e}")
-                            for d in dirs:
-                                try:
-                                    os.rmdir(os.path.join(root, d))
-                                except Exception as e:
-                                    logger.warning(f"Could not remove {d} in {root}: {e}")
-                except Exception as e:
-                    logger.warning(f"Cleanup failed for {path}: {e}")
+    Attributes:
+        amc_name (str): Name of the AMC being processed.
+        data_dir (str): Directory containing source Excel files.
+        output_directory (str): Destination for processed outputs.
+        output_file (str): Path to the final Excel output.
+        final_columns (list): List of target standardized headers.
+        base_headers (list): Normalized headers used for column mapping.
+        full_data (pd.DataFrame): Master dataframe containing aggregated data.
+        embeddings (HuggingFaceEmbeddings): Embedding model instance.
+        base_embeddings (np.ndarray): Embeddings of reference headers.
+    """
 
-        # independent variables
-        self.amc_name = amc_config.get("AMCName",None)
-        self.data_dir = amc_config.get("DataDirectory",f"./data/data/{self.amc_name}")
-        self.output_directory = default_config.get("OutputDirectory","./")
-        os.makedirs(self.output_directory ,exist_ok=True)
+    def __init__(self, amc_config, default_config, embedding_model = None):
+        """
+        Initialize the parser instance with configuration and embeddings setup.
+
+        Args:
+            amc_config (dict): AMC-specific configuration (data paths, exclusions).
+            default_config (dict): Default global configuration values.
+        """
+
+        self.isin_pattern = r"[A-Z]{3}[A-Z0-9]{9}"
+
+
+
+        # --------------------------------------------------------------
+        # 1. Load configurations and initialize working variables
+        # --------------------------------------------------------------
+        self.amc_name = amc_config.get("AMCName", None)
+        self.data_dir = amc_config.get("DataDirectory", f"./data/data/{self.amc_name}")
+        self.output_directory = ".cleaned"
+        os.makedirs(self.output_directory, exist_ok=True)
         self.sheets_to_avoid = amc_config.get("sheets_to_avoid", [])
-        self.isin_lookup = self._create_ISIN_mapping(pd.read_excel(default_config.get("ISINFilePath","./ISIN/fundisin.xlsx")))
         self.final_columns = amc_config.get("final_columns", None)
 
-        # handle derived variables
+        # --------------------------------------------------------------
+        # 2. Configure output and column structure
+        # --------------------------------------------------------------
         self.output_file = f"{self.output_directory}/{self.amc_name}.xlsx"
-        if self.final_columns is None or len(self.final_columns) == 0:
-            self.final_columns = [  "Name of Instrument", "ISIN", "Coupon", "Industry", "Quantity", "Market Value", "% to Net Assets (nav)",
-                                    "Yield", "Yield to call (ytc)" ,"Yield to Maturity (ytm)"]
-            
-        self.base_headers = [self._pre_process_header(header) for header in self.final_columns]
-        self.full_data = pd.DataFrame(columns= self.base_headers + ["Type", "Scheme Name", "AMC", "Scheme ISIN"])
-        self.embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-        self.base_embeddings = np.array([self._generate_embedding(value) for value in self.base_headers])
+        if not self.final_columns:
+            self.final_columns = [
+                "Name of Instrument", "ISIN", "Coupon", "Industry",
+                "Quantity", "Market Value", "% to Net Assets (nav)",
+                "Yield", "Yield to call (ytc)", "Yield to Maturity (ytm)"
+            ]
 
+        # normalized headers and empty master dataframe
+        self.base_headers = [self._pre_process_header(h) for h in self.final_columns]
+        self.full_data = pd.DataFrame(columns=self.base_headers + ["Type", "Scheme Name", "AMC"])
+
+        # embedding setup for semantic header mapping
+        self.embeddings = embedding_model if isinstance(embedding_model, HuggingFaceEmbeddings) else HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2") 
+        self.base_embeddings = np.array([self._generate_embedding(h) for h in self.base_headers])
+
+        # stopword configuration for fund name cleaning
         self.stopwords = set(stopwords.words("english"))
 
-        # functions
-        self.filterNonAlphaNumeric = lambda x : re.sub(r"[^a-zA-z0-9]","",x)
-        self.filterStopWords = lambda x : " ".join([word for word in str(x).lower().split(" ") if word not in self.stopwords])    
+        # Predefined text cleaning lambdas for repeated transformations
+        self.filterNonAlphaNumeric = lambda x: re.sub(r"[^a-zA-Z0-9]", "", x)
+        self.filterStopWords = lambda x: " ".join(
+            [w for w in str(x).lower().split() if w not in self.stopwords]
+        )
         self.filterBracketContent = lambda x: re.sub(r"\([^\)]\)", "", x)
-        self.filterNANIsolated = lambda x : re.sub(r"(?<!\w)(nan)+(?!\w)", "", x ,flags=re.IGNORECASE)
-        self.filterReccuringSpaces = lambda x : re.sub(r"\s+"," ",x)
+        self.filterNANIsolated = lambda x: re.sub(r"(?<!\w)(nan)+(?!\w)", "", x, flags=re.IGNORECASE)
+        self.filterReccuringSpaces = lambda x: re.sub(r"\s+", " ", x)
 
+    # -------------------------------------------------------------------
+    # Utility Functions
+    # -------------------------------------------------------------------
     def filterBullets(self, string):
+        """Removes stray bullet-like characters or mismatched parentheses."""
+        if(not isinstance(string, str)): return ""
+
         tmp = string + "()"
         if tmp.index("(") > tmp.index(")"):
             string = re.sub(r"[^\)]\)", "", string)
         return string
 
-    def _get_fund_isin(self, fund_name):
-
-        fund_name = self.filterStopWords(fund_name)
-        # as per pattern after the word "fund" dates or irrelevent spefications are present
-        fund_name = self.filterNonAlphaNumeric(fund_name).split("fund")[0].lower()
-
-        fund_names = pd.Series(self.isin_lookup.keys()).astype(str).apply(str.lower)
-
-        mask = fund_names.apply(lambda x : fund_name in self.filterNonAlphaNumeric(self.filterStopWords(x)))
-        candidate_fund_names = fund_names[mask].to_list()
-
-        if not candidate_fund_names:
-            return None
-        
-        isin = self.isin_lookup.get(candidate_fund_names[0])
-        if self._check_isin(isin):
-            return isin
-        return None
-
-    def _create_ISIN_mapping(self,df):
-        """Create a mapping of fund names to ISINs."""
-        isin_mapping = {}
-        for index, row in df.iterrows():
-            fund_name = row['Cleaned Fund Name'].lower()
-            isin = row['ISIN']
-            if fund_name and isin and row["Growth/Regular Type"] in ["Regular", "Growth"]:  # filter based on ["Direct"] or ["Regular", "Growth"]
-                isin_mapping[fund_name] = isin
-        return isin_mapping    
+    def _create_ISIN_mapping(self, df):
+        """Build dictionary mapping fund names to ISIN codes."""
+        mapping = {}
+        for _, row in df.iterrows():
+            fn = row["Cleaned Fund Name"].lower()
+            isin = row["ISIN"]
+            if fn and isin and row["Growth/Regular Type"] in ["Regular", "Growth"]:
+                mapping[fn] = isin
+        return mapping
 
     def _get_file_names(self):
+        """Recursively collect all valid Excel files from AMC’s data directory."""
         file_names = []
-        for root, dirs, files in os.walk(self.data_dir):
+        for root, _, files in os.walk(self.data_dir):
             for file in files:
-                if file.endswith((".xlsb", ".xls", ".xlsx" , ".xlsm")):
+                if file.endswith((".xlsb", ".xls", ".xlsx", ".xlsm")):
                     file_names.append(os.path.join(root, file))
         return file_names
 
-    def _read_excel_file(self, file_path , * , sheet_name = None, header_row_idx = None):
-
-        file_ext = file_path.split(".")[-1].lower()
+    def _read_excel_file(self, file_path, *, sheet_name=None, header_row_idx=None):
+        """Read Excel or CSV file and return all sheets as a dictionary of DataFrames."""
         try:
-            if file_ext == "xlsb":
+            ext = file_path.split(".")[-1].lower()
+            if ext == "xlsb":
                 return pd.read_excel(file_path, sheet_name=None, engine="pyxlsb", dtype=str)
-            elif file_ext in ["xls", "xlsx" , "xlsm"]:
+            elif ext in ["xls", "xlsx", "xlsm"]:
                 return pd.read_excel(file_path, sheet_name=None, dtype=str)
-            elif file_ext == "csv":
+            elif ext == "csv":
                 return pd.read_csv(file_path, sheet_name=sheet_name, skiprows=header_row_idx, dtype=str)
-            
         except Exception as e:
-            logger.error(f"Error Reading file: {file_path} | Supported File types xlsb/xls/xlsx | error: {e}")
-
-        return None
-    
-        def _get_fund_isin(self, fund_name):
-
-        fund_name = self.filterStopWords(fund_name)
-        # as per pattern after the word "fund" dates or irrelevent spefications are present
-        fund_name = self.filterNonAlphaNumeric(fund_name).split("fund")[0].lower()
-
-        fund_names = pd.Series(self.isin_lookup.keys()).astype(str).apply(str.lower)
-
-        mask = fund_names.apply(lambda x : fund_name in self.filterNonAlphaNumeric(self.filterStopWords(x)))
-        candidate_fund_names = fund_names[mask].to_list()
-
-        if not candidate_fund_names:
-            return None
-        
-        isin = self.isin_lookup.get(candidate_fund_names[0])
-        if self._check_isin(isin):
-            return isin
+            logger.error(f"Error reading {file_path}: {e}")
         return None
 
-    def process_sheet(self, file_path, sheet_name, df):  # parsing logic    
+    # -------------------------------------------------------------------
+    # Core Parsing Logic
+    # -------------------------------------------------------------------
+    def process_sheet(self, file_path, sheet_name, df):
+        """
+        Main sheet parsing logic:
+        - Identify fund name and ISIN.
+        - Locate and normalize header rows.
+        - Extract tabular data segments between valid ISIN patterns.
+        - Append processed rows to self.full_data.
+        """
         logger.info(f"Processing → Sheet: {sheet_name}")
         fund_name = self._get_fund_name(df)
-        
-        if not fund_name : logger.warning(f"No fund name for sheet {sheet_name}")
-        if fund_name is not None and sheet_name:
-            fund_isin = self._get_fund_isin(fund_name)
-            logger.info(f"Processing → dataframe: {fund_name}, {fund_isin}")
 
-            header_row_idx = next(
-                (index for index, row in df.iterrows() if any("ISIN" in str(val) for val in row.dropna())),
-                None
-            )
-            if header_row_idx is None:
-                logger.warning(f"Skipping {sheet_name} (No ISIN header found)")
-                return
+        if not fund_name:
+            logger.warning(f"No fund name for sheet {sheet_name}")
+            return
 
-            df = df.dropna(how='all')
-            df.reset_index(drop=True , inplace = True)
-            rows = df.fillna(" ").agg(" ".join , axis = 1).apply(str.lower)
-            df = df.iloc[rows[rows.apply(lambda x : "stock exchang" not in x and not ("index" in x and "stock" in x))].index.to_list()]
-            df.reset_index(drop=True , inplace = True)
-            grand_total_idx = rows[rows.apply(lambda x : "grand total" in x)].index.to_list()
-            table_end_idx=len(df)
-            if len(grand_total_idx) > 0 : 
-                table_end_idx = min( table_end_idx , grand_total_idx[-1])
-            
-            
-            # find the row contaning headers
+        logger.info(f"Processing DataFrame for fund: {fund_name}")
+
+        # locate header row index (first row containing "ISIN")
+        header_row_idx = next(
+            (idx for idx, row in df.iterrows() if any("ISIN" in str(v) for v in row.dropna())),
+            None
+        )
+        if header_row_idx is None:
+            logger.warning(f"Skipping {sheet_name} (no ISIN header found)")
+            return
+
+        # basic cleaning: drop empty rows and irrelevant sections
+        df = df.dropna(how="all").reset_index(drop=True)
+        rows = df.fillna(" ").agg(" ".join, axis=1).apply(str.lower)
+        df = df.iloc[
+            rows[rows.apply(lambda x: "stock exchang" not in x and not ("index" in x and "stock" in x))].index
+        ].reset_index(drop=True)
+
+        # locate table end boundary
+        grand_total_idx = rows[rows.apply(lambda x: "grand total" in x)].index.to_list()
+        table_end_idx = min(grand_total_idx[-1], len(df)) if grand_total_idx else len(df)
+
+        # header normalization
+        header_row = self._fetch_header_row(df)
+
+        # merge and clean NULL header segments
+        n_iter = 0
+        while "NULL" in header_row and n_iter < 5:
+            start = next((i for i, h in enumerate(header_row) if h != "NULL"), None)
+            end = next((i for i in range(start + 1, len(header_row)) if header_row[i] != "NULL"), len(header_row))
+            alter1 = df.iloc[:, start:end].fillna("").agg(" ".join, axis=1)
+            alter2 = df.drop(df.columns[start:end], axis=1)
+            df = pd.concat([alter1, alter2], axis=1)
             header_row = self._fetch_header_row(df)
+            n_iter += 1
 
-            # clear any columns with null values and merge
-            n_iter = 0
-            while "NULL" in header_row and n_iter<5:
-                start = None
-                end = len(header_row)
-                for i in range(len(header_row)):
-                    if start == None and header_row[i] != "NULL":
-                        start = i
-                        break
-                for i in range(start+1 , len(header_row)):
-                    if header_row[i] != "NULL":
-                        end = i
-                        break
-                alter1 = df.iloc[:,start:end].fillna("").agg(" ".join,axis = 1)
-                alter2 = df.drop(df.columns[start:end],axis = 1)
-                df = pd.concat([alter1 , alter2] , axis = 1)
+        header_map = self._header_mapper(header_row)
+        periods = self._get_valid_periods(df, header_map)
 
-                header_row = self._fetch_header_row(df)
-                n_iter+=1
+        # iterate through all valid ISIN-segmented regions
+        for start_idx, end_idx in periods:
+            type_name_idx = self._get_investment_type(df, start_idx, header_map["isin"])
+            if type_name_idx == start_idx:
+                logger.info("No valid Type Name found. Skipping section.")
+                continue
 
-            # maps the desired columns 
-            header_map = self._header_mapper(header_row)
+            type_name = df.iloc[type_name_idx, :].fillna(" ").agg(" ".join, axis=0)
+            # type_name = df.iloc[type_name_idx, :].fillna(" ").apply(lambda x: " ".join(x), axis=1)
 
-            periods = self._get_valid_periods(df , header_map)
+            type_name = self._clean_type_name(type_name)
 
-            # process data piece by piece
-            for (start_idx , end_idx) in periods:
+            for _, row in df.iloc[start_idx:min(end_idx + 1, table_end_idx)].iterrows():
+                values = header_map.copy()
+                for key, idx in header_map.items():
+                    values[key] = row.iloc[idx]
+                values["Type"] = type_name
+                values["Scheme Name"] = fund_name
+                values["AMC"] = self.amc_name
+                self.full_data = pd.concat([self.full_data, pd.DataFrame([values])], ignore_index=True).drop_duplicates()
 
-                type_name_idx = self._get_investment_type(df , start_idx , header_map["isin"])
-                if(type_name_idx == start_idx):
-                    logger.info("No valid Type Name Found. Moving on.")
-                    continue
-                
-                type_name = df[type_name_idx:type_name_idx+1].fillna(" ").agg(" ".join , axis = 1).iloc[0]
-                type_name = self.filterBullets(type_name)
-                type_name = self.filterBracketContent(type_name)
-                type_name = re.sub(r"[^a-zA-Z\s\&\-/\\]" , "" , type_name)
-                type_name = self.filterNANIsolated(type_name)
-                type_name = self.filterReccuringSpaces(type_name)
-                type_name = type_name if "total" not in type_name.lower() else "uncategorised"
+        # required print output
+        print("Processed this Excel")
+        logger.info("Completed sheet parsing.")
 
-                for (index , row) in df.iloc[start_idx:min(end_idx+1,table_end_idx)].iterrows():
-                    values = header_map.copy()
-                    for (key , idx) in header_map.items():
-                        temp = row.iloc[idx]
-                        values[key] = temp
-                 
-                    # meta data addition
-                    values["Type"] =  type_name
-                    values["Scheme Name"] = fund_name
-                    values["AMC"] = self.amc_name  
-                    values["Scheme ISIN"] = fund_isin if fund_isin is not None else None         
-
-                    self.full_data = pd.concat([self.full_data , pd.DataFrame([values])],ignore_index=True).drop_duplicates()
-
-            # the only print we keep, per requirement (c)
-            print("Processed this Excel")
-            logger.info("sheet over")
-
-    # -------- OLD Functions (unchanged logic) --------
+    # -------------------------------------------------------------------
+    # Helper Methods for Internal Use
+    # -------------------------------------------------------------------
 
     def _get_investment_type(self, df , start_index, isin_col_num):
-        n_iter = 1  # to avoid endless loop
+        n_iter = 1 # to avoid endless loop
         while(n_iter<=10):
             candidate_isin = df.iloc[start_index-n_iter , isin_col_num]
-            logger.debug(candidate_isin)
+            print(candidate_isin)
             if not self._check_isin(str(candidate_isin)):
                 return start_index-n_iter
             n_iter+=1
         return start_index
-
-    def _pre_process_header (self, x) :
-        return re.sub(r"[^a-z\s%\(\)\\]","",x.lower())
     
-    def _clean_fund_name(self,name):
-        return re.sub(r"[^a-zA-z0.9\+\-\\\(\)\s/]","",name)
-    
-    def _trf(self, x):
-        x = re.search(r'\d+(?:\.\d+)?', x)
-        if x : x = x.group().strip()
-        return "0" if x == None or x == "" else x
-
     def _filter_isin(self, string):
-        s = str(string).lower().strip()
-        return re.sub("[^a-zA-Z0-9]" , "" , s).upper()
-    
+        if(not isinstance(string, str)):
+            return ""
+        string = string.strip().upper()
+        return re.sub(r"[^A-Z0-9]","",string)
+        
     def _check_isin(self, val):
-        val = val[:12]
-        return  (   len(val) in range(5,30) and
-                    " " not in val.strip() and 
-                    (val[0].isupper() and 
-                    val[1].isupper() and 
-                    (val[-1].isdigit() or val[-1].upper() == "X"))
-                )
-                
+        val = self._filter_isin(val)
+        return bool(re.search(self.isin_pattern, val))
     
     def _get_valid_periods(self, df , header_map):
         df.iloc[:, header_map["isin"]] = df.iloc[:, header_map["isin"]].apply(self._filter_isin)
@@ -302,85 +287,85 @@ class AMCPortfolioParser(ABC):
         # Edge case: last element was True
         if start is not None:
             periods.append((start, len(mask) - 1))
+        # print("Passing periods:", periods)
         return periods
-    
-    def _generate_embedding(self, text:str) -> list[float]:
+
+    def _clean_type_name(self, name):
+        """Apply regex and stopword-based normalization for investment type."""
+        name = self.filterBullets(name)
+        name = self.filterBracketContent(name)
+        name = re.sub(r"[^a-zA-Z\s&/\-]", "", name)
+        name = self.filterNANIsolated(name)
+        name = self.filterReccuringSpaces(name)
+        return "uncategorised" if "total" in name.lower() else name
+
+    def _generate_embedding(self, text: str) -> list[float]:
+        """Generate vector embedding for a given text string."""
         return self.embeddings.embed_query(text)
-        
-    def _fetch_header_row(self, df :pd.DataFrame) -> list[str]: 
-        rows = df.astype(str).agg(' '.join, axis=1)
+
+    def _fetch_header_row(self, df: pd.DataFrame) -> list[str]:
+        """Identify the row containing 'ISIN' and return its cell values."""
+        rows = df.astype(str).agg(" ".join, axis=1)
         idx = rows[rows.apply(lambda x: "isin " in x.lower())].index.tolist()[0]
-        header_row = df.iloc[idx,:].fillna("NULL")
-        header_row = [(header_row.iloc[col]) for col in range(header_row.shape[0])]
-        return header_row
-    
-    def _pre_process_header (self, x) :
-        return re.sub(r"[^a-z\s%\(\)\\/]","",x.lower())
-    
-    def _header_mapper(self, header_row ) -> {str:int}:
+        header_row = df.iloc[idx, :].fillna("NULL")
+        return list(header_row)
 
-        header_map = dict()
-
-        self.base_headers = [self._pre_process_header(header) for header in self.base_headers]
-        header_row = [self._pre_process_header(header) for header in header_row]
-
-        header_row_embeddings = np.array([self._generate_embedding(value) for value in header_row])
+    def _header_mapper(self, header_row) -> dict:
+        """Map target headers to actual sheet columns using cosine similarity."""
+        header_map = {}
+        self.base_headers = [self._pre_process_header(h) for h in self.base_headers]
+        header_row = [self._pre_process_header(h) for h in header_row]
+        header_row_embeddings = np.array([self._generate_embedding(h) for h in header_row])
         similarity_matrix = cosine_similarity(self.base_embeddings, header_row_embeddings)
-
         most_similar_indices = np.argmax(similarity_matrix, axis=1)
         most_similar_scores = np.max(similarity_matrix, axis=1)
 
         for i, (idx, score) in enumerate(zip(most_similar_indices, most_similar_scores)):
-            bh = self.base_headers[i] 
-            hr = header_row[idx]
-
+            bh, hr = self.base_headers[i], header_row[idx]
+            # heuristic adjustments for specific header types
             if "yield" in bh and "yield" not in hr:
                 score = 0
-            if bh == "yield":
-                if "ytc" in hr or "call" in hr or "ytm" in hr:
-                    score = 0
-            if ("ytc" in bh or "call" in bh):
-                if("ytc" in hr or "call" in hr) and "put" not in hr: 
-                    score = 1
-                else: 
-                    score = 0 
-            if ("ytm" in bh or "maturity" in bh): 
-                if ("ytm" in hr or "maturity" in hr): 
-                    score = 1
-                else: 
-                    score =0
+            if bh == "yield" and any(k in hr for k in ["ytc", "call", "ytm"]):
+                score = 0
+            if ("ytc" in bh or "call" in bh) and ("ytc" in hr or "call" in hr) and "put" not in hr:
+                score = 1
+            if ("ytm" in bh or "maturity" in bh) and ("ytm" in hr or "maturity" in hr):
+                score = 1
             if "coupon" in bh and "coupon" not in hr:
                 score = 0
 
-            logger.info(f"Base vector {i} ie {self.base_headers[i]} ~ header {idx} ie {header_row[idx]} | score {score:.4f}")
-            if score > 0.47 :
-                header_map[self.base_headers[i]] = int(idx)
-        
-        return header_map   
+            if score > 0.47:
+                header_map[bh] = int(idx)
+            logger.info(f"Mapped base '{bh}' → header '{hr}' (score={score:.4f})")
 
-    # -------- OLD Functions over --------
+        return header_map
 
+    def _pre_process_header (self, x) :
+        return re.sub(r"[^a-z\s%\(\)\\/]","",x.lower())
+
+    # -------------------------------------------------------------------
+    # Orchestration Methods
+    # -------------------------------------------------------------------
     def parse_all_portfolios(self):
-        file_paths = self._get_file_names()
-        for file_path in file_paths:
+        """Iterate through all AMC Excel files and parse each sheet."""
+        for file_path in self._get_file_names():
             df_raw = self._read_excel_file(file_path)
-            if df_raw is None:
+            if not df_raw:
                 continue
             for sheet_name, sheet_df in df_raw.items():
                 if sheet_name not in self.sheets_to_avoid:
-                    self.process_sheet(file_path, sheet_name, sheet_df)                
+                    self.process_sheet(file_path, sheet_name, sheet_df)
 
     def save_to_excel(self):
-        error_saving = True
-        while(error_saving):
-            time.sleep(1)
+        """Persist final combined dataframe to an Excel file."""
+        while True:
             try:
                 if not self.full_data.empty:
                     self.full_data.to_excel(self.output_file, index=False)
-                    logger.info(f"Successfully saved parsed data to {self.output_file}")
+                    logger.info(f"Saved parsed data → {self.output_file}")
                 else:
-                    logger.warning("No data to save.")
-                error_saving = False
+                    logger.warning("No data available to save.")
+                break
             except Exception as e:
-                logger.error(f"Error Saving [File is Open] {e}")
-                continue
+                logger.error(f"Save failed (file open?): {e}")
+                time.sleep(1)
