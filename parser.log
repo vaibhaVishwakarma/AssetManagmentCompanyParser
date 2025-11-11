@@ -1,0 +1,205 @@
+2025-11-11 15:54:46,357 | sentence_transformers.SentenceTransformer | INFO | Use pytorch device_name: cpu
+2025-11-11 15:54:46,357 | sentence_transformers.SentenceTransformer | INFO | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-11 15:54:46,365 | urllib3.connectionpool | DEBUG | Starting new HTTPS connection (1): huggingface.co:443
+2025-11-11 15:54:48,875 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 307 0
+2025-11-11 15:54:48,894 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/modules.json HTTP/1.1" 200 0
+2025-11-11 15:54:49,166 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 307 0
+2025-11-11 15:54:49,184 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-11-11 15:54:49,801 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 307 0
+2025-11-11 15:54:49,814 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-11-11 15:54:50,054 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 307 0
+2025-11-11 15:54:50,070 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/README.md HTTP/1.1" 200 0
+2025-11-11 15:54:50,321 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 307 0
+2025-11-11 15:54:50,344 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/modules.json HTTP/1.1" 200 0
+2025-11-11 15:54:50,585 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 307 0
+2025-11-11 15:54:50,628 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/sentence_bert_config.json HTTP/1.1" 200 0
+2025-11-11 15:54:50,882 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-11-11 15:54:51,126 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 307 0
+2025-11-11 15:54:51,164 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config.json HTTP/1.1" 200 0
+2025-11-11 15:54:51,594 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 307 0
+2025-11-11 15:54:51,610 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/tokenizer_config.json HTTP/1.1" 200 0
+2025-11-11 15:54:53,859 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/1.1" 404 64
+2025-11-11 15:54:54,579 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/1_Pooling/config.json HTTP/1.1" 307 0
+2025-11-11 15:54:54,603 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/1_Pooling%2Fconfig.json HTTP/1.1" 200 0
+2025-11-11 15:54:54,850 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6891
+2025-11-11 15:54:54,855 | __main__ | INFO | === Processing AMC: 360 One Asset Management ===
+2025-11-11 15:54:56,071 | core.amcparser | INFO | Processing → Sheet: Dynamic Bond
+2025-11-11 15:54:56,071 | core.amcparser | INFO | Processing DataFrame for fund: 360 ONE Dynamic Bond Fund  - An Open Ended Dynamic Debt Scheme investing across duration. A relatively high interest rate risk and relatively high credit risk
+2025-11-11 15:54:56,077 | __main__ | ERROR | Error processing AMC 360 One Asset Management: '>' not supported between instances of 'list' and 'int'
+Traceback (most recent call last):
+  File "C:\Users\vaibh\OneDrive\Documents\Functional\DevMani @ Work\AMCParser\AssetManagmentCompanyParser\main.py", line 104, in <module>
+    parser.parse_all_portfolios()
+  File "C:\Users\vaibh\OneDrive\Documents\Functional\DevMani @ Work\AMCParser\AssetManagmentCompanyParser\core\amcparser.py", line 371, in parse_all_portfolios
+    self.process_sheet(file_path, sheet_name, sheet_df)
+  File "C:\Users\vaibh\OneDrive\Documents\Functional\DevMani @ Work\AMCParser\AssetManagmentCompanyParser\core\amcparser.py", line 206, in process_sheet
+    table_end_idx = min(grand_total_idx[-1], len(df)) if grand_total_idx > 0 else len(df)
+TypeError: '>' not supported between instances of 'list' and 'int'
+2025-11-11 15:54:56,139 | core.postprocessor | INFO | Initialized PortfolioPostProcessor with configuration file loaded.
+2025-11-11 15:54:56,139 | core.postprocessor | INFO | Starting data cleaning for 0 files in .cleaned
+2025-11-11 15:54:56,139 | core.postprocessor | WARNING | No cleaned files found to compile. Exiting.
+2025-11-11 15:54:56,139 | __main__ | INFO | === Pipeline completed successfully ===
+2025-11-11 15:56:27,985 | sentence_transformers.SentenceTransformer | INFO | Use pytorch device_name: cpu
+2025-11-11 15:56:27,985 | sentence_transformers.SentenceTransformer | INFO | Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+2025-11-11 15:56:27,990 | urllib3.connectionpool | DEBUG | Starting new HTTPS connection (1): huggingface.co:443
+2025-11-11 15:56:29,001 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 307 0
+2025-11-11 15:56:29,011 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/modules.json HTTP/1.1" 200 0
+2025-11-11 15:56:29,268 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 307 0
+2025-11-11 15:56:29,281 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-11-11 15:56:29,529 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json HTTP/1.1" 307 0
+2025-11-11 15:56:29,545 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config_sentence_transformers.json HTTP/1.1" 200 0
+2025-11-11 15:56:29,797 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md HTTP/1.1" 307 0
+2025-11-11 15:56:29,818 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/README.md HTTP/1.1" 200 0
+2025-11-11 15:56:30,063 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json HTTP/1.1" 307 0
+2025-11-11 15:56:30,076 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/modules.json HTTP/1.1" 200 0
+2025-11-11 15:56:30,332 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json HTTP/1.1" 307 0
+2025-11-11 15:56:30,356 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/sentence_bert_config.json HTTP/1.1" 200 0
+2025-11-11 15:56:32,515 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json HTTP/1.1" 404 0
+2025-11-11 15:56:32,812 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json HTTP/1.1" 307 0
+2025-11-11 15:56:32,885 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config.json HTTP/1.1" 200 0
+2025-11-11 15:56:35,488 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json HTTP/1.1" 307 0
+2025-11-11 15:56:35,499 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/tokenizer_config.json HTTP/1.1" 200 0
+2025-11-11 15:56:35,795 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=False&expand=False HTTP/1.1" 404 64
+2025-11-11 15:56:36,415 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /sentence-transformers/all-MiniLM-L6-v2/resolve/main/1_Pooling/config.json HTTP/1.1" 307 0
+2025-11-11 15:56:36,432 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "HEAD /api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/1_Pooling%2Fconfig.json HTTP/1.1" 200 0
+2025-11-11 15:56:36,697 | urllib3.connectionpool | DEBUG | https://huggingface.co:443 "GET /api/models/sentence-transformers/all-MiniLM-L6-v2 HTTP/1.1" 200 6891
+2025-11-11 15:56:36,698 | __main__ | INFO | === Processing AMC: 360 One Asset Management ===
+2025-11-11 15:56:37,805 | core.amcparser | INFO | Processing → Sheet: Dynamic Bond
+2025-11-11 15:56:37,805 | core.amcparser | INFO | Processing DataFrame for fund: 360 ONE Dynamic Bond Fund  - An Open Ended Dynamic Debt Scheme investing across duration. A relatively high interest rate risk and relatively high credit risk
+2025-11-11 15:56:38,218 | core.amcparser | INFO | Mapped base 'name of instrument' → header 'name of the instrument ' (score=0.9901)
+2025-11-11 15:56:38,218 | core.amcparser | INFO | Mapped base 'isin' → header 'isin' (score=1.0000)
+2025-11-11 15:56:38,218 | core.amcparser | INFO | Mapped base 'coupon' → header 'isin' (score=0.0000)
+2025-11-11 15:56:38,218 | core.amcparser | INFO | Mapped base 'industry / rating' → header 'industry / rating' (score=1.0000)
+2025-11-11 15:56:38,218 | core.amcparser | INFO | Mapped base 'quantity' → header 'quantity' (score=1.0000)
+2025-11-11 15:56:38,218 | core.amcparser | INFO | Mapped base 'market value (mkt) ( rs lakh )' → header 'market/fair value(rs in lacs)' (score=0.6582)
+2025-11-11 15:56:38,218 | core.amcparser | INFO | Mapped base '% to net assets (nav)' → header 'rounded % to net assets' (score=0.6783)
+2025-11-11 15:56:38,218 | core.amcparser | INFO | Mapped base 'yield' → header 'quantity' (score=0.0000)
+2025-11-11 15:56:38,218 | core.amcparser | INFO | Mapped base 'yield to call (ytc)' → header 'ytc (at/tier  bonds)' (score=1.0000)
+2025-11-11 15:56:38,357 | core.amcparser | INFO | Completed sheet parsing.
+2025-11-11 15:56:38,364 | core.amcparser | INFO | Processing → Sheet: Focused Equity
+2025-11-11 15:56:38,364 | core.amcparser | INFO | Processing DataFrame for fund: 360 ONE Focused Fund  - An Open Ended Equity Scheme investing in maximum 30 multicap stocks
+2025-11-11 15:56:38,805 | core.amcparser | INFO | Mapped base 'name of instrument' → header 'name of the instrument ' (score=0.9901)
+2025-11-11 15:56:38,805 | core.amcparser | INFO | Mapped base 'isin' → header 'isin' (score=1.0000)
+2025-11-11 15:56:38,805 | core.amcparser | INFO | Mapped base 'coupon' → header 'isin' (score=0.0000)
+2025-11-11 15:56:38,805 | core.amcparser | INFO | Mapped base 'industry / rating' → header 'industry' (score=0.6707)
+2025-11-11 15:56:38,805 | core.amcparser | INFO | Mapped base 'quantity' → header 'quantity' (score=1.0000)
+2025-11-11 15:56:38,805 | core.amcparser | INFO | Mapped base 'market value (mkt) ( rs lakh )' → header 'market/fair value(rs in lacs)' (score=0.6582)
+2025-11-11 15:56:38,805 | core.amcparser | INFO | Mapped base '% to net assets (nav)' → header 'rounded % to net assets' (score=0.6783)
+2025-11-11 15:56:38,805 | core.amcparser | INFO | Mapped base 'yield' → header 'quantity' (score=0.0000)
+2025-11-11 15:56:38,805 | core.amcparser | INFO | Mapped base 'yield to call (ytc)' → header 'ytc (at/tier  bonds)' (score=1.0000)
+2025-11-11 15:56:38,953 | core.amcparser | INFO | Completed sheet parsing.
+2025-11-11 15:56:38,953 | core.amcparser | INFO | Processing → Sheet: Liquid Fund
+2025-11-11 15:56:38,953 | core.amcparser | INFO | Processing DataFrame for fund: 360 ONE Liquid Fund (An open ended liquid scheme. A relatively low interest rate risk and relatively moderate credit risk)
+2025-11-11 15:56:39,336 | core.amcparser | INFO | Mapped base 'name of instrument' → header 'name of the instrument ' (score=0.9901)
+2025-11-11 15:56:39,336 | core.amcparser | INFO | Mapped base 'isin' → header 'isin' (score=1.0000)
+2025-11-11 15:56:39,336 | core.amcparser | INFO | Mapped base 'coupon' → header 'isin' (score=0.0000)
+2025-11-11 15:56:39,337 | core.amcparser | INFO | Mapped base 'industry / rating' → header 'rating' (score=0.7140)
+2025-11-11 15:56:39,337 | core.amcparser | INFO | Mapped base 'quantity' → header 'quantity' (score=1.0000)
+2025-11-11 15:56:39,337 | core.amcparser | INFO | Mapped base 'market value (mkt) ( rs lakh )' → header 'market/fair value(rs in lacs)' (score=0.6582)
+2025-11-11 15:56:39,337 | core.amcparser | INFO | Mapped base '% to net assets (nav)' → header 'rounded % to net assets' (score=0.6783)
+2025-11-11 15:56:39,337 | core.amcparser | INFO | Mapped base 'yield' → header 'quantity' (score=0.0000)
+2025-11-11 15:56:39,337 | core.amcparser | INFO | Mapped base 'yield to call (ytc)' → header 'ytc (at/tier  bonds)' (score=1.0000)
+2025-11-11 15:56:39,494 | core.amcparser | INFO | Completed sheet parsing.
+2025-11-11 15:56:39,494 | core.amcparser | INFO | Processing → Sheet: Quant Fund
+2025-11-11 15:56:39,494 | core.amcparser | INFO | Processing DataFrame for fund: 360 ONE QUANT FUND - An Open Ended Equity Scheme investing based on quant theme
+2025-11-11 15:56:39,872 | core.amcparser | INFO | Mapped base 'name of instrument' → header 'name of the instrument ' (score=0.9901)
+2025-11-11 15:56:39,872 | core.amcparser | INFO | Mapped base 'isin' → header 'isin' (score=1.0000)
+2025-11-11 15:56:39,872 | core.amcparser | INFO | Mapped base 'coupon' → header 'isin' (score=0.0000)
+2025-11-11 15:56:39,872 | core.amcparser | INFO | Mapped base 'industry / rating' → header 'industry' (score=0.6707)
+2025-11-11 15:56:39,872 | core.amcparser | INFO | Mapped base 'quantity' → header 'quantity' (score=1.0000)
+2025-11-11 15:56:39,872 | core.amcparser | INFO | Mapped base 'market value (mkt) ( rs lakh )' → header 'market/fair value(rs in lacs)' (score=0.6582)
+2025-11-11 15:56:39,872 | core.amcparser | INFO | Mapped base '% to net assets (nav)' → header 'rounded % to net assets' (score=0.6783)
+2025-11-11 15:56:39,872 | core.amcparser | INFO | Mapped base 'yield' → header 'quantity' (score=0.0000)
+2025-11-11 15:56:39,872 | core.amcparser | INFO | Mapped base 'yield to call (ytc)' → header 'ytc (at/tier  bonds)' (score=1.0000)
+2025-11-11 15:56:40,069 | core.amcparser | INFO | Completed sheet parsing.
+2025-11-11 15:56:40,069 | core.amcparser | INFO | Processing → Sheet: ELSS Tax Saver Nifty 50 Index
+2025-11-11 15:56:40,069 | core.amcparser | INFO | Processing DataFrame for fund: 360 ONE ELSS Tax Saver Nifty 50 Index Fund - An Open Ended Passive Equity Linked Saving Scheme with a statutory lock-in period of 3 years and tax benefit, replicating/tracking the Nifty 50 index)
+2025-11-11 15:56:40,438 | core.amcparser | INFO | Mapped base 'name of instrument' → header 'name of the instrument ' (score=0.9901)
+2025-11-11 15:56:40,438 | core.amcparser | INFO | Mapped base 'isin' → header 'isin' (score=1.0000)
+2025-11-11 15:56:40,438 | core.amcparser | INFO | Mapped base 'coupon' → header 'isin' (score=0.0000)
+2025-11-11 15:56:40,438 | core.amcparser | INFO | Mapped base 'industry / rating' → header 'industry' (score=0.6707)
+2025-11-11 15:56:40,438 | core.amcparser | INFO | Mapped base 'quantity' → header 'quantity' (score=1.0000)
+2025-11-11 15:56:40,438 | core.amcparser | INFO | Mapped base 'market value (mkt) ( rs lakh )' → header 'market/fair value(rs in lacs)' (score=0.6582)
+2025-11-11 15:56:40,438 | core.amcparser | INFO | Mapped base '% to net assets (nav)' → header 'rounded % to net assets' (score=0.6783)
+2025-11-11 15:56:40,438 | core.amcparser | INFO | Mapped base 'yield' → header 'quantity' (score=0.0000)
+2025-11-11 15:56:40,438 | core.amcparser | INFO | Mapped base 'yield to call (ytc)' → header 'ytc (at/tier  bonds)' (score=1.0000)
+2025-11-11 15:56:40,710 | core.amcparser | INFO | Completed sheet parsing.
+2025-11-11 15:56:40,710 | core.amcparser | INFO | Processing → Sheet: Flexicap Fund
+2025-11-11 15:56:40,710 | core.amcparser | INFO | Processing DataFrame for fund: 360 ONE FLEXICAP FUND - An Open Ended Dynamic Equity Scheme investing across large cap, mid cap and small cap stocks
+2025-11-11 15:56:41,087 | core.amcparser | INFO | Mapped base 'name of instrument' → header 'name of the instrument ' (score=0.9901)
+2025-11-11 15:56:41,087 | core.amcparser | INFO | Mapped base 'isin' → header 'isin' (score=1.0000)
+2025-11-11 15:56:41,087 | core.amcparser | INFO | Mapped base 'coupon' → header 'isin' (score=0.0000)
+2025-11-11 15:56:41,087 | core.amcparser | INFO | Mapped base 'industry / rating' → header 'industry' (score=0.6707)
+2025-11-11 15:56:41,087 | core.amcparser | INFO | Mapped base 'quantity' → header 'quantity' (score=1.0000)
+2025-11-11 15:56:41,087 | core.amcparser | INFO | Mapped base 'market value (mkt) ( rs lakh )' → header 'market/fair value(rs in lacs)' (score=0.6582)
+2025-11-11 15:56:41,087 | core.amcparser | INFO | Mapped base '% to net assets (nav)' → header 'rounded % to net assets' (score=0.6783)
+2025-11-11 15:56:41,087 | core.amcparser | INFO | Mapped base 'yield' → header 'quantity' (score=0.0000)
+2025-11-11 15:56:41,087 | core.amcparser | INFO | Mapped base 'yield to call (ytc)' → header 'ytc (at/tier  bonds)' (score=1.0000)
+2025-11-11 15:56:41,401 | core.amcparser | INFO | Completed sheet parsing.
+2025-11-11 15:56:41,401 | core.amcparser | INFO | Processing → Sheet: Hybrid Fund
+2025-11-11 15:56:41,401 | core.amcparser | INFO | Processing DataFrame for fund: 360 ONE Balanced Hybrid Fund -  An open ended balanced scheme investing in equity and debt instruments
+2025-11-11 15:56:41,789 | core.amcparser | INFO | Mapped base 'name of instrument' → header 'name of the instrument ' (score=0.9901)
+2025-11-11 15:56:41,791 | core.amcparser | INFO | Mapped base 'isin' → header 'isin' (score=1.0000)
+2025-11-11 15:56:41,791 | core.amcparser | INFO | Mapped base 'coupon' → header 'isin' (score=0.0000)
+2025-11-11 15:56:41,791 | core.amcparser | INFO | Mapped base 'industry / rating' → header 'industry / rating' (score=1.0000)
+2025-11-11 15:56:41,791 | core.amcparser | INFO | Mapped base 'quantity' → header 'quantity' (score=1.0000)
+2025-11-11 15:56:41,791 | core.amcparser | INFO | Mapped base 'market value (mkt) ( rs lakh )' → header 'market/fair value(rs in lacs)' (score=0.6582)
+2025-11-11 15:56:41,791 | core.amcparser | INFO | Mapped base '% to net assets (nav)' → header 'rounded % to net assets' (score=0.6783)
+2025-11-11 15:56:41,791 | core.amcparser | INFO | Mapped base 'yield' → header 'quantity' (score=0.0000)
+2025-11-11 15:56:41,791 | core.amcparser | INFO | Mapped base 'yield to call (ytc)' → header 'ytc (at/tier  bonds)' (score=1.0000)
+2025-11-11 15:56:42,249 | core.amcparser | INFO | Completed sheet parsing.
+2025-11-11 15:56:42,249 | core.amcparser | INFO | Processing → Sheet: GOLDETF
+2025-11-11 15:56:42,249 | core.amcparser | INFO | Processing DataFrame for fund: 360 ONE GOLD ETF (An open-ended exchange traded fund replicating/tracking domestic prices of Gold)
+2025-11-11 15:56:42,625 | core.amcparser | INFO | Mapped base 'name of instrument' → header 'name of the instrument ' (score=0.9901)
+2025-11-11 15:56:42,625 | core.amcparser | INFO | Mapped base 'isin' → header 'isin' (score=1.0000)
+2025-11-11 15:56:42,625 | core.amcparser | INFO | Mapped base 'coupon' → header 'isin' (score=0.0000)
+2025-11-11 15:56:42,625 | core.amcparser | INFO | Mapped base 'industry / rating' → header 'industry / rating' (score=1.0000)
+2025-11-11 15:56:42,625 | core.amcparser | INFO | Mapped base 'quantity' → header 'quantity' (score=1.0000)
+2025-11-11 15:56:42,625 | core.amcparser | INFO | Mapped base 'market value (mkt) ( rs lakh )' → header 'market/fair value(rs in lacs)' (score=0.6582)
+2025-11-11 15:56:42,625 | core.amcparser | INFO | Mapped base '% to net assets (nav)' → header 'rounded % to net assets' (score=0.6783)
+2025-11-11 15:56:42,625 | core.amcparser | INFO | Mapped base 'yield' → header 'quantity' (score=0.0000)
+2025-11-11 15:56:42,625 | core.amcparser | INFO | Mapped base 'yield to call (ytc)' → header 'ytc (at/tier  bonds)' (score=1.0000)
+2025-11-11 15:56:42,636 | core.amcparser | INFO | Completed sheet parsing.
+2025-11-11 15:56:42,636 | core.amcparser | INFO | Processing → Sheet: SILVERETF
+2025-11-11 15:56:42,638 | core.amcparser | INFO | Processing DataFrame for fund: 360 ONE Silver ETF (An open-ended exchange traded fund replicating/tracking domestic prices of Silver)
+2025-11-11 15:56:43,017 | core.amcparser | INFO | Mapped base 'name of instrument' → header 'name of the instrument ' (score=0.9901)
+2025-11-11 15:56:43,017 | core.amcparser | INFO | Mapped base 'isin' → header 'isin' (score=1.0000)
+2025-11-11 15:56:43,017 | core.amcparser | INFO | Mapped base 'coupon' → header 'isin' (score=0.0000)
+2025-11-11 15:56:43,017 | core.amcparser | INFO | Mapped base 'industry / rating' → header 'industry / rating' (score=1.0000)
+2025-11-11 15:56:43,017 | core.amcparser | INFO | Mapped base 'quantity' → header 'quantity' (score=1.0000)
+2025-11-11 15:56:43,017 | core.amcparser | INFO | Mapped base 'market value (mkt) ( rs lakh )' → header 'market/fair value(rs in lacs)' (score=0.6582)
+2025-11-11 15:56:43,017 | core.amcparser | INFO | Mapped base '% to net assets (nav)' → header 'rounded % to net assets' (score=0.6783)
+2025-11-11 15:56:43,017 | core.amcparser | INFO | Mapped base 'yield' → header 'quantity' (score=0.0000)
+2025-11-11 15:56:43,017 | core.amcparser | INFO | Mapped base 'yield to call (ytc)' → header 'ytc (at/tier  bonds)' (score=1.0000)
+2025-11-11 15:56:43,017 | core.amcparser | INFO | Completed sheet parsing.
+2025-11-11 15:56:43,017 | core.amcparser | INFO | Processing → Sheet: Overnight
+2025-11-11 15:56:43,017 | core.amcparser | INFO | Processing DataFrame for fund: 360 ONE Overnight Fund - An open-ended debt scheme investing in overnight securities. A relatively low interest risk & relatively low credit risk
+2025-11-11 15:56:43,406 | core.amcparser | INFO | Mapped base 'name of instrument' → header 'name of the instrument ' (score=0.9901)
+2025-11-11 15:56:43,406 | core.amcparser | INFO | Mapped base 'isin' → header 'isin' (score=1.0000)
+2025-11-11 15:56:43,406 | core.amcparser | INFO | Mapped base 'coupon' → header 'isin' (score=0.0000)
+2025-11-11 15:56:43,406 | core.amcparser | INFO | Mapped base 'industry / rating' → header 'rating' (score=0.7140)
+2025-11-11 15:56:43,406 | core.amcparser | INFO | Mapped base 'quantity' → header 'quantity' (score=1.0000)
+2025-11-11 15:56:43,406 | core.amcparser | INFO | Mapped base 'market value (mkt) ( rs lakh )' → header 'market/fair value(rs in lacs)' (score=0.6582)
+2025-11-11 15:56:43,406 | core.amcparser | INFO | Mapped base '% to net assets (nav)' → header 'rounded % to net assets' (score=0.6783)
+2025-11-11 15:56:43,406 | core.amcparser | INFO | Mapped base 'yield' → header 'quantity' (score=0.0000)
+2025-11-11 15:56:43,406 | core.amcparser | INFO | Mapped base 'yield to call (ytc)' → header 'ytc (at/tier  bonds)' (score=1.0000)
+2025-11-11 15:56:43,424 | core.amcparser | INFO | Completed sheet parsing.
+2025-11-11 15:56:43,424 | core.amcparser | INFO | Processing → Sheet: Multi Asset
+2025-11-11 15:56:43,424 | core.amcparser | INFO | Processing DataFrame for fund: 360 ONE Multi Asset Allocation Fund - An open ended scheme investing in Equity & Equity Related Instruments, Debt & Money Market Securities, Gold/Silver related instruments and in units of REITs & InvITs
+2025-11-11 15:56:43,799 | core.amcparser | INFO | Mapped base 'name of instrument' → header 'name of the instrument ' (score=0.9901)
+2025-11-11 15:56:43,799 | core.amcparser | INFO | Mapped base 'isin' → header 'isin' (score=1.0000)
+2025-11-11 15:56:43,799 | core.amcparser | INFO | Mapped base 'coupon' → header 'isin' (score=0.0000)
+2025-11-11 15:56:43,799 | core.amcparser | INFO | Mapped base 'industry / rating' → header 'industry / rating' (score=1.0000)
+2025-11-11 15:56:43,799 | core.amcparser | INFO | Mapped base 'quantity' → header 'quantity' (score=1.0000)
+2025-11-11 15:56:43,799 | core.amcparser | INFO | Mapped base 'market value (mkt) ( rs lakh )' → header 'market/fair value(rs in lacs)' (score=0.6582)
+2025-11-11 15:56:43,799 | core.amcparser | INFO | Mapped base '% to net assets (nav)' → header 'rounded % to net assets' (score=0.6783)
+2025-11-11 15:56:43,799 | core.amcparser | INFO | Mapped base 'yield' → header 'quantity' (score=0.0000)
+2025-11-11 15:56:43,799 | core.amcparser | INFO | Mapped base 'yield to call (ytc)' → header 'ytc (at/tier  bonds)' (score=1.0000)
+2025-11-11 15:56:44,080 | core.amcparser | INFO | Completed sheet parsing.
+2025-11-11 15:56:44,307 | core.amcparser | INFO | Saved parsed data → .cleaned/360 One Asset Management.xlsx
+2025-11-11 15:56:44,354 | core.postprocessor | INFO | Initialized PortfolioPostProcessor with configuration file loaded.
+2025-11-11 15:56:44,354 | core.postprocessor | INFO | Starting data cleaning for 1 files in .cleaned
+2025-11-11 15:56:44,527 | core.postprocessor | INFO | Cleaning data for AMC: 360 One Asset Management
+2025-11-11 15:56:44,765 | core.postprocessor | INFO | Cleaned and saved file → 360 One Asset Management.xlsx
+2025-11-11 15:56:44,922 | core.postprocessor | INFO | Compiling 1 cleaned workbooks into unified dataset
+2025-11-11 15:56:48,806 | core.postprocessor | INFO | Final combined CSV successfully.
+2025-11-11 15:56:48,806 | __main__ | INFO | === Pipeline completed successfully ===

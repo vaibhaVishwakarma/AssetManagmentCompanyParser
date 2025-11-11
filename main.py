@@ -6,14 +6,18 @@ from core.amcparser import AMCPortfolioParser
 from core.parser import *
 from core.postprocessor import PortfolioPostProcessor
 from langchain_huggingface import HuggingFaceEmbeddings
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 # ---------- logger setup ----------
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s | %(levelname)s | %(message)s"
-)
 logger = logging.getLogger(__name__)
-
+logging.basicConfig(
+        filename='parser.log',
+        level=logging.DEBUG,  # or ERROR
+        format="%(asctime)s | %(name)s | %(levelname)s | %(message)s",
+        encoding='utf-8'
+    )
+    
 # ---------- config loader ----------
 def load_yaml_config(filepath="config/amc_configs.yaml"):
     with open(filepath, "r") as f:
@@ -23,45 +27,45 @@ def load_yaml_config(filepath="config/amc_configs.yaml"):
 
 amc_parser_mapping = {
     "360 One Asset Management": One360Parser,
-    "Aditya Birla Sun Life Mutual Fund": AdityaBirlaParser,
-    "Axis Mutual Fund": AxisParser,
-    "Bandhan Mutual Fund": BandhanParser,
-    "Bank of India Mutual Fund": BankOfIndiaParser,
-    "Baroda BNP Paribas Mutual Fund": BarodaBNPParser,
-    "Canara Robeco Mutual Fund": CanaraRobecoParser,
-    "DSP Mutual Fund": DSPParser,
-    "Edelweiss Mutual Fund": EdelweissParser,
-    "Franklin Templeton India": FranklinTempletonParser,
-    "Groww Mutual Fund": GrowwParser,
-    "HDFC Mutual Fund": HDFCParser,
-    "Helios Mutual Fund": HeliosParser,
-    "HSBC Mutual Fund": HSBCParser,
-    "ICICI Prudential Mutual Fund": ICICIMFParser,
-    "Invesco Mutual Fund": InvescoParser,
-    "ITI Mutual Fund": ITIParser,
-    "JM Financial Mutual Fund": JMFinancialParser,
-    "Kotak Mutual Fund": KotakParser,
-    "LIC Mutual Fund": LICParser,
-    "Mahindra Manulife Mutual Fund": MahindraManulifeParser,
-    "Mirae Asset Mutual Fund": MiraeAssetParser,
-    "Motilal Oswal Mutual Fund": MotilalOswalParser,
-    "Navi Mutual Fund": NaviParser,
-    "Nippon India Mutual Fund": NipponIndiaParser,
-    "NJ Mutual Fund": NJParser,
-    "PGIM India Mutual Fund": PGIMIndiaParser,
-    "PPFAS Mutual Fund": PPFASParser,
-    "Quant Mutual Fund": QuantParser,
-    "Quantum Mutual Fund": QuantumParser,
-    "SBI Mutual Fund": SBIParser,
-    "Shriram Mutual Fund": ShriramParser,
-    "Sundaram Mutual Fund": SundaramParser,
-    "Tata Mutual Fund": TataParser,
-    "Trust Mutual Fund": TrustParser,
-    "Union Mutual Fund": UnionParser,
-    "UTI Mutual Fund": UTIParser,
-    "WhiteOak Mutual Fund": WhiteOakParser,
-    "Zerodha Fund House": ZerodhaParser,
-    "Old Bridge Capital": OldBridgeCapital,
+    # "Aditya Birla Sun Life Mutual Fund": AdityaBirlaParser,
+    # "Axis Mutual Fund": AxisParser,
+    # "Bandhan Mutual Fund": BandhanParser,
+    # "Bank of India Mutual Fund": BankOfIndiaParser,
+    # "Baroda BNP Paribas Mutual Fund": BarodaBNPParser,
+    # "Canara Robeco Mutual Fund": CanaraRobecoParser,
+    # "DSP Mutual Fund": DSPParser,
+    # "Edelweiss Mutual Fund": EdelweissParser,
+    # "Franklin Templeton India": FranklinTempletonParser,
+    # "Groww Mutual Fund": GrowwParser,
+    # "HDFC Mutual Fund": HDFCParser,
+    # "Helios Mutual Fund": HeliosParser,
+    # "HSBC Mutual Fund": HSBCParser,
+    # "ICICI Prudential Mutual Fund": ICICIMFParser,
+    # "Invesco Mutual Fund": InvescoParser,
+    # "ITI Mutual Fund": ITIParser,
+    # "JM Financial Mutual Fund": JMFinancialParser,
+    # "Kotak Mutual Fund": KotakParser,
+    # "LIC Mutual Fund": LICParser,
+    # "Mahindra Manulife Mutual Fund": MahindraManulifeParser,
+    # "Mirae Asset Mutual Fund": MiraeAssetParser,
+    # "Motilal Oswal Mutual Fund": MotilalOswalParser,
+    # "Navi Mutual Fund": NaviParser,
+    # "Nippon India Mutual Fund": NipponIndiaParser,
+    # "NJ Mutual Fund": NJParser,
+    # "PGIM India Mutual Fund": PGIMIndiaParser,
+    # "PPFAS Mutual Fund": PPFASParser,
+    # "Quant Mutual Fund": QuantParser,
+    # "Quantum Mutual Fund": QuantumParser,
+    # "SBI Mutual Fund": SBIParser,
+    # "Shriram Mutual Fund": ShriramParser,
+    # "Sundaram Mutual Fund": SundaramParser,
+    # "Tata Mutual Fund": TataParser,
+    # "Trust Mutual Fund": TrustParser,
+    # "Union Mutual Fund": UnionParser,
+    # "UTI Mutual Fund": UTIParser,
+    # "WhiteOak Mutual Fund": WhiteOakParser,
+    # "Zerodha Fund House": ZerodhaParser,
+    # "Old Bridge Capital": OldBridgeCapital,
     }
 
 # ---------- main runner ----------

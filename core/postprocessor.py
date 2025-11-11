@@ -33,11 +33,6 @@ from fuzzywuzzy import process
 # Logger setup
 # -------------------------------------------------------------------
 logger = logging.getLogger(__name__)
-if not logger.handlers:
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s | %(levelname)s | %(message)s"
-    )
 
 # -------------------------------------------------------------------
 # Class Definition

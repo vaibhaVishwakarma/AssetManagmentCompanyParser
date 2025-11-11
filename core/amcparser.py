@@ -37,11 +37,7 @@ import requests  # retained for compatibility with existing architecture
 # Logger Configuration
 # -------------------------------------------------------------------
 logger = logging.getLogger(__name__)
-if not logger.handlers:
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s | %(levelname)s | %(message)s"
-    )
+
 
 # -------------------------------------------------------------------
 # Abstract Base Class Definition
@@ -167,6 +163,11 @@ class AMCPortfolioParser(ABC):
     # -------------------------------------------------------------------
     # Core Parsing Logic
     # -------------------------------------------------------------------
+
+    @abstractmethod
+    def _get_fund_name(df : pd.DataFrame) -> "Fund Name":
+        pass
+
     def process_sheet(self, file_path, sheet_name, df):
         """
         Main sheet parsing logic:
@@ -210,17 +211,25 @@ class AMCPortfolioParser(ABC):
         # merge and clean NULL header segments
         n_iter = 0
         while "NULL" in header_row and n_iter < 5:
-            start = next((i for i, h in enumerate(header_row) if h != "NULL"), None)
-            end = next((i for i in range(start + 1, len(header_row)) if header_row[i] != "NULL"), len(header_row))
-            alter1 = df.iloc[:, start:end].fillna("").agg(" ".join, axis=1)
-            alter2 = df.drop(df.columns[start:end], axis=1)
-            df = pd.concat([alter1, alter2], axis=1)
+            start = None
+            end = len(header_row)
+            for i in range(len(header_row)):
+                if start == None and header_row[i] != "NULL":
+                    start = i
+                    break
+            for i in range(start + 1 , len(header_row)):
+                if header_row[i] != "NULL":
+                    end = i
+                    break
+            alter1 = df.iloc[:,start:end].fillna("").agg(" ".join,axis = 1)
+            alter2 = df.drop(df.columns[start:end],axis = 1)
+            df = pd.concat([alter1 , alter2] , axis = 1)
+
             header_row = self._fetch_header_row(df)
-            n_iter += 1
+            n_iter+=1
 
         header_map = self._header_mapper(header_row)
         periods = self._get_valid_periods(df, header_map)
-
         # iterate through all valid ISIN-segmented regions
         for start_idx, end_idx in periods:
             type_name_idx = self._get_investment_type(df, start_idx, header_map["isin"])
@@ -231,7 +240,14 @@ class AMCPortfolioParser(ABC):
             type_name = df.iloc[type_name_idx, :].fillna(" ").agg(" ".join, axis=0)
             # type_name = df.iloc[type_name_idx, :].fillna(" ").apply(lambda x: " ".join(x), axis=1)
 
-            type_name = self._clean_type_name(type_name)
+            type_name = df[type_name_idx:type_name_idx+1].fillna(" ").agg(" ".join , axis = 1).iloc[0]
+            type_name = self.filterBullets(type_name)
+            type_name = self.filterBracketContent(type_name)
+            type_name = re.sub(r"[^a-zA-Z\s\&\-/\\]" , "" , type_name)
+            type_name = self.filterNANIsolated(type_name)
+            type_name = self.filterReccuringSpaces(type_name)
+            type_name = type_name if "total" not in type_name.lower() else "uncategorised"
+
 
             for _, row in df.iloc[start_idx:min(end_idx + 1, table_end_idx)].iterrows():
                 values = header_map.copy()
@@ -270,6 +286,9 @@ class AMCPortfolioParser(ABC):
         val = self._filter_isin(val)
         return bool(re.search(self.isin_pattern, val))
     
+    def _clean_fund_name(self,name):
+        return re.sub(r"[^a-zA-z0.9\+\-\\\(\)\s/]","",name)
+    
     def _get_valid_periods(self, df , header_map):
         df.iloc[:, header_map["isin"]] = df.iloc[:, header_map["isin"]].apply(self._filter_isin)
         mask = df.iloc[:, header_map["isin"]].apply(self._check_isin).values
@@ -289,15 +308,6 @@ class AMCPortfolioParser(ABC):
             periods.append((start, len(mask) - 1))
         # print("Passing periods:", periods)
         return periods
-
-    def _clean_type_name(self, name):
-        """Apply regex and stopword-based normalization for investment type."""
-        name = self.filterBullets(name)
-        name = self.filterBracketContent(name)
-        name = re.sub(r"[^a-zA-Z\s&/\-]", "", name)
-        name = self.filterNANIsolated(name)
-        name = self.filterReccuringSpaces(name)
-        return "uncategorised" if "total" in name.lower() else name
 
     def _generate_embedding(self, text: str) -> list[float]:
         """Generate vector embedding for a given text string."""
@@ -327,8 +337,12 @@ class AMCPortfolioParser(ABC):
                 score = 0
             if bh == "yield" and any(k in hr for k in ["ytc", "call", "ytm"]):
                 score = 0
+            if ("ytc" in bh or "call" in bh):
+                score = 0
             if ("ytc" in bh or "call" in bh) and ("ytc" in hr or "call" in hr) and "put" not in hr:
                 score = 1
+            if ("ytm" in bh or "maturity" in bh) :
+                score = 0
             if ("ytm" in bh or "maturity" in bh) and ("ytm" in hr or "maturity" in hr):
                 score = 1
             if "coupon" in bh and "coupon" not in hr:
