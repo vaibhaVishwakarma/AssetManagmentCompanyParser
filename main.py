@@ -114,7 +114,7 @@ if __name__ == "__main__":
     # --------------------------------------------------------------
     try:
         post = PortfolioPostProcessor()
-        # post.clean_data()
+        post.clean_data()
         post.compile_final_output()
         logger.info("=== Pipeline completed successfully ===")
     except Exception as e:
