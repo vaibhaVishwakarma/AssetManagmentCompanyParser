@@ -49,7 +49,7 @@ class BandhanParser(AMCPortfolioParser):
 
     def _get_fund_name(self,df):
         if len(df)<2 and len(df.columns) < 2 : return None
-        return df.iloc[1,1]
+        return df.iloc[0,1]
 
 
 class BankOfIndiaParser(AMCPortfolioParser):

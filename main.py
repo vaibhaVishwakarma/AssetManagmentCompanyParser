@@ -27,45 +27,45 @@ def load_yaml_config(filepath="config/amc_configs.yaml"):
 
 amc_parser_mapping = {
     "360 One Asset Management": One360Parser,
-    # "Aditya Birla Sun Life Mutual Fund": AdityaBirlaParser,
-    # "Axis Mutual Fund": AxisParser,
-    # "Bandhan Mutual Fund": BandhanParser,
-    # "Bank of India Mutual Fund": BankOfIndiaParser,
-    # "Baroda BNP Paribas Mutual Fund": BarodaBNPParser,
-    # "Canara Robeco Mutual Fund": CanaraRobecoParser,
-    # "DSP Mutual Fund": DSPParser,
-    # "Edelweiss Mutual Fund": EdelweissParser,
-    # "Franklin Templeton India": FranklinTempletonParser,
-    # "Groww Mutual Fund": GrowwParser,
-    # "HDFC Mutual Fund": HDFCParser,
-    # "Helios Mutual Fund": HeliosParser,
-    # "HSBC Mutual Fund": HSBCParser,
-    # "ICICI Prudential Mutual Fund": ICICIMFParser,
-    # "Invesco Mutual Fund": InvescoParser,
-    # "ITI Mutual Fund": ITIParser,
-    # "JM Financial Mutual Fund": JMFinancialParser,
-    # "Kotak Mutual Fund": KotakParser,
-    # "LIC Mutual Fund": LICParser,
-    # "Mahindra Manulife Mutual Fund": MahindraManulifeParser,
-    # "Mirae Asset Mutual Fund": MiraeAssetParser,
-    # "Motilal Oswal Mutual Fund": MotilalOswalParser,
-    # "Navi Mutual Fund": NaviParser,
-    # "Nippon India Mutual Fund": NipponIndiaParser,
-    # "NJ Mutual Fund": NJParser,
-    # "PGIM India Mutual Fund": PGIMIndiaParser,
-    # "PPFAS Mutual Fund": PPFASParser,
-    # "Quant Mutual Fund": QuantParser,
-    # "Quantum Mutual Fund": QuantumParser,
-    # "SBI Mutual Fund": SBIParser,
-    # "Shriram Mutual Fund": ShriramParser,
-    # "Sundaram Mutual Fund": SundaramParser,
-    # "Tata Mutual Fund": TataParser,
-    # "Trust Mutual Fund": TrustParser,
-    # "Union Mutual Fund": UnionParser,
-    # "UTI Mutual Fund": UTIParser,
-    # "WhiteOak Mutual Fund": WhiteOakParser,
-    # "Zerodha Fund House": ZerodhaParser,
-    # "Old Bridge Capital": OldBridgeCapital,
+    "Aditya Birla Sun Life Mutual Fund": AdityaBirlaParser,
+    "Axis Mutual Fund": AxisParser,
+    "Bandhan Mutual Fund": BandhanParser,
+    "Bank of India Mutual Fund": BankOfIndiaParser,
+    "Baroda BNP Paribas Mutual Fund": BarodaBNPParser,
+    "Canara Robeco Mutual Fund": CanaraRobecoParser,
+    "DSP Mutual Fund": DSPParser,
+    "Edelweiss Mutual Fund": EdelweissParser,
+    "Franklin Templeton India": FranklinTempletonParser,
+    "Groww Mutual Fund": GrowwParser,
+    "HDFC Mutual Fund": HDFCParser,
+    "Helios Mutual Fund": HeliosParser,
+    "HSBC Mutual Fund": HSBCParser,
+    "ICICI Prudential Mutual Fund": ICICIMFParser,
+    "Invesco Mutual Fund": InvescoParser,
+    "ITI Mutual Fund": ITIParser,
+    "JM Financial Mutual Fund": JMFinancialParser,
+    "Kotak Mutual Fund": KotakParser,
+    "LIC Mutual Fund": LICParser,
+    "Mahindra Manulife Mutual Fund": MahindraManulifeParser,
+    "Mirae Asset Mutual Fund": MiraeAssetParser,
+    "Motilal Oswal Mutual Fund": MotilalOswalParser,
+    "Navi Mutual Fund": NaviParser,
+    "Nippon India Mutual Fund": NipponIndiaParser,
+    "NJ Mutual Fund": NJParser,
+    "PGIM India Mutual Fund": PGIMIndiaParser,
+    "PPFAS Mutual Fund": PPFASParser,
+    "Quant Mutual Fund": QuantParser,
+    "Quantum Mutual Fund": QuantumParser,
+    "SBI Mutual Fund": SBIParser,
+    "Shriram Mutual Fund": ShriramParser,
+    "Sundaram Mutual Fund": SundaramParser,
+    "Tata Mutual Fund": TataParser,
+    "Trust Mutual Fund": TrustParser,
+    "Union Mutual Fund": UnionParser,
+    "UTI Mutual Fund": UTIParser,
+    "WhiteOak Mutual Fund": WhiteOakParser,
+    "Zerodha Fund House": ZerodhaParser,
+    "Old Bridge Capital": OldBridgeCapital,
     }
 
 # ---------- main runner ----------
@@ -96,6 +96,9 @@ if __name__ == "__main__":
                 logger.warning(f"Cleanup failed for {path}: {e}")\
         
 
+    # --------------------------------------------------------------
+    # 2. Extract Raw data from Excels
+    # --------------------------------------------------------------
     for amc_name, parser_cls in amc_parser_mapping.items():
         logger.info(f"=== Processing AMC: {amc_name} ===")
         try:
@@ -106,10 +109,12 @@ if __name__ == "__main__":
         except Exception as e:
             logger.exception(f"Error processing AMC {amc_name}: {e}")
 
-    # post-processing: clean and compile
+    # --------------------------------------------------------------
+    # 3. Post Processing
+    # --------------------------------------------------------------
     try:
         post = PortfolioPostProcessor()
-        post.clean_data()
+        # post.clean_data()
         post.compile_final_output()
         logger.info("=== Pipeline completed successfully ===")
     except Exception as e:

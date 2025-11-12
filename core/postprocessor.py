@@ -217,6 +217,7 @@ class PortfolioPostProcessor:
             'FOREIGNETF': 'Exchange Traded Funds (ETFs)',
 
             # Bonds & Debentures
+            'Corporate Debt Market Development Fund Class': 'Bonds & Debentures',
             'BOND & NCDs': 'Bonds & Debentures',
             'Bonds': 'Bonds & Debentures',
             'Debentures and Bonds': 'Bonds & Debentures',
@@ -367,6 +368,10 @@ class PortfolioPostProcessor:
         # join Scheme ISIN and Amfi Code
         df = self._join_bse_schemedata(df)
 
+        #handle negative entries by excel (specificly for TATA_MF)
+        neg_idxs = df[(df.iloc[:, 4:7] <= 0).all(axis=1)].index.tolist()
+        df.loc[neg_idxs, df.columns[4:7]] *= -1
+
         # export final combined output
         df.to_csv(f"Portfolio_extracted_{pd.Timestamp.today().strftime('%d%m%y-%H%M')}.csv", index=False)
         logger.info("Final combined CSV successfully.")
@@ -412,7 +417,7 @@ class PortfolioPostProcessor:
                 right_on = "Scheme Name",
                 suffixes=("","_df")
             )
-            # .drop(columns=["Scheme Name_df"])
+            .drop(columns=["Scheme Name_df"])
             .rename(columns = {"Code":"amfi_code",
                                "ISIN Div Payout/ ISIN GrowthISIN Div Reinvestment":"isin_group"})
         )               

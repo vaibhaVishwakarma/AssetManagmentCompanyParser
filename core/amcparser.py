@@ -70,7 +70,7 @@ class AMCPortfolioParser(ABC):
             default_config (dict): Default global configuration values.
         """
 
-        self.isin_pattern = r"[A-Z]{3}[A-Z0-9]{9}"
+        self.isin_pattern = r"^[A-Z][A-Z0-9]{11}$"
 
 
 
@@ -127,16 +127,6 @@ class AMCPortfolioParser(ABC):
             string = re.sub(r"[^\)]\)", "", string)
         return string
 
-    def _create_ISIN_mapping(self, df):
-        """Build dictionary mapping fund names to ISIN codes."""
-        mapping = {}
-        for _, row in df.iterrows():
-            fn = row["Cleaned Fund Name"].lower()
-            isin = row["ISIN"]
-            if fn and isin and row["Growth/Regular Type"] in ["Regular", "Growth"]:
-                mapping[fn] = isin
-        return mapping
-
     def _get_file_names(self):
         """Recursively collect all valid Excel files from AMC’s data directory."""
         file_names = []
@@ -165,6 +155,7 @@ class AMCPortfolioParser(ABC):
     # -------------------------------------------------------------------
 
     @abstractmethod
+    # to be defined sperately for each AMC in parser.py
     def _get_fund_name(df : pd.DataFrame) -> "Fund Name":
         pass
 
@@ -230,15 +221,13 @@ class AMCPortfolioParser(ABC):
 
         header_map = self._header_mapper(header_row)
         periods = self._get_valid_periods(df, header_map)
+
         # iterate through all valid ISIN-segmented regions
         for start_idx, end_idx in periods:
             type_name_idx = self._get_investment_type(df, start_idx, header_map["isin"])
             if type_name_idx == start_idx:
                 logger.info("No valid Type Name found. Skipping section.")
                 continue
-
-            type_name = df.iloc[type_name_idx, :].fillna(" ").agg(" ".join, axis=0)
-            # type_name = df.iloc[type_name_idx, :].fillna(" ").apply(lambda x: " ".join(x), axis=1)
 
             type_name = df[type_name_idx:type_name_idx+1].fillna(" ").agg(" ".join , axis = 1).iloc[0]
             type_name = self.filterBullets(type_name)
@@ -249,7 +238,14 @@ class AMCPortfolioParser(ABC):
             type_name = type_name if "total" not in type_name.lower() else "uncategorised"
 
 
+            # DEBUG
+            # print(f"idx - {start_idx} ... typename = {type_name} ...")
+            # for _, row in df.iloc[start_idx:min(end_idx + 1, table_end_idx)].iterrows():
+            #     print(row.to_list())
+            #     break
+
             for _, row in df.iloc[start_idx:min(end_idx + 1, table_end_idx)].iterrows():
+
                 values = header_map.copy()
                 for key, idx in header_map.items():
                     values[key] = row.iloc[idx]
@@ -259,7 +255,6 @@ class AMCPortfolioParser(ABC):
                 self.full_data = pd.concat([self.full_data, pd.DataFrame([values])], ignore_index=True).drop_duplicates()
 
         # required print output
-        print("Processed this Excel")
         logger.info("Completed sheet parsing.")
 
     # -------------------------------------------------------------------
@@ -270,7 +265,6 @@ class AMCPortfolioParser(ABC):
         n_iter = 1 # to avoid endless loop
         while(n_iter<=10):
             candidate_isin = df.iloc[start_index-n_iter , isin_col_num]
-            print(candidate_isin)
             if not self._check_isin(str(candidate_isin)):
                 return start_index-n_iter
             n_iter+=1
@@ -283,7 +277,7 @@ class AMCPortfolioParser(ABC):
         return re.sub(r"[^A-Z0-9]","",string)
         
     def _check_isin(self, val):
-        val = self._filter_isin(val)
+        val = self._filter_isin(val).strip()
         return bool(re.search(self.isin_pattern, val))
     
     def _clean_fund_name(self,name):
@@ -292,7 +286,7 @@ class AMCPortfolioParser(ABC):
     def _get_valid_periods(self, df , header_map):
         df.iloc[:, header_map["isin"]] = df.iloc[:, header_map["isin"]].apply(self._filter_isin)
         mask = df.iloc[:, header_map["isin"]].apply(self._check_isin).values
-        # Find continuous True periods
+        # Find continuous True periods (start and and indicies for each valid entry period)
         periods = []
         start = None
         for i, val in enumerate(mask):
